@@ -27,4 +27,4 @@ make
 ```
 Our classes inherit UML graph.
 
-![alt text](https://github.com/zxdan523/game_design/edit/master/doc/class-diagram.png)
+![](https://github.com/zxdan523/game_design/edit/master/doc/class-diagram.png " ")
