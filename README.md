@@ -25,4 +25,6 @@ Compile the program.
 ```
 make
 ```
+Our classes inherit UML graph.
 
+![](doc/class-diagram.png)
