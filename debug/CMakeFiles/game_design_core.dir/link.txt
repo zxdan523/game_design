@@ -1,0 +1,2 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar qc libgame_design_core.a  CMakeFiles/game_design_core.dir/src/Fish.cpp.o CMakeFiles/game_design_core.dir/src/Knot.cpp.o CMakeFiles/game_design_core.dir/src/Larry.cpp.o CMakeFiles/game_design_core.dir/src/music_manager.cpp.o
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib libgame_design_core.a

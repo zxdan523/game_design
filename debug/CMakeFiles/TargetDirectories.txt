@@ -1,0 +1,4 @@
+/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles/TestFish.dir
+/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles/rebuild_cache.dir
+/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles/edit_cache.dir
+/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles/game_design_core.dir
