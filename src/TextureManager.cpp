@@ -1,26 +1,33 @@
 #include "TextureManager.h"
 
-/*TextureManager::TextureManager()
-{
-	
-}*/
 
-void TextureManager::add(std::string id, std::string path, std::shared_ptr<std::map<std::string,sf::IntRect>> areas)
+void TextureManager::addTexture(std::string path,std::string type)
 {
-      //textureMap.loadResource(id, path);
-	std::shared_ptr<sf::Texture> texture=std::make_shared<sf::Texture>();
+    if(atlasMap.find(type)!=atlasMap.end())
+    {
+        throw std::runtime_error("inserting existing texture");
+    }
+    
+    std::shared_ptr<sf::Texture> texture=std::make_shared<sf::Texture>();
 	if (!texture->loadFromFile(path))
 		throw std::runtime_error("error");
-
-	Atlas input;
-	input.areas = areas;
-	input.texture = texture;
-	atlasMap.insert(std::make_pair(id, input));
+    
+    atlasMap[type].texture=texture;
+    atlasMap[type].areas=std::make_shared<std::map<std::string,sf::IntRect>>();
+}
+void TextureManager::addArea(std::string id, sf::IntRect area, std::string type)
+{
+      //textureMap.loadResource(id, path);
+      if(atlasMap.find(type)==atlasMap.end())
+      {
+          throw std::runtime_error("add texture coordinates into a empty texture");
+      }
+      atlasMap[type].areas->insert(std::make_pair(id,area));
 }
 
-Atlas TextureManager::get(std::string id)
+Atlas TextureManager::get(std::string type) const
 {
-	auto found = atlasMap.find(id);
+	auto found = atlasMap.find(type);
 	assert(found != atlasMap.end());
 	return (found->second);
 }
