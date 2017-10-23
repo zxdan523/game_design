@@ -10,7 +10,7 @@ CSCI 437
 
 using namespace sf;
 
-ui::Button::Button(std::string str, std::string id, Font& bFont, Vector2f location)
+Button::Button(std::string str, std::string id, Color bgColor, Color txtColor, Font& bFont, Vector2f location)
 {
 	buttonID = id;
 	font = bFont;
@@ -18,11 +18,10 @@ ui::Button::Button(std::string str, std::string id, Font& bFont, Vector2f locati
 	text.setString(str);
 	text.setFont(bFont);
 	text.setOrigin(float(text.getGlobalBounds().width / 2), float(text.getGlobalBounds().height / 2));
-	text.setColor(normalText);
-	borderRadius = 5.f;
-	borderThickness = 0.f;
+	text.setColor(txtColor);
 	size = Vector2f(text.getGlobalBounds().width * 1.5f, text.getGlobalBounds().height * 1.5f);
 	buttonShape = RectangleShape(size);
+	buttonShape.setFillColor(bgColor);
 	Vector2f textPos = Vector2f(buttonShape.getPosition().x, buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 4);
 	text.setPosition(textPos);
 }
@@ -43,21 +42,6 @@ void Button::Button::setColorNormal(Color nbg)
 void Button::Button::setColorClick(Color cbg)
 {
 	clickBackground = cbg;
-}
-
-void Button::Button::setColorBorder(Color borderColor)
-{
-	border = borderColor;
-}
-
-void Button::Button::setBorderThickness(float thickness)
-{
-	borderThickness = thickness;
-}
-
-void Button::Button::setBorderRadius(float radius)
-{
-	borderRadius = radius;
 }
 
 void Button::setPosition(Vector2f pos)
@@ -99,11 +83,6 @@ Vector2f Button::getDimensions()
 	return Vector2f(buttonShape.getGlobalBounds().width, buttonShape.getGlobalBounds().height);
 }
 
-Uint32 Button::getState()
-{
-	return state;
-}
-
 void Button::update(Event& e, RenderWindow window)
 {
 	Vector2i mousePos = Mouse::getPosition(window);
@@ -124,13 +103,42 @@ void Button::update(Event& e, RenderWindow window)
         buttonText.setColor(clickText);
       }
       else
+			{
       buttonShape.setFillColor(normalBackground);
       buttonText.setColor(normalText);
+			}
     }
   }
 }
 
-void draw(RenderTarget& target, RenderStates states) const
+bool buttonClick(Event& e, RenderWindow window)
+{
+	bool click = false;
+	Vector2i mousePos = Mouse::getPosition(window);
+
+	bool mouseOnButton = mousePos.x >= buttonShape.getPosition().x - buttonShape.getGlobalBounds().width / 2 && \
+						 mousePos.x <= buttonShape.getPosition().x + buttonShape.getGlobalBounds().width / 2 && \
+						 mousePos.y >= buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 2 && \
+						 mousePos.y <= buttonShape.getPosition().y + buttonShape.getGlobalBounds().height / 2;
+
+  if (e.type == Event::MouseButtonPressed)
+  {
+    if (e.mouseButton.button == Mouse::Left)
+    {
+      if(mouseOnButton)
+      {
+        click = true;
+      }
+      else
+			{
+				click = false;
+			}
+    }
+  }
+	return click;
+}
+
+void Button::draw(RenderTarget& target, RenderStates states) const
 {
   target.draw(buttonShape, states);
   target.draw(text, states);
