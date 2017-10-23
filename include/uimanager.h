@@ -3,12 +3,12 @@
 class UIManager
 {
 public:
-  void startGame(bool click);
-  void pauseGame(bool click);
-  void goToMainMenu(bool click);
-  void goToSettingsMenu(bool click);
-  
+  UIManager();
+  void resumeGame();
+  void pauseGame();
+  void goToMainMenu();
+  void goToSettingsMenu();
+
 private:
-  bool buttonClick;
 
 }

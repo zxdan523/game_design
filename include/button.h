@@ -19,9 +19,6 @@ public:
 	void setTextColorClick(Color cButtonText);
 	void setColorNormal(Color nbg);
 	void setColorClick(Color cbg);
-	void setColorBorder(Color borderColor);
-	void setBorderThickness(float thickness);
-	void setBorderRadius(float radius);
 	void setPosition(Vector2f pos);
 	void setID(std::string str);
 	void setSize(unsigned int size);
@@ -30,17 +27,14 @@ public:
 
 	Vector2f getPosition();
 	Vector2f getDimensions();
-	Uint32 getState();
 	void update(Event& e, RenderWindow window);
+  bool buttonClick(Event& e, RenderWindow window);
 
 private:
   Color normalText;
   Color normalBackground;
   Color clickText;
   Color clickBackground;
-  Color border;
-  float borderThickness;
-  float borderRadius;
   Vector2f position;
   Vector2f size;
   Uint32 buttonState;
