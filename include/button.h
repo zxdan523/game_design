@@ -10,39 +10,37 @@ CSCI 437
 #include <SFML/Graphics.hpp>
 
 using namespace sf;
-
-class Button : public sf::Drawable
+namespace ui
+{
+  namespace state
+  {
+    enum
+    {
+      unselected = 0;
+      selected = 1;
+    }
+  }
+}
+class Button : public Drawable, public Transformable
 {
 public:
-	Button(std::string str, std::string id, Font& bFont, Vector2f location);
-	void setTextColorNormal(Color nButtonText);
-	void setTextColorClick(Color cButtonText);
-	void setColorNormal(Color nbg);
-	void setColorClick(Color cbg);
-	void setPosition(Vector2f pos);
-	void setID(std::string str);
-	void setSize(unsigned int size);
-	void setText(std::string str);
-	void setFont(Font& bFont);
-
-	Vector2f getPosition();
-	Vector2f getDimensions();
-	void update(Event& e, RenderWindow window);
-  bool buttonClick(Event& e, RenderWindow window);
+  Button();
+  Button(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
+  void selected();
+  void unselected();
 
 private:
-  Color normalText;
-  Color normalBackground;
-  Color clickText;
-  Color clickBackground;
-  Vector2f position;
-  Vector2f size;
   Uint32 buttonState;
+  Color selectedColor;
+  Color unselectedColor;
+  Color textColor;
   RectangleShape buttonShape;
+  Vector2f buttonPosition;
+  Vector2f buttonSize;
   Font font;
   unsigned int fontSize;
   std::string buttonID;
-  Text text;
+  Text buttonText;
 
   virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };

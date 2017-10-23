@@ -4,11 +4,9 @@ class UIManager
 {
 public:
   UIManager();
-  void resumeGame();
-  void pauseGame();
-  void goToMainMenu();
-  void goToSettingsMenu();
+  void addPanel();
+  int select();
 
 private:
 
-}
+};
