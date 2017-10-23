@@ -1,7 +1,6 @@
 /**
 button.cpp
 Class file for the button class
-
 CSCI 437
 @author Stephen Tung
 */
@@ -11,7 +10,7 @@ CSCI 437
 
 using namespace sf;
 
-Button::Button(std::string str, std::string id, Font& bFont, Vector2f location)
+ui::Button::Button(std::string str, std::string id, Font& bFont, Vector2f location)
 {
 	buttonID = id;
 	font = bFont;
@@ -32,10 +31,6 @@ void Button::setTextColorNormal(Color nButtonText) {
 	normalText = nButtonText;
 }
 
-void Button::Button::setTextColorHover(Color hButtonText) {
-	hoverText = hButtonText;
-}
-
 void Button::Button::setTextColorClick(Color cButtonText) {
 	clickText = cButtonText;
 }
@@ -43,11 +38,6 @@ void Button::Button::setTextColorClick(Color cButtonText) {
 void Button::Button::setColorNormal(Color nbg)
 {
 	normalBackground = nbg;
-}
-
-void Button::Button::setColorHover(Color hbg)
-{
-	hoverBackground = hbg;
 }
 
 void Button::Button::setColorClick(Color cbg)
@@ -117,12 +107,31 @@ Uint32 Button::getState()
 void Button::update(Event& e, RenderWindow window)
 {
 	Vector2i mousePos = Mouse::getPosition(window);
-	
+
 
 	bool mouseOnButton = mousePos.x >= buttonShape.getPosition().x - buttonShape.getGlobalBounds().width / 2 && \
 						 mousePos.x <= buttonShape.getPosition().x + buttonShape.getGlobalBounds().width / 2 && \
 						 mousePos.y >= buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 2 && \
 						 mousePos.y <= buttonShape.getPosition().y + buttonShape.getGlobalBounds().height / 2;
 
+  if (e.type == Event::MouseButtonPressed)
+  {
+    if (e.mouseButton.button == Mouse::Left)
+    {
+      if(mouseOnButton)
+      {
+        buttonShape.setFillColor(clickBackground);
+        buttonText.setColor(clickText);
+      }
+      else
+      buttonShape.setFillColor(normalBackground);
+      buttonText.setColor(normalText);
+    }
+  }
+}
 
+void draw(RenderTarget& target, RenderStates states) const
+{
+  target.draw(buttonShape, states);
+  target.draw(text, states);
 }
