@@ -65,8 +65,8 @@ static void Bezier(const std::vector<Knot>& knots,std::vector<sf::Vector2f>& ver
 
     for(size_t i=0;i<total;i++)
     {
-        float t=(float)i/total;
-        float accum=pow(1-t,knots.size()-1);
+        float t=(float)i/(total-1);
+        float accum=pow(1.0f-t,knots.size()-1);
         vertices[2*i]=sf::Vector2f(0.0f,0.0f);
         vertices[2*i+1]=sf::Vector2f(0.0f,0.0f);
         for(size_t j=0;j<knots.size();j++)
