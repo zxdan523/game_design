@@ -15,11 +15,12 @@ using namespace sf;
 class Panel : public Drawable, public Transformable
 {
 public:
-  std::map<std::string, ui::Button>
-  Panel();
-  Panel(Vector2f pos, );
-  addButton();
-  removeButton();
+	Panel();
+	Panel(Vector2f pos);
+	void addButton();
+	void removeButton(std::string bID);
+
+	static std::map<std::string, ui::Button> buttonList;
 
 private:
   Vector2f panelPosition;

@@ -10,7 +10,12 @@ UIManager::UIManager()
 
 }
 
-void UIManager::resumeGame()
+void UIManager::addPanel()
 {
 
+}
+
+int UIManager::select()
+{
+	return 0;
 }

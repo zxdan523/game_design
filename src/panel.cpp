@@ -17,15 +17,15 @@ Panel::Panel()
 
 Panel::Panel(Vector2f pos)
 {
-  position = pos;
+  panelPosition = pos;
 }
 
-Panel::addButton()
+void Panel::addButton()
 {
   
 }
 
-Panel::removeButton(std::string bID)
+void Panel::removeButton(std::string bID)
 {
 
 }

@@ -7,6 +7,8 @@
 #include <SFML/Graphics.hpp>
 static std::random_device rd;
 static std::mt19937 rnd;
+const static double M_PI;
+
 static float dot(const sf::Vector2f& v1,const sf::Vector2f& v2)
 {
     return v1.x*v2.x+v1.y*v2.y;

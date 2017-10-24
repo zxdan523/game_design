@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include "Knot.h"
+#include <memory>
 
 class Fish:public sf::Drawable,public sf::Transformable 
 {

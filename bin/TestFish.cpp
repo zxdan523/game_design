@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include "Larry.h"
 #include <iostream>
+#include "uimanager.h"
+#include "button.h"
 
 int main(int argc, char** argv)
 {
@@ -21,6 +23,12 @@ int main(int argc, char** argv)
     (*areas)["Larry_tail"]=sf::IntRect(128,0,128,256);
     fish.setTextureAreas(areas);
     fish.init();
+
+	sf::Font buttonTextFont;
+	buttonTextFont.loadFromFile("Arial.ttf");
+
+	ui::Button button("Start", "startButton", Color(0, 0, 0), Color(200, 100, 100), Color(), buttonTextFont, sf::Vector2f(100.f, 100.f));
+
     // start main loop
   while(App.isOpen())
   {
@@ -31,14 +39,25 @@ int main(int argc, char** argv)
       // Exit
       if(Event.type == sf::Event::Closed)
         App.close();
+	  else if (Event.type == sf::Event::MouseButtonPressed)
+	  {
+		  if (Event.mouseButton.button == sf::Mouse::Left)
+		  {
+			  
+		  }
+	  }
     }
 
     // clear screen and fill with blue
     App.clear(sf::Color::Blue);
 
-    sf::Vector2i mousePos=sf::Mouse::getPosition(App);
+	App.draw(button);
+
+    /*
+	sf::Vector2i mousePos=sf::Mouse::getPosition(App);
     fish.swimTo(sf::Vector2f(mousePos.x,mousePos.y));
     App.draw(fish);
+	*/
     // display
     App.display();
   }
