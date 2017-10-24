@@ -1,11 +1,6 @@
 #include <SFML/Graphics.hpp>
-#include <SFML/Audio.hpp>
 #include "Larry.h"
-#include "MusicManager.h"
 #include <iostream>
-
-using namespace sf;
-using namespace std;
 
 int main(int argc, char** argv)
 {
@@ -26,43 +21,24 @@ int main(int argc, char** argv)
     (*areas)["Larry_tail"]=sf::IntRect(128,0,128,256);
     fish.setTextureAreas(areas);
     fish.init();
-    
-    MusicManager music;
-    music.add();
-        // start main loop
+    // start main loop
   while(App.isOpen())
   {
-      
-    
     // process events
-    Event event;
-    while (App.pollEvent(event)) {
-        switch (event.type) {
-            case Event::Closed:
-                App.close();
-            case Event::KeyPressed:
-                if (event.key.code == Keyboard::Escape)
-                    App.close();
-                else if (event.key.code == Keyboard::Num1)
-                    music.play("canary");
-                else if (event.key.code == Keyboard::Num2)
-                    music.play("orchestral");
-                else if (event.key.code == Keyboard::Num3)
-                    music.play("ding");
-                else if (event.key.code == Keyboard::P)
-                    music.stop();
-            default:
-                break;
-        }
+    sf::Event Event;
+    while(App.pollEvent(Event))
+    {
+      // Exit
+      if(Event.type == sf::Event::Closed)
+        App.close();
     }
-      
+
     // clear screen and fill with blue
     App.clear(sf::Color::Blue);
 
     sf::Vector2i mousePos=sf::Mouse::getPosition(App);
     fish.swimTo(sf::Vector2f(mousePos.x,mousePos.y));
     App.draw(fish);
-      
     // display
     App.display();
   }
