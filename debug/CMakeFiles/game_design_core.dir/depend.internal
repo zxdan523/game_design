@@ -229,9 +229,9 @@ CMakeFiles/game_design_core.dir/src/Larry.cpp.o
  /usr/local/include/SFML/Window/Window.hpp
  /usr/local/include/SFML/Window/WindowHandle.hpp
  /usr/local/include/SFML/Window/WindowStyle.hpp
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.o
- ../include/music_manager.h
- /Users/jwei/Documents/GitHub/game_design/src/music_manager.cpp
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o
+ ../include/MusicManager.h
+ /Users/jwei/Documents/GitHub/game_design/src/MusicManager.cpp
  /usr/local/include/SFML/Audio.hpp
  /usr/local/include/SFML/Audio/AlResource.hpp
  /usr/local/include/SFML/Audio/Export.hpp

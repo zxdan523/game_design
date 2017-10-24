@@ -129,28 +129,28 @@ CMakeFiles/game_design_core.dir/src/Larry.cpp.o.provides: CMakeFiles/game_design
 CMakeFiles/game_design_core.dir/src/Larry.cpp.o.provides.build: CMakeFiles/game_design_core.dir/src/Larry.cpp.o
 
 
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.o: CMakeFiles/game_design_core.dir/flags.make
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.o: ../src/music_manager.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game_design_core.dir/src/music_manager.cpp.o"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game_design_core.dir/src/music_manager.cpp.o -c /Users/jwei/Documents/GitHub/game_design/src/music_manager.cpp
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o: CMakeFiles/game_design_core.dir/flags.make
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o: ../src/MusicManager.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o -c /Users/jwei/Documents/GitHub/game_design/src/MusicManager.cpp
 
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game_design_core.dir/src/music_manager.cpp.i"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jwei/Documents/GitHub/game_design/src/music_manager.cpp > CMakeFiles/game_design_core.dir/src/music_manager.cpp.i
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game_design_core.dir/src/MusicManager.cpp.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/jwei/Documents/GitHub/game_design/src/MusicManager.cpp > CMakeFiles/game_design_core.dir/src/MusicManager.cpp.i
 
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game_design_core.dir/src/music_manager.cpp.s"
-	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jwei/Documents/GitHub/game_design/src/music_manager.cpp -o CMakeFiles/game_design_core.dir/src/music_manager.cpp.s
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game_design_core.dir/src/MusicManager.cpp.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/jwei/Documents/GitHub/game_design/src/MusicManager.cpp -o CMakeFiles/game_design_core.dir/src/MusicManager.cpp.s
 
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.requires:
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.requires:
 
-.PHONY : CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.requires
+.PHONY : CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.requires
 
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.provides: CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.requires
-	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.provides.build
-.PHONY : CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.provides
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.provides: CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.provides.build
+.PHONY : CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.provides
 
-CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.provides.build: CMakeFiles/game_design_core.dir/src/music_manager.cpp.o
+CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.provides.build: CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o
 
 
 # Object files for target game_design_core
@@ -158,7 +158,7 @@ game_design_core_OBJECTS = \
 "CMakeFiles/game_design_core.dir/src/Fish.cpp.o" \
 "CMakeFiles/game_design_core.dir/src/Knot.cpp.o" \
 "CMakeFiles/game_design_core.dir/src/Larry.cpp.o" \
-"CMakeFiles/game_design_core.dir/src/music_manager.cpp.o"
+"CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o"
 
 # External object files for target game_design_core
 game_design_core_EXTERNAL_OBJECTS =
@@ -166,7 +166,7 @@ game_design_core_EXTERNAL_OBJECTS =
 libgame_design_core.a: CMakeFiles/game_design_core.dir/src/Fish.cpp.o
 libgame_design_core.a: CMakeFiles/game_design_core.dir/src/Knot.cpp.o
 libgame_design_core.a: CMakeFiles/game_design_core.dir/src/Larry.cpp.o
-libgame_design_core.a: CMakeFiles/game_design_core.dir/src/music_manager.cpp.o
+libgame_design_core.a: CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o
 libgame_design_core.a: CMakeFiles/game_design_core.dir/build.make
 libgame_design_core.a: CMakeFiles/game_design_core.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX static library libgame_design_core.a"
@@ -181,7 +181,7 @@ CMakeFiles/game_design_core.dir/build: libgame_design_core.a
 CMakeFiles/game_design_core.dir/requires: CMakeFiles/game_design_core.dir/src/Fish.cpp.o.requires
 CMakeFiles/game_design_core.dir/requires: CMakeFiles/game_design_core.dir/src/Knot.cpp.o.requires
 CMakeFiles/game_design_core.dir/requires: CMakeFiles/game_design_core.dir/src/Larry.cpp.o.requires
-CMakeFiles/game_design_core.dir/requires: CMakeFiles/game_design_core.dir/src/music_manager.cpp.o.requires
+CMakeFiles/game_design_core.dir/requires: CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o.requires
 
 .PHONY : CMakeFiles/game_design_core.dir/requires
 

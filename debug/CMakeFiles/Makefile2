@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /Users/jwei/Documents/GitHub/game_design
 CMAKE_BINARY_DIR = /Users/jwei/Documents/GitHub/game_design/debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/TestFish.dir
+# Target rules for target CMakeFiles/TestMusicManager.dir
 
 # All Build rule for target.
-CMakeFiles/TestFish.dir/all: CMakeFiles/game_design_core.dir/all
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/depend
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles --progress-num=1,2 "Built target TestFish"
-.PHONY : CMakeFiles/TestFish.dir/all
+CMakeFiles/TestMusicManager.dir/all: CMakeFiles/game_design_core.dir/all
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/depend
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles --progress-num=1,2 "Built target TestMusicManager"
+.PHONY : CMakeFiles/TestMusicManager.dir/all
 
 # Include target in all.
-all: CMakeFiles/TestFish.dir/all
+all: CMakeFiles/TestMusicManager.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/TestFish.dir/rule: cmake_check_build_system
+CMakeFiles/TestMusicManager.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles 7
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/TestFish.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/TestMusicManager.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/jwei/Documents/GitHub/game_design/debug/CMakeFiles 0
-.PHONY : CMakeFiles/TestFish.dir/rule
+.PHONY : CMakeFiles/TestMusicManager.dir/rule
 
 # Convenience name for target.
-TestFish: CMakeFiles/TestFish.dir/rule
+TestMusicManager: CMakeFiles/TestMusicManager.dir/rule
 
-.PHONY : TestFish
-
-# clean rule for target.
-CMakeFiles/TestFish.dir/clean:
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/clean
-.PHONY : CMakeFiles/TestFish.dir/clean
+.PHONY : TestMusicManager
 
 # clean rule for target.
-clean: CMakeFiles/TestFish.dir/clean
+CMakeFiles/TestMusicManager.dir/clean:
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/clean
+.PHONY : CMakeFiles/TestMusicManager.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/TestMusicManager.dir/clean
 
 .PHONY : clean
 

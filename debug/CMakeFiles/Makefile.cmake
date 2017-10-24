@@ -47,6 +47,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/TestFish.dir/DependInfo.cmake"
+  "CMakeFiles/TestMusicManager.dir/DependInfo.cmake"
   "CMakeFiles/game_design_core.dir/DependInfo.cmake"
   )

@@ -2,7 +2,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/game_design_core.dir/src/Fish.cpp.o"
   "CMakeFiles/game_design_core.dir/src/Knot.cpp.o"
   "CMakeFiles/game_design_core.dir/src/Larry.cpp.o"
-  "CMakeFiles/game_design_core.dir/src/music_manager.cpp.o"
+  "CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o"
   "libgame_design_core.pdb"
   "libgame_design_core.a"
 )

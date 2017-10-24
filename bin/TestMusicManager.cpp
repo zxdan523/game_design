@@ -1,7 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include "Larry.h"
-#include "music_manager.h"
+#include "MusicManager.h"
 #include <iostream>
 
 using namespace sf;
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     fish.setTextureAreas(areas);
     fish.init();
     
-    music_manager music;
+    MusicManager music;
     music.add();
         // start main loop
   while(App.isOpen())

@@ -6,8 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../include/Constants.h
-
 ../include/Fish.h
 SFML/Graphics.hpp
 -
@@ -38,53 +36,17 @@ SFML/Audio.hpp
 map
 -
 
-../include/util.h
-cmath
--
-random
--
-vector
--
-Knot.h
-../include/Knot.h
+/Users/jwei/Documents/GitHub/game_design/bin/TestMusicManager.cpp
 SFML/Graphics.hpp
 -
-
-/Users/jwei/Documents/GitHub/game_design/src/Fish.cpp
-cassert
--
-iostream
--
-Fish.h
-/Users/jwei/Documents/GitHub/game_design/src/Fish.h
-util.h
-/Users/jwei/Documents/GitHub/game_design/src/util.h
-Constants.h
-/Users/jwei/Documents/GitHub/game_design/src/Constants.h
-
-/Users/jwei/Documents/GitHub/game_design/src/Knot.cpp
-cassert
--
-Knot.h
-/Users/jwei/Documents/GitHub/game_design/src/Knot.h
-
-/Users/jwei/Documents/GitHub/game_design/src/Larry.cpp
-Larry.h
-/Users/jwei/Documents/GitHub/game_design/src/Larry.h
-util.h
-/Users/jwei/Documents/GitHub/game_design/src/util.h
-
-/Users/jwei/Documents/GitHub/game_design/src/MusicManager.cpp
 SFML/Audio.hpp
 -
+Larry.h
+/Users/jwei/Documents/GitHub/game_design/bin/Larry.h
+MusicManager.h
+/Users/jwei/Documents/GitHub/game_design/bin/MusicManager.h
 iostream
 -
-string
--
-map
--
-MusicManager.h
-/Users/jwei/Documents/GitHub/game_design/src/MusicManager.h
 
 /usr/local/include/SFML/Audio.hpp
 SFML/System.hpp

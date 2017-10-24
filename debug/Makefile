@@ -111,17 +111,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named TestFish
+# Target rules for targets named TestMusicManager
 
 # Build rule for target.
-TestFish: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 TestFish
-.PHONY : TestFish
+TestMusicManager: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 TestMusicManager
+.PHONY : TestMusicManager
 
 # fast build rule for target.
-TestFish/fast:
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/build
-.PHONY : TestFish/fast
+TestMusicManager/fast:
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/build
+.PHONY : TestMusicManager/fast
 
 #=============================================================================
 # Target rules for targets named game_design_core
@@ -136,32 +136,32 @@ game_design_core/fast:
 	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/build
 .PHONY : game_design_core/fast
 
-bin/TestFish.o: bin/TestFish.cpp.o
+bin/TestMusicManager.o: bin/TestMusicManager.cpp.o
 
-.PHONY : bin/TestFish.o
+.PHONY : bin/TestMusicManager.o
 
 # target to build an object file
-bin/TestFish.cpp.o:
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/bin/TestFish.cpp.o
-.PHONY : bin/TestFish.cpp.o
+bin/TestMusicManager.cpp.o:
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/bin/TestMusicManager.cpp.o
+.PHONY : bin/TestMusicManager.cpp.o
 
-bin/TestFish.i: bin/TestFish.cpp.i
+bin/TestMusicManager.i: bin/TestMusicManager.cpp.i
 
-.PHONY : bin/TestFish.i
+.PHONY : bin/TestMusicManager.i
 
 # target to preprocess a source file
-bin/TestFish.cpp.i:
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/bin/TestFish.cpp.i
-.PHONY : bin/TestFish.cpp.i
+bin/TestMusicManager.cpp.i:
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/bin/TestMusicManager.cpp.i
+.PHONY : bin/TestMusicManager.cpp.i
 
-bin/TestFish.s: bin/TestFish.cpp.s
+bin/TestMusicManager.s: bin/TestMusicManager.cpp.s
 
-.PHONY : bin/TestFish.s
+.PHONY : bin/TestMusicManager.s
 
 # target to generate assembly for a file
-bin/TestFish.cpp.s:
-	$(MAKE) -f CMakeFiles/TestFish.dir/build.make CMakeFiles/TestFish.dir/bin/TestFish.cpp.s
-.PHONY : bin/TestFish.cpp.s
+bin/TestMusicManager.cpp.s:
+	$(MAKE) -f CMakeFiles/TestMusicManager.dir/build.make CMakeFiles/TestMusicManager.dir/bin/TestMusicManager.cpp.s
+.PHONY : bin/TestMusicManager.cpp.s
 
 src/Fish.o: src/Fish.cpp.o
 
@@ -244,32 +244,32 @@ src/Larry.cpp.s:
 	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/Larry.cpp.s
 .PHONY : src/Larry.cpp.s
 
-src/music_manager.o: src/music_manager.cpp.o
+src/MusicManager.o: src/MusicManager.cpp.o
 
-.PHONY : src/music_manager.o
+.PHONY : src/MusicManager.o
 
 # target to build an object file
-src/music_manager.cpp.o:
-	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/music_manager.cpp.o
-.PHONY : src/music_manager.cpp.o
+src/MusicManager.cpp.o:
+	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/MusicManager.cpp.o
+.PHONY : src/MusicManager.cpp.o
 
-src/music_manager.i: src/music_manager.cpp.i
+src/MusicManager.i: src/MusicManager.cpp.i
 
-.PHONY : src/music_manager.i
+.PHONY : src/MusicManager.i
 
 # target to preprocess a source file
-src/music_manager.cpp.i:
-	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/music_manager.cpp.i
-.PHONY : src/music_manager.cpp.i
+src/MusicManager.cpp.i:
+	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/MusicManager.cpp.i
+.PHONY : src/MusicManager.cpp.i
 
-src/music_manager.s: src/music_manager.cpp.s
+src/MusicManager.s: src/MusicManager.cpp.s
 
-.PHONY : src/music_manager.s
+.PHONY : src/MusicManager.s
 
 # target to generate assembly for a file
-src/music_manager.cpp.s:
-	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/music_manager.cpp.s
-.PHONY : src/music_manager.cpp.s
+src/MusicManager.cpp.s:
+	$(MAKE) -f CMakeFiles/game_design_core.dir/build.make CMakeFiles/game_design_core.dir/src/MusicManager.cpp.s
+.PHONY : src/MusicManager.cpp.s
 
 # Help Target
 help:
@@ -277,13 +277,13 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... TestFish"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
+	@echo "... TestMusicManager"
 	@echo "... game_design_core"
-	@echo "... bin/TestFish.o"
-	@echo "... bin/TestFish.i"
-	@echo "... bin/TestFish.s"
+	@echo "... bin/TestMusicManager.o"
+	@echo "... bin/TestMusicManager.i"
+	@echo "... bin/TestMusicManager.s"
 	@echo "... src/Fish.o"
 	@echo "... src/Fish.i"
 	@echo "... src/Fish.s"
@@ -293,9 +293,9 @@ help:
 	@echo "... src/Larry.o"
 	@echo "... src/Larry.i"
 	@echo "... src/Larry.s"
-	@echo "... src/music_manager.o"
-	@echo "... src/music_manager.i"
-	@echo "... src/music_manager.s"
+	@echo "... src/MusicManager.o"
+	@echo "... src/MusicManager.i"
+	@echo "... src/MusicManager.s"
 .PHONY : help
 
 
