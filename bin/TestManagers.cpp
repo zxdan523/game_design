@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "TextManager.h"
 #include "MusicManager.h"
+#include "tinyxml2.h"
 #include <iostream>
 
 int main(int argc, char** argv)
@@ -99,7 +100,7 @@ int main(int argc, char** argv)
     App.draw(*(texts.get("asdf")));*/
 
     if(isTest) {
-      App.draw(testFish);
+      //App.draw(testFish);
       testText.setString("Test Fish");
     }
     else {
