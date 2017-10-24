@@ -28,6 +28,7 @@ namespace ui
 		void selected();
 		void unselected();
 		void remove(std::string bID);
+		RectangleShape getButtonShape();
 
 	private:
 		Uint32 buttonState;

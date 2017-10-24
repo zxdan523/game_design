@@ -25,9 +25,11 @@ int main(int argc, char** argv)
     fish.init();
 
 	sf::Font buttonTextFont;
-	buttonTextFont.loadFromFile("Arial.ttf");
+	buttonTextFont.loadFromFile("Amender_Tu.ttf");
 
-	ui::Button button("Start", "startButton", Color(0, 0, 0), Color(200, 100, 100), Color(), buttonTextFont, sf::Vector2f(100.f, 100.f));
+	ui::Button button("Start", "startButton", Color(125, 230, 240), Color(200, 250, 255), Color(), buttonTextFont, sf::Vector2f(400.f, 200.f));
+
+	ui::Button button2("Quit", "quitButton", Color(200, 190, 160), Color(255, 250, 200), Color(), buttonTextFont, sf::Vector2f(400.f, 400.f));
 
     // start main loop
   while(App.isOpen())
@@ -36,14 +38,39 @@ int main(int argc, char** argv)
     sf::Event Event;
     while(App.pollEvent(Event))
     {
+		sf::Vector2i mousePosition = sf::Mouse::getPosition(App);
+
+		bool mouseInButton1 = mousePosition.x >= button.getPosition().x - button.getButtonShape().getGlobalBounds().width / 2
+			&& mousePosition.x <= button.getPosition().x + button.getButtonShape().getGlobalBounds().width / 2
+			&& mousePosition.y >= button.getPosition().y - button.getButtonShape().getGlobalBounds().height / 2
+			&& mousePosition.y <= button.getPosition().y + button.getButtonShape().getGlobalBounds().height / 2;
+
+		bool mouseInButton2 = mousePosition.x >= button2.getPosition().x - button2.getButtonShape().getGlobalBounds().width / 2
+			&& mousePosition.x <= button2.getPosition().x + button2.getButtonShape().getGlobalBounds().width / 2
+			&& mousePosition.y >= button2.getPosition().y - button2.getButtonShape().getGlobalBounds().height / 2
+			&& mousePosition.y <= button2.getPosition().y + button2.getButtonShape().getGlobalBounds().height / 2;
+
       // Exit
       if(Event.type == sf::Event::Closed)
-        App.close();
+		  App.close();
 	  else if (Event.type == sf::Event::MouseButtonPressed)
 	  {
 		  if (Event.mouseButton.button == sf::Mouse::Left)
 		  {
-			  
+			  if (mouseInButton1)
+				  button.selected();
+			  else if (mouseInButton2)
+				  button2.selected();
+		  }
+	  }
+	  else if (Event.type == sf::Event::MouseButtonReleased)
+	  {
+		  if (Event.mouseButton.button == sf::Mouse::Left)
+		  {
+			  if (!mouseInButton1)
+				  button.unselected();
+			  else if (!mouseInButton2)
+				  button2.unselected();
 		  }
 	  }
     }
@@ -52,6 +79,7 @@ int main(int argc, char** argv)
     App.clear(sf::Color::Blue);
 
 	App.draw(button);
+	App.draw(button2);
 
     /*
 	sf::Vector2i mousePos=sf::Mouse::getPosition(App);
