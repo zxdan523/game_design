@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <map>
+#include <memory>
 #include <string>
 #include "Knot.h"
 

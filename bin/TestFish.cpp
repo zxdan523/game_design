@@ -27,26 +27,14 @@ int main(int argc, char** argv)
     //fish.setTexture(textures.getResource("Larry"));
     
     //std::cout << textures.getResource("Larry").use_count()<<std::endl;
-    std::shared_ptr<std::map<std::string,sf::IntRect>> areas=std::make_shared<std::map<std::string,sf::IntRect>>();
-    (*areas)["Larry_eye"]=sf::IntRect(256,192,64,64);
-    (*areas)["Larry_mouth"]=sf::IntRect(320,0,128,128);
-    (*areas)["Larry_fin_big_left"]=sf::IntRect(0,128,128,128);
-    (*areas)["Larry_fin_big_right"]=sf::IntRect(0,0,128,128);
-    (*areas)["Larry_fin_tiny_left"]=sf::IntRect(256,64,64,64);
-    (*areas)["Larry_fin_tiny_right"]=sf::IntRect(256,0,64,64);
-    (*areas)["Larry_tail"]=sf::IntRect(128,0,128,256);
-
-    std::shared_ptr<std::map<std::string,sf::IntRect>> sharkAreas=std::make_shared<std::map<std::string,sf::IntRect>>();
-    (*areas)["Larry_eye"]=sf::IntRect(100,100,64,64);
-    (*areas)["Larry_mouth"]=sf::IntRect(400,20,200,128);
-    (*areas)["Larry_fin_big_left"]=sf::IntRect(0,232,132,128);
-    (*areas)["Larry_fin_big_right"]=sf::IntRect(0,0,128,300);
-    (*areas)["Larry_fin_tiny_left"]=sf::IntRect(256,64,64,64);
-    (*areas)["Larry_fin_tiny_right"]=sf::IntRect(256,0,64,64);
-    (*areas)["Larry_tail"]=sf::IntRect(128,0,128,256);
-
-    textures.add("Larry", "../data/Larry.png", areas);
-    textures.add("Shark", "../data/Shark.png", sharkAreas);
+    textures.addTexture("../data/Default.png"); 
+    textures.addArea("Larry_eye",sf::IntRect(256,192,64,64));
+    textures.addArea("Larry_mouth",sf::IntRect(320,0,128,128));
+    textures.addArea("Larry_fin_big_left",sf::IntRect(0,128,128,128));
+    textures.addArea("Larry_fin_big_right",sf::IntRect(0,0,128,128));
+    textures.addArea("Larry_fin_tiny_left",sf::IntRect(256,64,64,64));
+    textures.addArea("Larry_fin_tiny_right",sf::IntRect(256,0,64,64));
+    textures.addArea("Larry_tail",sf::IntRect(128,0,128,256));
 
     texts.addFont("Roboto", "../data/Roboto-Regular.ttf");
 
@@ -82,6 +70,15 @@ int main(int argc, char** argv)
     testText.setString("TEST");
     testText.setPosition(50,50);
     testText.setCharacterSize(40);
+
+
+    textures.addArea("Larry_eye",sf::IntRect(256,192,64,64));
+    textures.addArea("Larry_mouth",sf::IntRect(320,0,128,128));
+    textures.addArea("Larry_fin_big_left",sf::IntRect(0,128,128,128));
+    textures.addArea("Larry_fin_big_right",sf::IntRect(0,0,128,128));
+    textures.addArea("Larry_fin_tiny_left",sf::IntRect(256,64,64,64));
+    textures.addArea("Larry_fin_tiny_right",sf::IntRect(256,0,64,64));
+    textures.addArea("Larry_tail",sf::IntRect(128,0,128,256));
 
     /*(texts.get("asdf"))->setString("TEST");
     (texts.get("asdf"))->setPosition(50,50);
