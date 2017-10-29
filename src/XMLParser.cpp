@@ -1,8 +1,4 @@
 #include "XMLParser.h"
-#include <SFML/Graphics.hpp>
-#include <iostream>
-#include <sstream>
-#include <vector>
 
 void XMLParser::loadXML(const char* path) {
 	doc.LoadFile(path);

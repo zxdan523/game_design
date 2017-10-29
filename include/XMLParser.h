@@ -7,6 +7,8 @@
 #include <string>
 #include <map>
 #include <memory>
+#include <sstream>
+#include <vector>
 
 class XMLParser
 {
