@@ -1,9 +1,9 @@
 <root>
-	<TextureMap>
+	<TextureInfo>
 		<name>default</name>
-		<Location>../data/Default.png</Location>
+		<location>../data/Default.png</location>
 		<Positions>
-			<item>Larry_Eye|256,192,64,64</item>
+			<item>Larry_eye|256,192,64,64</item>
 			<item>Larry_mouth|320,0,128,128</item>
 			<item>Larry_fin_big_left|0,128,128,128</item>
 			<item>Larry_fin_big_right|0,0,128,128</item>
@@ -11,7 +11,7 @@
 			<item>Larry_fin_tiny_right|256,0,64,64</item>
 			<item>Larry_tail|128,0,128,256</item>
 		</Positions>
-	</TextureMap>
+	</TextureInfo>
 
 	<FontList>
 		<roboto>../data/Roboto-Regular.ttf</roboto>
