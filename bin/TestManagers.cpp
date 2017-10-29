@@ -99,7 +99,7 @@
       App.draw(*(texts.get("asdf")));*/
 
       if(isTest) {
-        //App.draw(testFish);
+        App.draw(testFish);
         testText.setString("Test Fish");
       }
       else {
