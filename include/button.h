@@ -30,6 +30,8 @@ namespace ui
 		void remove(std::string bID);
 		RectangleShape getButtonShape();
 
+		void update(Event& e, RenderWindow& window);
+
 	private:
 		Uint32 buttonState;
 		Color selectedColor;

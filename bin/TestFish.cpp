@@ -38,41 +38,9 @@ int main(int argc, char** argv)
     sf::Event Event;
     while(App.pollEvent(Event))
     {
-		sf::Vector2i mousePosition = sf::Mouse::getPosition(App);
-
-		bool mouseInButton1 = mousePosition.x >= button.getPosition().x - button.getButtonShape().getGlobalBounds().width / 2
-			&& mousePosition.x <= button.getPosition().x + button.getButtonShape().getGlobalBounds().width / 2
-			&& mousePosition.y >= button.getPosition().y - button.getButtonShape().getGlobalBounds().height / 2
-			&& mousePosition.y <= button.getPosition().y + button.getButtonShape().getGlobalBounds().height / 2;
-
-		bool mouseInButton2 = mousePosition.x >= button2.getPosition().x - button2.getButtonShape().getGlobalBounds().width / 2
-			&& mousePosition.x <= button2.getPosition().x + button2.getButtonShape().getGlobalBounds().width / 2
-			&& mousePosition.y >= button2.getPosition().y - button2.getButtonShape().getGlobalBounds().height / 2
-			&& mousePosition.y <= button2.getPosition().y + button2.getButtonShape().getGlobalBounds().height / 2;
-
-      // Exit
+		      // Exit
       if(Event.type == sf::Event::Closed)
 		  App.close();
-	  else if (Event.type == sf::Event::MouseButtonPressed)
-	  {
-		  if (Event.mouseButton.button == sf::Mouse::Left)
-		  {
-			  if (mouseInButton1)
-				  button.selected();
-			  else if (mouseInButton2)
-				  button2.selected();
-		  }
-	  }
-	  else if (Event.type == sf::Event::MouseButtonReleased)
-	  {
-		  if (Event.mouseButton.button == sf::Mouse::Left)
-		  {
-			  if (!mouseInButton1)
-				  button.unselected();
-			  else if (!mouseInButton2)
-				  button2.unselected();
-		  }
-	  }
     }
 
     // clear screen and fill with blue

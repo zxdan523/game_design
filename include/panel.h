@@ -17,14 +17,17 @@ class Panel : public Drawable, public Transformable
 public:
 	Panel();
 	Panel(Vector2f pos);
-	void addButton();
+	void addButton(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
 	void removeButton(std::string bID);
 
 	static std::map<std::string, ui::Button> buttonList;
 
 private:
-  Vector2f panelPosition;
-  Vector2f panelSize;
+	RectangleShape panelShape;
+	Vector2f panelPosition;
+	Vector2f panelSize;
+
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 };
 
 #endif

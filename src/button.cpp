@@ -69,3 +69,42 @@ void ui::Button::draw(RenderTarget& target, RenderStates states) const
 	target.draw(buttonShape, states);
 	target.draw(buttonText, states);
 }
+
+void ui::Button::update(Event& e, RenderWindow& window)
+{
+	Vector2i mousePosition = sf::Mouse::getPosition(window);
+
+	bool mouseInButton = mousePosition.x >= buttonShape.getPosition().x - buttonShape.getGlobalBounds().width / 2
+		&& mousePosition.x <= buttonShape.getPosition().x + buttonShape.getGlobalBounds().width / 2
+		&& mousePosition.y >= buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 2
+		&& mousePosition.y <= buttonShape.getPosition().y + buttonShape.getGlobalBounds().height / 2;
+
+	if (e.type = Event::MouseButtonPressed)
+	{
+		switch (e.mouseButton.button)
+		{
+		case Mouse::Left:
+		{
+			if (mouseInButton)
+			{
+				selected();
+			}
+			else
+			{
+				unselected();
+			}
+		}
+		break;
+		}
+	}
+	if (e.type == Event::MouseButtonReleased)
+	{
+		switch (e.mouseButton.button)
+		{
+		case Mouse::Left:
+		{
+			unselected();
+		}
+		}
+	}
+}
