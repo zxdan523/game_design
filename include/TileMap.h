@@ -42,56 +42,56 @@ public:
 					quad[3].color = sf::Color::Green;*/
 				}
 
-				if(tileNumber == 1) {
+				else if(tileNumber == 1) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 				}
 
-				if(tileNumber == 2) {
+				else if(tileNumber == 2) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 				}
 
-				if(tileNumber == 3) {
+				else if(tileNumber == 3) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 				}
 
-				if(tileNumber == 4) {
+				else if(tileNumber == 4) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 				}
 
-				if(tileNumber == 5) {
+				else if(tileNumber == 5) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
 				}
 
-				if(tileNumber == 6) {
+				else if(tileNumber == 6) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
 				}
 
-				if(tileNumber == 7) {
+				else if(tileNumber == 7) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
 				}
 
-				if(tileNumber == 8) {
+				else if(tileNumber == 8) {
 					sf::Vertex* triangle = &triangles[(i + j * width) * 3];
 					triangle[0].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
