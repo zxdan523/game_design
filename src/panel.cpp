@@ -1,6 +1,6 @@
 /**
-button.cpp
-Class file for the button class
+panel.cpp
+Class file for the panel class
 CSCI 437
 @author Stephen Tung
 */
@@ -10,30 +10,30 @@ CSCI 437
 
 using namespace sf;
 
-Panel::Panel()
+ui::Panel::Panel()
 {
 
 }
 
-Panel::Panel(Vector2f pos)
+ui::Panel::Panel(Vector2f pos)
 {
   panelPosition = pos;
   panelShape.setOrigin(float(panelShape.getGlobalBounds().width / 2), float(panelShape.getGlobalBounds().height / 2));
 
 }
 
-void Panel::addButton(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
+void ui::Panel::addButton(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
 {
 	ui::Button(str, id, usColor, selColor, txtColor, bFont, pos);
 	
 }
 
-void Panel::removeButton(std::string bID)
+void ui::Panel::removeButton(std::string bID)
 {
 
 }
 
-void Panel::draw(RenderTarget& target, RenderStates states) const
+void ui::Panel::draw(RenderTarget& target, RenderStates states) const
 {
 	target.draw(panelShape, states);
 

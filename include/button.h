@@ -28,6 +28,12 @@ namespace ui
 		void selected();
 		void unselected();
 		void remove(std::string bID);
+		void setUnselectedColor(Color uColor);
+		void setSelectedColor(Color sColor);
+		void setTextColor(Color tColor);
+		Color getUnselectedColor();
+		Color getSelectedColor();
+		Color getTextColor();
 		RectangleShape getButtonShape();
 
 		void update(Event& e, RenderWindow& window);

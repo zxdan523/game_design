@@ -12,21 +12,11 @@ using namespace sf;
 
 ui::Button::Button()
 {
-
-}
-
-ui::Button::Button(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
-{
-	buttonPosition = pos;
+	buttonPosition = Vector2f(400.f, 300.f);
 	buttonState = ui::state::unselected;
-	buttonID = id;
-	font = bFont;
-	unselectedColor = usColor;
-	selectedColor = selColor;
-	textColor = txtColor;
+	font.loadFromFile("Amender_Tu.ttf");
 
-	buttonText.setString(str);
-	buttonText.setFont(bFont);
+	buttonText.setFont(font);
 	buttonText.setOrigin(float(buttonText.getGlobalBounds().width / 2), float(buttonText.getGlobalBounds().height / 2));
 	buttonText.setColor(textColor);
 
@@ -40,18 +30,73 @@ ui::Button::Button(std::string str, std::string id, Color usColor, Color selColo
 	buttonText.setPosition(textPos);
 }
 
+ui::Button::Button(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
+{
+	buttonPosition = pos;
+	buttonState = ui::state::unselected;
+	buttonID = id;
+	font = bFont;
+	setUnselectedColor(usColor);
+	setSelectedColor(selColor);
+	setTextColor(txtColor);
+
+	buttonText.setString(str);
+	buttonText.setFont(bFont);
+	buttonText.setOrigin(float(buttonText.getGlobalBounds().width / 2), float(buttonText.getGlobalBounds().height / 2));
+	buttonText.setColor(txtColor);
+
+	buttonSize = Vector2f(float(buttonText.getGlobalBounds().width) * 1.5f, float(buttonText.getGlobalBounds().height) * 1.5f);
+	buttonShape = RectangleShape(buttonSize);
+	buttonShape.setFillColor(usColor);
+	buttonShape.setOrigin(buttonShape.getGlobalBounds().width / 2, buttonShape.getGlobalBounds().height / 2);
+	buttonShape.setPosition(buttonPosition);
+
+	Vector2f textPos = Vector2f(buttonShape.getPosition().x, buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 4);
+	buttonText.setPosition(textPos);
+}
+
+void ui::Button::setUnselectedColor(Color uColor)
+{
+	unselectedColor = uColor;
+}
+
+Color ui::Button::getUnselectedColor()
+{
+	return unselectedColor;
+}
+
+void ui::Button::setSelectedColor(Color sColor)
+{
+	selectedColor = sColor;
+}
+
+Color ui::Button::getSelectedColor()
+{
+	return selectedColor;
+}
+
+void ui::Button::setTextColor(Color tColor)
+{
+	textColor = tColor;
+}
+
+Color ui::Button::getTextColor()
+{
+	return textColor;
+}
+
 void ui::Button::selected()
 {
 	buttonState = ui::state::selected;
-	buttonShape.setFillColor(selectedColor);
-	buttonText.setColor(textColor);
+	buttonShape.setFillColor(getSelectedColor());
+	buttonText.setColor(getTextColor());
 }
 
 void ui::Button::unselected()
 {
 	buttonState = ui::state::unselected;
-	buttonShape.setFillColor(unselectedColor);
-	buttonText.setColor(textColor);
+	buttonShape.setFillColor(getUnselectedColor());
+	buttonText.setColor(getTextColor());
 }
 
 void ui::Button::remove(std::string bID)
@@ -88,10 +133,12 @@ void ui::Button::update(Event& e, RenderWindow& window)
 			if (mouseInButton)
 			{
 				selected();
+				buttonShape.setFillColor(getSelectedColor());
 			}
 			else
 			{
 				unselected();
+				buttonShape.setFillColor(getUnselectedColor());
 			}
 		}
 		break;
