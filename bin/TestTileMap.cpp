@@ -12,7 +12,7 @@ int main(int argc, char** argv)
    // define the level with an array of tile indices
     const int level[] =
     {
-        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+        0, 1, 2, 3, 4, 5, 6, 7, 8, 1, 1, 1, 1, 1, 1, 1,
         0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0,
         1, 1, 0, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3,
         0, 1, 0, 0, 2, 0, 3, 3, 3, 0, 1, 1, 1, 0, 0, 0,
@@ -26,9 +26,6 @@ int main(int argc, char** argv)
     TileMap map;
     if (!map.load("tileset.png", sf::Vector2u(32, 32), level, 16, 8))
         return -1;
-
-
-
 
       // start main loop
   while(App.isOpen())
@@ -48,6 +45,8 @@ int main(int argc, char** argv)
       // clear screen and fill with blue
     App.clear(sf::Color::Blue);
     App.draw(map);
+    //App.draw(map.m_vertices);
+    //App.draw(map.triangles);
     // display
     App.display();
   }
