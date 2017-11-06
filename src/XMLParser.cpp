@@ -8,6 +8,24 @@ void XMLParser::loadFont() {
 
 }
 
+std::vector<int> XMLParser::getTileMap() {
+	tinyxml2::XMLNode * root = doc.FirstChild();
+	tinyxml2::XMLElement * tileMap = root->FirstChildElement("TileMap");
+	std::string tileMapText = tileMap->GetText();
+
+	std::stringstream ss(tileMapText);
+
+	int i;
+	std::vector<int> v;
+	while(ss>> i) {
+		v.push_back(i);
+		if(ss.peek()==',')
+			ss.ignore();
+	}
+
+	return v;
+}
+
 // adds texture info from the XML file to the texture manager 
 void XMLParser::loadTexture(TextureManager &textures) {
 	// Find elements in XML
@@ -15,6 +33,7 @@ void XMLParser::loadTexture(TextureManager &textures) {
 	tinyxml2::XMLElement * main = root->FirstChildElement("TextureInfo");
 	tinyxml2::XMLElement * location = main->FirstChildElement("location");
 
+	// sets location of texture
 	textures.addTexture(location->GetText());
 
 	// iterate through areas listed and add to texture manager

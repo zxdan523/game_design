@@ -17,6 +17,7 @@ class XMLParser
     	void loadXML(const char*);
     	void loadTexture(TextureManager&);
     	void loadFont();
+    	std::vector<int> getTileMap();
 
     private:
     	tinyxml2::XMLDocument doc;

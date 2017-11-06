@@ -1,35 +1,40 @@
-#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp> 
 #include "TextureManager.h"
 #include "TileMap.h"
+#include "XMLParser.h"
 #include <iostream>
 
 int main(int argc, char** argv)
 {
 
     // create main window
-  sf::RenderWindow App(sf::VideoMode(640,640,32), "Hello World - SFML",sf::Style::Titlebar|sf::Style::Close);
+  sf::RenderWindow App(sf::VideoMode(640,640,32), "Tile Map Test",sf::Style::Titlebar|sf::Style::Close);
 
    // define the level with an array of tile indices
-    const int level[] =
+    /*const int level[] =
     {
-      9,9,9,9,9,9,9,9,3,2,
-      9,9,9,9,9,9,9,3,2,9,
-      9,9,9,7,9,9,9,0,9,9,
-      9,9,9,1,4,9,9,0,9,9,
-      9,9,9,9,1,4,9,9,9,9,
-      9,0,9,9,9,1,4,9,9,9,
-      9,0,9,9,9,8,0,0,0,0,
-      9,0,9,9,9,9,9,9,9,9,
-      3,0,4,9,9,9,9,9,9,9,
-      0,0,2,9,9,9,9,9,9,9,
-    };
+      0,1,0,0,0,0,0,0,0,0,
+      0,1,0,0,0,0,1,0,0,0,
+      0,1,0,0,1,1,1,0,0,0,
+      0,0,0,0,0,0,0,0,0,0,
+      0,0,0,0,0,0,9,1,1,1,
+      0,0,0,0,0,0,0,2,3,0,
+      0,0,0,0,0,0,0,0,0,0,
+      0,9,5,0,0,0,0,0,0,0,
+      0,4,3,0,0,0,0,0,0,0,
+      4,1,5,0,4,5,0,0,0,0,
+    };*/
+
+  XMLParser parser;
+  parser.loadXML("../data/xml/TestXML.xml");
+  std::vector<int> tiles = parser.getTileMap();
 
     // create the tilemap from the level definition
-    TileMap map;
-    if (!map.load("tileset.png", sf::Vector2u(64, 64), level, 10, 10))
-        return -1;
+  TileMap map;
+  if (!map.load("tileset.png", sf::Vector2u(64, 64), tiles, 10, 10))
+    return -1;
 
-      // start main loop
+    // start main loop
   while(App.isOpen())
   {
 
@@ -45,10 +50,8 @@ int main(int argc, char** argv)
     }
 
       // clear screen and fill with blue
-    App.clear(sf::Color::Blue);
+    App.clear(sf::Color::Black);
     App.draw(map);
-    //App.draw(map.m_vertices);
-    //App.draw(map.triangles);
     // display
     App.display();
   }

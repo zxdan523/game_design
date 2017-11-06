@@ -24,16 +24,6 @@ int main(int argc, char** argv)
 	sf::RenderWindow App(sf::VideoMode(800,600,32), "XML Test",sf::Style::Titlebar|sf::Style::Close);
 	Larry fish;
 
-    //Note: to save the memory fot passing texture and texture location, I used shared pointer. However, shared pointer can only be created dynamically, so you need to use make_shared<T>, or you will have segementation fault
-	/*textures.addTexture("../data/Default.png"); 
-	textures.addArea("Larry_eye",sf::IntRect(256,192,64,64));
-	textures.addArea("Larry_mouth",sf::IntRect(320,0,128,128));
-	textures.addArea("Larry_fin_big_left",sf::IntRect(0,128,128,128));
-	textures.addArea("Larry_fin_big_right",sf::IntRect(0,0,128,128));
-	textures.addArea("Larry_fin_tiny_left",sf::IntRect(256,64,64,64));
-	textures.addArea("Larry_fin_tiny_right",sf::IntRect(256,0,64,64));
-	textures.addArea("Larry_tail",sf::IntRect(128,0,128,256));
-*/
 	texts.addFont("Roboto", "../data/Roboto-Regular.ttf");
 
 	fish.setTexture(textures.get().texture);
