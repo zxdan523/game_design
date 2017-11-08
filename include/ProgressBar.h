@@ -16,16 +16,20 @@ namespace ui
 	class ProgressBar : public Drawable, public Transformable
 	{
 	public:
-		ProgressBar(float width);
+		ProgressBar();
+		ProgressBar(Vector2f pos, float width, float val);
 		void setValue(float val);
 		float getValue() const;
-
+		
 	private:
 		void draw(RenderTarget& target, RenderStates states) const;
+		Vector2f position;
 		float height;
 		float value;
 		Text text;
 		RectangleShape barShape;
+		Texture texture;
+		const Texture* barTexture;
 	};
 }
 

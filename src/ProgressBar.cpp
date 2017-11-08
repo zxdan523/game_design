@@ -10,16 +10,33 @@ CSCI 437
 
 using namespace sf;
 
-ui::ProgressBar::ProgressBar(float width)
+ui::ProgressBar::ProgressBar()
 {
+
+}
+
+ui::ProgressBar::ProgressBar(Vector2f pos, float width, float val)
+{
+	position = pos;
+	value = val;
+	texture.loadFromFile("../data/progressbartexture.png");
+	barTexture = &texture;
 	Vector2f barSize = Vector2f(width, height);
 	barShape = RectangleShape(barSize);
+	barShape.setPosition(position);
+	barShape.setTexture(barTexture);
+	setValue(value);
 
 }
 
 void ui::ProgressBar::setValue(float val)
 {
 	value = val;
+	
+	for (float i = 0; i < val; i++)
+	{
+		barShape.setTextureRect(IntRect(position.x, position.y, i, height));
+	}
 }
 
 float ui::ProgressBar::getValue() const
@@ -30,5 +47,4 @@ float ui::ProgressBar::getValue() const
 void ui::ProgressBar::draw(RenderTarget& target, RenderStates states) const
 {
 	target.draw(barShape, states);
-
 }
