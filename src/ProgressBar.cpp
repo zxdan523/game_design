@@ -32,11 +32,14 @@ ui::ProgressBar::ProgressBar(Vector2f pos, float width, float val)
 void ui::ProgressBar::setValue(float val)
 {
 	value = val;
-	
+	barShape.setTextureRect(IntRect(position.x, position.y, value, height));
+
+	/**
 	for (float i = 0; i < val; i++)
 	{
 		barShape.setTextureRect(IntRect(position.x, position.y, i, height));
 	}
+	**/
 }
 
 float ui::ProgressBar::getValue() const
