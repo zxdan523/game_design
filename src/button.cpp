@@ -126,6 +126,7 @@ void ui::Button::update(Event& e, RenderWindow& window)
 
 	if (e.type = Event::MouseButtonPressed)
 	{
+		buttonShape.setFillColor(Color(100, 100, 100));
 		switch (e.mouseButton.button)
 		{
 		case Mouse::Left:

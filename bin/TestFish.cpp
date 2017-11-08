@@ -3,6 +3,8 @@
 #include <iostream>
 #include "uimanager.h"
 #include "button.h"
+#include "panel.h"
+#include "ProgressBar.h"
 
 int main(int argc, char** argv)
 {
@@ -30,6 +32,8 @@ int main(int argc, char** argv)
 	ui::Button button("Start", "startButton", Color(125, 230, 240), Color(200, 250, 255), Color(), buttonTextFont, sf::Vector2f(400.f, 200.f));
 
 	ui::Button button2("Quit", "quitButton", Color(200, 190, 160), Color(255, 250, 200), Color(), buttonTextFont, sf::Vector2f(400.f, 400.f));
+
+	ui::ProgressBar progressBar(Vector2f(400.f, 300.f), 100.f, 0);
 
     // start main loop
   while(App.isOpen())
