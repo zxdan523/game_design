@@ -20,12 +20,15 @@ class Fish:public sf::Drawable,public sf::Transformable
         void setTexture(const std::shared_ptr<sf::Texture>& texture);
         const std::shared_ptr<sf::Texture>& getTexture() const;
         void setTextureAreas(const std::shared_ptr<std::map<std::string,sf::IntRect>>& areas);
+        const std::shared_ptr<std::vector<Knot>> getKnots() const;
 
         const std::shared_ptr<std::map<std::string,sf::IntRect>>& getTextureAreas() const;
         void setHeadDistance(float headDist);
         float getHeadDistance() const;
 
         void swimTo(const sf::Vector2f& dest);
+
+        virtual void update(float deltaTime)=0;
 
     protected:
         virtual void updateShape()=0;

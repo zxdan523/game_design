@@ -52,6 +52,11 @@ float Fish::getHeadDistance() const
 {
     return _headDist;
 }
+
+const std::shared_ptr<std::vector<Knot>> Fish::getKnots() const
+{
+    return std::make_shared<std::vector<Knot>>(_knots);
+}
 void Fish::swimTo(const sf::Vector2f& dest)
 {
     if(_knots.size()>0)
@@ -68,5 +73,5 @@ void Fish::swimTo(const sf::Vector2f& dest)
             _knots[i].setPosition(nextPos);
         }
     }
-    updateShape();
 }
+

@@ -16,11 +16,14 @@ class Larry:public Fish
         void setNumPartition(int numPartition);
         int getNumPartition() const;
 
-        virtual void updateShape() override;
+        virtual void update(float deltaTime) override;
     private:
+        static const float KNOT_DIST;
+        virtual void updateShape() override;
         virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
         int _numPartition;
         sf::VertexArray _body;
+        sf::VertexArray _back_fin;
         sf::RectangleShape _mouth,_fin_big_left,_fin_big_right,_fin_tiny_left,_fin_tiny_right,_tail,_eye_left,_eye_right;
 };
 #endif
