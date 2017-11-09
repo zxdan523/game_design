@@ -1,17 +1,26 @@
 <root>
-	<TextureInfo>
-		<name>default</name>
-		<location>../data/Default.png</location>
-		<Positions>
-			<item>Larry_eye|256,192,64,64</item>
-			<item>Larry_mouth|320,0,128,128</item>
-			<item>Larry_fin_big_left|0,128,128,128</item>
-			<item>Larry_fin_big_right|0,0,128,128</item>
-			<item>Larry_fin_tiny_left|256,64,64,64</item>
-			<item>Larry_fin_tiny_right|256,0,64,64</item>
-			<item>Larry_tail|128,0,128,256</item>
-		</Positions>
-	</TextureInfo>
+	<TextureList>
+		<Texture>
+			<name>default</name>
+			<location>../data/Default.png</location>
+			<Positions>
+				<item>Larry_eye|256,192,64,64</item>
+				<item>Larry_mouth|320,0,128,128</item>
+				<item>Larry_fin_big_left|0,128,128,128</item>
+				<item>Larry_fin_big_right|0,0,128,128</item>
+				<item>Larry_fin_tiny_left|256,64,64,64</item>
+				<item>Larry_fin_tiny_right|256,0,64,64</item>
+				<item>Larry_tail|128,0,128,256</item>
+			</Positions>
+		</Texture>
+		<Texture>
+			<name>terrain</name>
+			<location>../data/terrain.png</location>
+			<Positions>
+				<item>grass|40,830,50,30</item>
+			</Positions>
+		</Texture>
+	</TextureList>
 
 	<FontList>
 		<roboto>../data/Roboto-Regular.ttf</roboto>

@@ -11,8 +11,11 @@ class TileMap : public sf::Drawable, public sf::Transformable
 
 public:
 
-	bool load(const std::string& tileset, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width, unsigned int height)
+	bool load(TextureManager &textureManager, std::string terrain, sf::Vector2u tileSize, std::vector<int> tiles, unsigned int width, unsigned int height)
 	{
+		// texture coordinates
+		textureAreas = textureManager.get("terrain").areas;
+		texture = textureManager.get("terrain").texture;
 
         // resize the vertex array to fit the level size
 		quads.setPrimitiveType(sf::Quads);
@@ -36,11 +39,10 @@ public:
 					quad[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 					quad[3].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 
-					// set color
-					/*quad[0].color = sf::Color::Green;
-					quad[1].color = sf::Color::Green;
-					quad[2].color = sf::Color::Green;
-					quad[3].color = sf::Color::Green;*/
+					quad[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
+					quad[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top);
+					quad[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top + tileSize.y);
+					quad[3].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);					
 				}
 				// triangle top right
 				else if(tileNumber == 2) {
@@ -48,6 +50,10 @@ public:
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
 				}
 				// triangle top left
 				else if(tileNumber == 3) {
@@ -55,6 +61,10 @@ public:
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top + tileSize.y);
 				}
 				// triangle bottom right
 				else if(tileNumber == 4) {
@@ -62,6 +72,10 @@ public:
 					triangle[0].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top + tileSize.y);
 				}
 				// triangle bottom left
 				else if(tileNumber == 5) {
@@ -69,6 +83,10 @@ public:
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
 				}
 				// triangle small top
 				else if(tileNumber == 6) {
@@ -76,6 +94,10 @@ public:
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x/2, (*textureAreas)[terrain].top + tileSize.y/2);
 				}
 				// triangle small left
 				else if(tileNumber == 7) {
@@ -83,6 +105,10 @@ public:
 					triangle[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x/2, (*textureAreas)[terrain].top + tileSize.y/2);
 				}
 				// triangle small bottom
 				else if(tileNumber == 8) {
@@ -90,6 +116,10 @@ public:
 					triangle[0].position = sf::Vector2f(i * tileSize.x, (j + 1) * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x/2, (*textureAreas)[terrain].top + tileSize.y/2);
 				}
 				// triangle small right
 				else if(tileNumber == 9) {
@@ -97,6 +127,10 @@ public:
 					triangle[0].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
 					triangle[1].position = sf::Vector2f((i + 1) * tileSize.x, (j + 1) * tileSize.y);
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
+
+					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x/2, (*textureAreas)[terrain].top + tileSize.y/2);
 				}
 			}
 			return true;
@@ -109,6 +143,8 @@ public:
         // apply the transform
 			states.transform *= getTransform();
 
+			states.texture = texture.get();
+
         // draw the vertex array
 			target.draw(quads, states);
 			target.draw(triangles, states);
@@ -116,6 +152,8 @@ public:
 
 		sf::VertexArray quads;
 		sf::VertexArray triangles;
+		std::shared_ptr<sf::Texture> texture;
+		std::shared_ptr<std::map<std::string,sf::IntRect>> textureAreas;
 	};
 
 

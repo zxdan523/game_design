@@ -31,7 +31,9 @@ int main(int argc, char** argv)
 
     // create the tilemap from the level definition
   TileMap map;
-  if (!map.load("tileset.png", sf::Vector2u(64, 64), tiles, 10, 10))
+  TextureManager textures;
+  parser.loadTexture(textures,"terrain");
+  if (!map.load(textures,"grass", sf::Vector2u(64, 64), tiles, 10, 10))
     return -1;
 
     // start main loop

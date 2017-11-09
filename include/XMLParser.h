@@ -15,12 +15,13 @@ class XMLParser
     public:
     	//XMLParser();
     	void loadXML(const char*);
-    	void loadTexture(TextureManager&);
+    	void loadTexture(TextureManager&,std::string type="default");
     	void loadFont();
     	std::vector<int> getTileMap();
 
     private:
     	tinyxml2::XMLDocument doc;
+    	
 };
 
 #endif

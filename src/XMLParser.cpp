@@ -1,4 +1,5 @@
 #include "XMLParser.h"
+#include <iostream>
 
 void XMLParser::loadXML(const char* path) {
 	doc.LoadFile(path);
@@ -27,20 +28,25 @@ std::vector<int> XMLParser::getTileMap() {
 }
 
 // adds texture info from the XML file to the texture manager 
-void XMLParser::loadTexture(TextureManager &textures) {
-	// Find elements in XML
+void XMLParser::loadTexture(TextureManager &textures, std::string name) {
+	// Find specific texture needed
 	tinyxml2::XMLNode * root = doc.FirstChild();
-	tinyxml2::XMLElement * main = root->FirstChildElement("TextureInfo");
-	tinyxml2::XMLElement * location = main->FirstChildElement("location");
+	tinyxml2::XMLElement * textureList = root->FirstChildElement("TextureList");
+	tinyxml2::XMLElement * texture = textureList->FirstChildElement();
+	while(texture!=NULL && (texture->FirstChildElement("name")->GetText())!=(name)) {
+		texture=texture->NextSiblingElement();
+	}
+//		std::cout<<texture->FirstChildElement("name")->GetText()<<std::endl;
 
 	// sets location of texture
-	textures.addTexture(location->GetText());
+	tinyxml2::XMLElement * location = texture->FirstChildElement("location");
+	textures.addTexture(location->GetText(),name);
 
 	// iterate through areas listed and add to texture manager
-	for(tinyxml2::XMLElement * item = main->FirstChildElement("Positions")->FirstChildElement();
+	for(tinyxml2::XMLElement * item = texture->FirstChildElement("Positions")->FirstChildElement();
 		item!= NULL;item=item->NextSiblingElement()) {
 		std::string itemText = item->GetText();
-	std::string name = (itemText).substr(0, (itemText).find("|"));
+	std::string areaName = (itemText).substr(0, (itemText).find("|"));
 	std::string value = (itemText).substr((itemText).find("|")+1);
 	std::stringstream ss(value);
 
@@ -51,6 +57,6 @@ void XMLParser::loadTexture(TextureManager &textures) {
 		if(ss.peek()==',')
 			ss.ignore();
 	}
-	textures.addArea(name,sf::IntRect(v.at(0),v.at(1),v.at(2),v.at(3)));
+	textures.addArea(areaName,sf::IntRect(v.at(0),v.at(1),v.at(2),v.at(3)),name);
 }
 }
