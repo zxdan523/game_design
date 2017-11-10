@@ -33,7 +33,7 @@ int main(int argc, char** argv)
 
 	ui::Button button2("Quit", "quitButton", Color(200, 190, 160), Color(255, 250, 200), Color(), buttonTextFont, sf::Vector2f(400.f, 400.f));
 
-	ui::ProgressBar progressBar(Vector2f(400.f, 300.f), 100.f, 0);
+	//ui::ProgressBar progressBar(sf::Vector2f(400.f, 300.f), 100.f, 0.0f);
 
     // start main loop
   while(App.isOpen())
@@ -42,11 +42,23 @@ int main(int argc, char** argv)
     sf::Event Event;
     while(App.pollEvent(Event))
     {
+		if (Event.type == sf::Event::MouseButtonPressed)
+		{
+			if (button.mouseInButton(Event, App) == true)
+				button.selected();
+			else if (button2.mouseInButton(Event, App) == true)
+				button2.selected();
+		}
+		else if (Event.type == sf::Event::MouseButtonReleased)
+		{
+			button.unselected();
+			button2.unselected();
+		}
 		      // Exit
       if(Event.type == sf::Event::Closed)
 		  App.close();
     }
-
+	
     // clear screen and fill with blue
     App.clear(sf::Color::Blue);
 

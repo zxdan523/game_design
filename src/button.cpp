@@ -115,7 +115,7 @@ void ui::Button::draw(RenderTarget& target, RenderStates states) const
 	target.draw(buttonText, states);
 }
 
-void ui::Button::update(Event& e, RenderWindow& window)
+bool ui::Button::mouseInButton(Event& e, RenderWindow& window)
 {
 	Vector2i mousePosition = sf::Mouse::getPosition(window);
 
@@ -124,35 +124,5 @@ void ui::Button::update(Event& e, RenderWindow& window)
 		&& mousePosition.y >= buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 2
 		&& mousePosition.y <= buttonShape.getPosition().y + buttonShape.getGlobalBounds().height / 2;
 
-	if (e.type = Event::MouseButtonPressed)
-	{
-		buttonShape.setFillColor(Color(100, 100, 100));
-		switch (e.mouseButton.button)
-		{
-		case Mouse::Left:
-		{
-			if (mouseInButton)
-			{
-				selected();
-				buttonShape.setFillColor(getSelectedColor());
-			}
-			else
-			{
-				unselected();
-				buttonShape.setFillColor(getUnselectedColor());
-			}
-		}
-		break;
-		}
-	}
-	if (e.type == Event::MouseButtonReleased)
-	{
-		switch (e.mouseButton.button)
-		{
-		case Mouse::Left:
-		{
-			unselected();
-		}
-		}
-	}
+	return mouseInButton;
 }
