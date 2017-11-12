@@ -17,31 +17,37 @@ namespace ui
 		enum
 		{
 			unselected = 0,
-			selected = 1
+			hover = 1,
+			selected = 2
 		};
 	};
 	class Button : public Drawable, public Transformable
 	{
 	public:
 		Button();
-		Button(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
-		void selected();
+		Button(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
 		void unselected();
+		void hover();
+		void selected();
 		bool mouseInButton(Event& e, RenderWindow& window);
 
 		void remove(std::string bID);
 		void setUnselectedColor(Color uColor);
+		void setHoverColor(Color hColor);
 		void setSelectedColor(Color sColor);
 		void setTextColor(Color tColor);
 		Color getUnselectedColor();
+		Color getHoverColor();
 		Color getSelectedColor();
 		Color getTextColor();
 		RectangleShape getButtonShape();
+		Uint32 getButtonState();
 
 	private:
 		Uint32 buttonState;
-		Color selectedColor;
 		Color unselectedColor;
+		Color hoverColor;
+		Color selectedColor;
 		Color textColor;
 		RectangleShape buttonShape;
 		Vector2f buttonPosition;

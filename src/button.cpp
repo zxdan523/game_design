@@ -30,13 +30,14 @@ ui::Button::Button()
 	buttonText.setPosition(textPos);
 }
 
-ui::Button::Button(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
+ui::Button::Button(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
 {
 	buttonPosition = pos;
 	buttonState = ui::state::unselected;
 	buttonID = id;
 	font = bFont;
 	setUnselectedColor(usColor);
+	setHoverColor(hovColor);
 	setSelectedColor(selColor);
 	setTextColor(txtColor);
 
@@ -65,6 +66,16 @@ Color ui::Button::getUnselectedColor()
 	return unselectedColor;
 }
 
+void ui::Button::setHoverColor(Color hColor)
+{
+	hoverColor = hColor;
+}
+
+Color ui::Button::getHoverColor()
+{
+	return hoverColor;
+}
+
 void ui::Button::setSelectedColor(Color sColor)
 {
 	selectedColor = sColor;
@@ -85,6 +96,20 @@ Color ui::Button::getTextColor()
 	return textColor;
 }
 
+void ui::Button::unselected()
+{
+	buttonState = ui::state::unselected;
+	buttonShape.setFillColor(getUnselectedColor());
+	buttonText.setColor(getTextColor());
+}
+
+void ui::Button::hover()
+{
+	buttonState = ui::state::hover;
+	buttonShape.setFillColor(getHoverColor());
+	buttonText.setColor(getTextColor());
+}
+
 void ui::Button::selected()
 {
 	buttonState = ui::state::selected;
@@ -92,12 +117,6 @@ void ui::Button::selected()
 	buttonText.setColor(getTextColor());
 }
 
-void ui::Button::unselected()
-{
-	buttonState = ui::state::unselected;
-	buttonShape.setFillColor(getUnselectedColor());
-	buttonText.setColor(getTextColor());
-}
 
 void ui::Button::remove(std::string bID)
 {
@@ -107,6 +126,11 @@ void ui::Button::remove(std::string bID)
 RectangleShape ui::Button::getButtonShape()
 {
 	return buttonShape;
+}
+
+Uint32 ui::Button::getButtonState()
+{
+	return buttonState;
 }
 
 void ui::Button::draw(RenderTarget& target, RenderStates states) const

@@ -19,7 +19,7 @@ namespace ui
 	public:
 		Panel();
 		Panel(Vector2f pos);
-		void addButton(std::string str, std::string id, Color usColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
+		void addButton(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
 		void removeButton(std::string bID);
 
 		static std::map<std::string, Button> buttonList;
