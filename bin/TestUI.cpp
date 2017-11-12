@@ -8,7 +8,7 @@
 int main(int argc, char** argv)
 {
   // create main window
-  sf::RenderWindow App(sf::VideoMode(800,600,32), "Hello World - SFML",sf::Style::Titlebar|sf::Style::Close);
+  sf::RenderWindow App(sf::VideoMode(800,600,32), "Larry, Swim!",sf::Style::Titlebar|sf::Style::Close);
     
 	sf::Font buttonTextFont;
 	buttonTextFont.loadFromFile("Amender_Tu.ttf");
@@ -26,57 +26,9 @@ int main(int argc, char** argv)
     sf::Event Event;
 	while (App.pollEvent(Event))
 	{
-		if (Event.type == sf::Event::MouseButtonPressed)
-		{
-			if (button.mouseInButton(Event, App) == true)
-			{
-				button.selected();
-			}
-		}
-		else if (Event.type == sf::Event::MouseButtonReleased)
-		{
-			if (button.mouseInButton(Event, App) == true)
-			{
-				button.hover();
-			}
-			else
-				button.unselected();
-		}
-		else
-		{ 
-			if (button.mouseInButton(Event, App) == true)
-			{
-				button.hover();
-			}
-			else
-				button.unselected();
-		}
+		button.update(Event, App);
+		quitButton.update(Event, App);
 
-		if (Event.type == sf::Event::MouseButtonPressed)
-		{
-			if (quitButton.mouseInButton(Event, App) == true)
-			{
-				quitButton.selected();
-			}
-		}
-		else if (Event.type == sf::Event::MouseButtonReleased)
-		{
-			if (quitButton.mouseInButton(Event, App) == true)
-			{
-				quitButton.hover();
-			}
-			else
-				quitButton.unselected();
-		}
-		else
-		{
-			if (quitButton.mouseInButton(Event, App) == true)
-			{
-				quitButton.hover();
-			}
-			else
-				quitButton.unselected();
-		}
 		// Exit
 		if (Event.type == sf::Event::Closed)
 			App.close();

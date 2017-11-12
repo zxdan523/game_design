@@ -30,6 +30,7 @@ namespace ui
 		void hover();
 		void selected();
 		bool mouseInButton(Event& e, RenderWindow& window);
+		void update(Event& e, RenderWindow& window);
 
 		void remove(std::string bID);
 		void setUnselectedColor(Color uColor);

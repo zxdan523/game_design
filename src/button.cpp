@@ -150,3 +150,32 @@ bool ui::Button::mouseInButton(Event& e, RenderWindow& window)
 
 	return mouseInButton;
 }
+
+void ui::Button::update(Event& e, RenderWindow& window)
+{
+	if (e.type == sf::Event::MouseButtonPressed)
+	{
+		if (mouseInButton(e, window) == true)
+		{
+			selected();
+		}
+	}
+	else if (e.type == Event::MouseButtonReleased)
+	{
+		if (mouseInButton(e, window) == true)
+		{
+			hover();
+		}
+		else
+			unselected();
+	}
+	else
+	{
+		if (mouseInButton(e, window) == true)
+		{
+			hover();
+		}
+		else
+			unselected();
+	}
+}
