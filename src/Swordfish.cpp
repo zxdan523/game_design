@@ -11,16 +11,12 @@ const float Swordfish::SIZE=100.0f;
 
 Swordfish::Swordfish(sf::Vector2f pos)
 {
-//  _attackLine=sf::VertexArray(sf::Lines, 2);
-//  _attackLine[0].position = pos;
-//  _attackLine[1].position = sf::Vector2f(pos.x * 100.0f, pos.y * 100.0f);
-    
   Fish::addKnot(Knot(SIZE,SIZE,pos));
   _body=sf::RectangleShape(sf::Vector2f(SIZE,SIZE));
   _body.setOrigin(SIZE,0.5f*SIZE);
     
-    _attackLine.setSize(sf::Vector2f(10000, 5));
-    _attackLine.setPosition(pos);
+  _attackLine.setSize(sf::Vector2f(10000, 5));
+  _attackLine.setPosition(pos);
   _timer=0.0f;
   _state=NORMAL;
 }
@@ -42,6 +38,7 @@ void Swordfish::triggered()
 {
   if(_state!=NORMAL)
     return;
+  _attackLine.setPosition(_body.getPosition());
   _attackLine.rotate(_body.getRotation());
   _state=CHARGE;
   _timer=0.0f;
@@ -49,13 +46,14 @@ void Swordfish::triggered()
 
 void Swordfish::update(float deltaTime)
 {
-    //int trans=128;
     switch(_state)
     {
         case NORMAL:
+        case RELEASED:
+            //swimTo(_attackLine.getPosition());
+            break;
         case CHARGE:
             _timer+=deltaTime;
-            //trans=128*(_timer/BLINK_TIME-int(_timer/BLINK_TIME));
             _attackLine.setFillColor(sf::Color(255,0,0));
             if(_timer>=CHARGE_TIME)
             {
@@ -70,8 +68,6 @@ void Swordfish::update(float deltaTime)
                 _timer=0.0f;
                 _state=RELEASED;
             }
-            break;
-        case RELEASED:
             break;
         default:
             break;

@@ -26,7 +26,6 @@ private:
     
     sf::RectangleShape _body;
     sf::RectangleShape _attackLine;
-    //sf::VertexArray _attackLine;
     
     float _timer;
     State _state;

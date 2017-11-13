@@ -46,7 +46,7 @@ int main(int argc, char** argv)
       App.clear(sf::Color::Blue);
 
       sf::Vector2i mousePos=sf::Mouse::getPosition(App);
-      fish.swimTo(sf::Vector2f(100, 100));
+      fish.swimTo(sf::Vector2f(300, 300));
       fish.update(0);
       App.draw(fish);
       App.display();
