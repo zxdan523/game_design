@@ -166,6 +166,8 @@ void Larry::draw(sf::RenderTarget& target,sf::RenderStates states) const
     target.draw(_back_fin,states);
     target.draw(_tail,states);
 
+<<<<<<< HEAD
+=======
     /*for(int i=0;i<_knots.size();i++)
     {
         sf::CircleShape circle(5.0f);
@@ -173,4 +175,5 @@ void Larry::draw(sf::RenderTarget& target,sf::RenderStates states) const
         circle.setPosition(_knots[i].getPosition());
         target.draw(circle,states);
     }*/
+>>>>>>> 3ea49e2204eb6296fc6201020218d412dd3a2b48
 }
