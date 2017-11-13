@@ -12,7 +12,7 @@ int main(int argc, char** argv)
 
   // create main window
   sf::RenderWindow App(sf::VideoMode(1000,800,32), "Hello World - SFML",sf::Style::Titlebar|sf::Style::Close);
-  Swordfish fish(sf::Vector2f(50,50));
+  Swordfish fish(sf::Vector2f(100,100));
 
   /*Note: to save the memory fot passing texture and texture location, I used shared pointer. However, shared pointer can only be created dynamically, so you need to use make_shared<T>, or you will have segementation fault*/
   textures.addTexture("../data/fish.png"); 
@@ -23,31 +23,30 @@ int main(int argc, char** argv)
 
   fish.init();
   // start main loop
-  while(App.isOpen())
+  sf::Clock clock;
+    while(App.isOpen())
     {
-      // process events
-      sf::Event event;
-      while (App.pollEvent(event)) {
-        switch (event.type) {
-	case sf::Event::Closed:
-	  App.close();
-	  break;
-	case sf::Event::KeyPressed:
-	  if(event.key.code==sf::Keyboard::A)
-          fish.triggered();
-	  break;
-	default:
-	  break;
+        // process events
+        sf::Event event;
+        while (App.pollEvent(event)) {
+            switch (event.type) {
+                case sf::Event::Closed:
+                    App.close();
+                    break;
+                case sf::Event::KeyPressed:
+                    if(event.key.code==sf::Keyboard::A)
+                        fish.triggered();
+                    break;
+                default:
+                    break;
+            }
         }
-       
-      }
-
       // clear screen and fill with blue
       App.clear(sf::Color::Blue);
 
       sf::Vector2i mousePos=sf::Mouse::getPosition(App);
-      fish.swimTo(sf::Vector2f(300, 300));
-      fish.update(0);
+      //fish.swimTo(sf::Vector2f(200, 200));
+      fish.update(clock.restart().asSeconds());
       App.draw(fish);
       App.display();
     }

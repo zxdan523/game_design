@@ -5,7 +5,7 @@
 class Swordfish:public Fish
 {
 public:
-    enum State {NORMAL,CHARGE,RELEASE,RELEASED};
+    enum State {NORMAL,CHARGE,RELEASED};
     
     Swordfish(sf::Vector2f pos=sf::Vector2f());
     Swordfish(const Swordfish&)=delete;
@@ -17,10 +17,7 @@ public:
     
     void triggered();
     
-    sf::Vector2f targetPoint;
-    
     virtual void update(float deltaTime) override;
-private:
     virtual void updateShape() override;
     virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
     

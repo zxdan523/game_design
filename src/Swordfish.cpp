@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cmath>
 #include "Swordfish.h"
+#include "util.h"
 #include "Constants.h"
 
 const float Swordfish::TOTAL_TIME=10.0f;
@@ -46,24 +47,25 @@ void Swordfish::triggered()
 
 void Swordfish::update(float deltaTime)
 {
+    assert(_knots.size()>=1);
+    assert(_texture);
+    assert(_textureAreas);
+    sf::Vector2f dist;
+    //float dist=0.0f;
+    int trans=128;
     switch(_state)
     {
         case NORMAL:
+            break;
         case RELEASED:
-            //swimTo(_attackLine.getPosition());
+            dist=_knots[0].getPosition()*deltaTime;
+            swimTo(_knots[0].getPosition());
             break;
         case CHARGE:
             _timer+=deltaTime;
-            _attackLine.setFillColor(sf::Color(255,0,0));
-            if(_timer>=CHARGE_TIME)
-            {
-                _timer=0.0f;
-                _state=RELEASE;
-            }
-            break;
-        case RELEASE:
-            _timer+=deltaTime;
-            if(_timer>=RELEASE_TIME)
+            trans=128/(_timer/BLINK_TIME);
+            _attackLine.setFillColor(sf::Color(255,0,0,trans));
+            if(_timer>CHARGE_TIME)
             {
                 _timer=0.0f;
                 _state=RELEASED;
@@ -84,7 +86,7 @@ void Swordfish::updateShape()
 
 void Swordfish::draw(sf::RenderTarget& target,sf::RenderStates states) const
 {
-  if(_state==CHARGE||_state==RELEASE)
+  if(_state==CHARGE)
     {
       target.draw(_attackLine,states);
     }
