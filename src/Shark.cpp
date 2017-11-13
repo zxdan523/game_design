@@ -9,9 +9,9 @@ const float Shark::NORMAL_SPEED=0.01f;
 const float Shark::CRAZY_SPEED=0.5f;
 const float Shark::ESCAPE_SPEED=0.8f;
 const float Shark::NORMAL_SIZE=1.0f;
-const float Shark::CRAZY_SIZE=0.6f;
+const float Shark::CRAZY_SIZE=0.8f;
 const float Shark::WEAKEN_SIZE=0.5f;
-const float Shark::HP=100;
+const int Shark::HP=100;
 
 Shark::Shark()
 {
@@ -50,37 +50,54 @@ void Shark::init()
 
 void Shark::setSize(float size)
 {
-    _head.setScale(sf::Vector2f(size,size));
     setHeadDistance(HEAD_SIZE*size);
-    _tail.setScale(sf::Vector2f(size,size));
-    _fins.setScale(sf::Vector2f(size,size));
-    for(size_t i=0;i<_knots.size();i++)
-    {
-        _knots[i].setWidth(_knots[i].getWidth()*size);
-        _knots[i].setHeight(_knots[i].getHeight()*size);
-    }
+    _knots[0].setRect(KNOT_DIST*size,TAIL_SIZE*size);
+    _knots[1].setRect(KNOT_DIST*size,TAIL_SIZE*size*4.0f/5.0f);
+    _knots[2].setRect(KNOT_DIST*size,TAIL_SIZE*size*3.0f/5.0f);
+    _knots[3].setRect(KNOT_DIST*size,TAIL_SIZE*size/2.0f);
+    _knots[4].setRect(KNOT_DIST*size,TAIL_SIZE*size/5.0f);
+    _head=sf::RectangleShape(sf::Vector2f(HEAD_SIZE*size,HEAD_SIZE*size));
+    _head.setOrigin(sf::Vector2f(0.0f,HEAD_SIZE*size/2.0f));
+    _fins=sf::RectangleShape(sf::Vector2f(TAIL_SIZE*size/2.0f,TAIL_SIZE*size));
+    _fins.setOrigin(sf::Vector2f(TAIL_SIZE*size/2.0f,TAIL_SIZE*size/2.0F));
+    _tail=sf::RectangleShape(sf::Vector2f(TAIL_SIZE*size,TAIL_SIZE*size*2.0f));
+    _tail.setOrigin(sf::Vector2f(TAIL_SIZE*size,TAIL_SIZE*size));
 }
 
 void Shark::shocked()
 {
     _current_HP-=10;
-    if(_current_HP<=HP/2)
+    if(_current_HP==HP/2)
     {
         _state=CRAZY;
         setSize(CRAZY_SIZE);
         _size=CRAZY_SIZE;
         _speed=CRAZY_SPEED;
+        assert(_texture!=nullptr);
+        assert(_textureAreas!=nullptr);
+        _head.setTexture(_texture.get());
         _head.setTextureRect((*_textureAreas)["Shark_crazy_head"]);
+        _fins.setTexture(_texture.get());
+        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+        _tail.setTexture(_texture.get());
+        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
     }
-    if(_current_HP<=HP/10)
+    if(_current_HP==HP/10)
     {
         _state=WEAKEN;
         _speed=ESCAPE_SPEED;
         setSize(WEAKEN_SIZE);
         _size=WEAKEN_SIZE;
+        assert(_texture!=nullptr);
+        assert(_textureAreas!=nullptr);
+        _head.setTexture(_texture.get());
         _head.setTextureRect((*_textureAreas)["Shark_weak_head"]);
+        _fins.setTexture(_texture.get());
+        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+        _tail.setTexture(_texture.get());
+        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
     }
-    if(_current_HP<=0)
+    if(_current_HP==0)
     {
         _current_HP=0;
         _state=DIE;
@@ -90,23 +107,37 @@ void Shark::shocked()
 void Shark::shot()
 {
     _current_HP-=10;
-    if(_current_HP<=HP/2)
+    if(_current_HP==HP/2)
     {
         _state=CRAZY;
         setSize(CRAZY_SIZE);
         _size=CRAZY_SIZE;
         _speed=CRAZY_SPEED;
+        assert(_texture!=nullptr);
+        assert(_textureAreas!=nullptr);
+        _head.setTexture(_texture.get());
         _head.setTextureRect((*_textureAreas)["Shark_crazy_head"]);
+        _fins.setTexture(_texture.get());
+        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+        _tail.setTexture(_texture.get());
+        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
     }
-    if(_current_HP<=HP/10)
+    if(_current_HP==HP/10)
     {
         _state=WEAKEN;
         _speed=ESCAPE_SPEED;
         setSize(WEAKEN_SIZE);
         _size=WEAKEN_SIZE;
+        assert(_texture!=nullptr);
+        assert(_textureAreas!=nullptr);
+        _head.setTexture(_texture.get());
         _head.setTextureRect((*_textureAreas)["Shark_weak_head"]);
+        _fins.setTexture(_texture.get());
+        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+        _tail.setTexture(_texture.get());
+        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
     }
-    if(_current_HP<=0)
+    if(_current_HP==0)
     {
         _current_HP=0;
         _state=DIE;

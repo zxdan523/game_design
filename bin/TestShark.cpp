@@ -18,7 +18,7 @@ int main(int argc, char** argv)
   textures.addTexture("../data/fish.png"); 
   textures.addArea("Shark_normal_head",sf::IntRect(0,512,256,256));
   textures.addArea("Shark_weak_head",sf::IntRect(256,512,256,256));
-  textures.addArea("Shark_crazy_head",sf::IntRect(630,256,512,512));
+  textures.addArea("Shark_crazy_head",sf::IntRect(633,256,256,256));
   textures.addArea("Shark_fins",sf::IntRect(886,256,64,128));
   textures.addArea("Shark_tail",sf::IntRect(886,384,64,128));
 
@@ -37,6 +37,15 @@ int main(int argc, char** argv)
             case sf::Event::Closed:
                 App.close();
                 break;
+            case sf::Event::KeyPressed:
+                if(event.key.code==sf::Keyboard::A)
+                {
+                    fish.shocked();
+                }
+                if(event.key.code==sf::Keyboard::S)
+                {
+                    fish.shot();
+                }
             default:
                 break;
         }

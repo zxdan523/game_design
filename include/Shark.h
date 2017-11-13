@@ -29,7 +29,8 @@ class Shark:public Fish
     private:
         virtual void updateShape() override;
         virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
-        static const float HEAD_SIZE,TAIL_SIZE,KNOT_DIST,NORMAL_SPEED,CRAZY_SPEED,ESCAPE_SPEED,NORMAL_SIZE,CRAZY_SIZE,ESCAPE_SIZE,WEAKEN_SIZE,HP;
+        static const float HEAD_SIZE,TAIL_SIZE,KNOT_DIST,NORMAL_SPEED,CRAZY_SPEED,ESCAPE_SPEED,NORMAL_SIZE,CRAZY_SIZE,ESCAPE_SIZE,WEAKEN_SIZE;
+        static const int HP;
         int _numPartition;
         sf::VertexArray _body;
         sf::VertexArray _bodyShadow;
@@ -37,7 +38,7 @@ class Shark:public Fish
         State _state;
         float _size;
         float _speed;
-        float _current_HP;
+        int _current_HP;
         std::shared_ptr<Fish> _target;
 };
 #endif
