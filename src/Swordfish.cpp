@@ -50,16 +50,15 @@ void Swordfish::update(float deltaTime)
     assert(_knots.size()>=1);
     assert(_texture);
     assert(_textureAreas);
-    sf::Vector2f dist;
+    //sf::Vector2f dist;
     //float dist=0.0f;
     int trans=128;
     switch(_state)
     {
         case NORMAL:
             break;
-        case RELEASED:
-            dist=_knots[0].getPosition()*deltaTime;
-            swimTo(_knots[0].getPosition());
+        case ATTACK:
+            //swimTo();
             break;
         case CHARGE:
             _timer+=deltaTime;
@@ -68,7 +67,7 @@ void Swordfish::update(float deltaTime)
             if(_timer>CHARGE_TIME)
             {
                 _timer=0.0f;
-                _state=RELEASED;
+                _state=ATTACK;
             }
             break;
         default:

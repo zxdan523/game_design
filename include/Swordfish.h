@@ -5,7 +5,7 @@
 class Swordfish:public Fish
 {
 public:
-    enum State {NORMAL,CHARGE,RELEASED};
+    enum State {NORMAL,CHARGE,ATTACK};
     
     Swordfish(sf::Vector2f pos=sf::Vector2f());
     Swordfish(const Swordfish&)=delete;
