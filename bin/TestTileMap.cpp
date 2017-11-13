@@ -11,7 +11,7 @@ int main(int argc, char** argv)
   sf::RenderWindow App(sf::VideoMode(640,640,32), "Tile Map Test",sf::Style::Titlebar|sf::Style::Close);
 
    // define the level with an array of tile indices
-    /*const int level[] =
+    /*std::vector<int> tiles =
     {
       0,1,0,0,0,0,0,0,0,0,
       0,1,0,0,0,0,1,0,0,0,

@@ -96,7 +96,7 @@ public:
 					triangle[2].position = sf::Vector2f(i * tileSize.x + tileSize.x/2, j * tileSize.y + tileSize.y/2);
 
 					triangle[0].texCoords = sf::Vector2f((*textureAreas)[terrain].left, (*textureAreas)[terrain].top);
-					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top + tileSize.y);
+					triangle[1].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x, (*textureAreas)[terrain].top);
 					triangle[2].texCoords = sf::Vector2f((*textureAreas)[terrain].left + tileSize.x/2, (*textureAreas)[terrain].top + tileSize.y/2);
 				}
 				// triangle small left
