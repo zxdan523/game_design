@@ -95,6 +95,10 @@ float Eel::getTriggerRadius() const
     return TRIGGER_RADIUS;
 }
 
+sf::Vector2f Eel::getCenter() const
+{
+    return sf::Vector2f(_knots[0].getPosition().x+PARTITION*LENGTH/3.0f,WINDOW_HEIGHT*(1.0f-0.618f));
+}
 void Eel::triggered()
 {
     if(_state!=NORMAL)

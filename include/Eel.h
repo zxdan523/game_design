@@ -16,6 +16,7 @@ class Eel:public Fish
         State getState() const;
         float getAttackRadius() const;
         float getTriggerRadius() const;
+        sf::Vector2f getCenter() const;
         
         void triggered();
 

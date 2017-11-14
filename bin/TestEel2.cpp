@@ -75,7 +75,7 @@ int main(int argc, char** argv)
     for(int i=0;i<5;i++)
     {
         sf::Vector2f diff=sf::Vector2f(512,384)-minions[i]->getKnot(0).getPosition();
-        if(fish.getState()==Eel::RELEASE&&mag(diff)<fish.getAttackRadius())
+        if(fish.getState()==Eel::RELEASE&&mag(fish.getCenter()-minions[i]->getKnot(0).getPosition())<fish.getAttackRadius())
         {
                 minions[i]->shocked();
         }
@@ -86,6 +86,7 @@ int main(int argc, char** argv)
         if(minions[i]->getState()==Minions::NORMAL)
         {
             sf::Vector2f dist=normalize(diff)*50.0f*deltaTime;
+            if(mag(dist)>minions[i]->getHeadDistance())
             minions[i]->swimTo(minions[i]->getKnot(0).getPosition()+dist);
             minions[i]->update(0);
         }
