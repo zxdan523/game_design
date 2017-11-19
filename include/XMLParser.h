@@ -15,6 +15,7 @@ class XMLParser
     public:
     	//XMLParser();
     	void loadXML(const char*);
+		std::map<std::string,int> loadLevel(int levelName);
     	void loadTexture(TextureManager&,std::string type="default");
     	void loadFont();
     	std::vector<int> getTileMap();

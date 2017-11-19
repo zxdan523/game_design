@@ -2,7 +2,7 @@
 	<TextureList>
 		<Texture>
 			<name>default</name>
-			<location>../data/Default.png</location>
+			<location>../data/fish.png</location>
 			<Positions>
 				<item>Larry_eye|256,192,64,64</item>
 				<item>Larry_mouth|320,0,128,128</item>
@@ -11,6 +11,7 @@
 				<item>Larry_fin_tiny_left|256,64,64,64</item>
 				<item>Larry_fin_tiny_right|256,0,64,64</item>
 				<item>Larry_tail|128,0,128,256</item>
+				<item>Eel_left_eye|512,256,64,64</item>
 			</Positions>
 		</Texture>
 		<Texture>
@@ -25,7 +26,6 @@
 	<FontList>
 		<roboto>../data/Roboto-Regular.ttf</roboto>
 	</FontList>
-
 	<TileMap>
 		0,1,0,0,0,0,0,0,0,0,
 		0,1,0,0,0,0,1,0,0,0,
@@ -38,5 +38,29 @@
 		0,4,3,0,0,0,0,0,0,0,
 		4,1,5,0,4,5,0,0,0,0,
 	</TileMap>
+
+	<LevelList>
+		<Level>
+			<name>1</name>
+			<fish>
+				<minion></minion>
+				<minion></minion>
+				<minion></minion>
+				<shark></shark>
+			</fish>
+			<TileMap>
+				0,1,0,0,0,0,0,0,0,0,
+				0,1,0,0,0,0,1,0,0,0,
+				0,1,0,0,1,1,1,0,0,0,
+				0,0,0,0,0,0,0,0,0,0,
+				0,0,0,0,0,0,9,1,1,1,
+				0,0,0,0,0,0,0,2,3,0,
+				0,0,0,0,0,0,0,0,0,0,
+				0,9,5,0,0,0,0,0,0,0,
+				0,4,3,0,0,0,0,0,0,0,
+				4,1,5,0,4,5,0,0,0,0,
+			</TileMap>
+		</Level>
+	</LevelList>
 
 </root>

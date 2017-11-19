@@ -9,6 +9,25 @@ void XMLParser::loadFont() {
 
 }
 
+std::map<std::string,int> XMLParser::loadLevel(int levelName)
+{
+	std::map<std::string,int> map;
+
+	// go to level list
+	tinyxml2::XMLNode * root = doc.FirstChild();
+	tinyxml2::XMLElement * levelList = root->FirstChildElement("LevelList");
+
+	// find specified level
+	tinyxml2::XMLElement * level = levelList->FirstChildElement();
+	while(level!=NULL && (std::stoi(level->FirstChildElement("name")->GetText()))!=(levelName)) {
+		level=level->NextSiblingElement();
+	}
+
+	tinyxml2::XMLElement * element = level->FirstChildElement("TileMap");
+
+
+}
+
 std::vector<int> XMLParser::getTileMap() {
 	tinyxml2::XMLNode * root = doc.FirstChild();
 	tinyxml2::XMLElement * tileMap = root->FirstChildElement("TileMap");
