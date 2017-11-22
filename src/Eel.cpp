@@ -182,7 +182,7 @@ void Eel::update(float deltaTime)
         default:
             break;
     }
-    updateShape();
+    Fish::update(deltaTime);
 }
 
 void Eel::updateShape()
@@ -217,6 +217,7 @@ void Eel::updateShape()
 
 void Eel::draw(sf::RenderTarget& target,sf::RenderStates states) const
 {
+    Fish::draw(target,states);
     if(_state==CHARGE||_state==RELEASE)
     {
         target.draw(_attackArea,states);

@@ -131,7 +131,7 @@ void Minions::update(float deltaTime)
         default:
             break;
     }
-    updateShape();
+    Fish::update(deltaTime);
 }
 
 void Minions::updateShape()
@@ -143,6 +143,7 @@ void Minions::updateShape()
 
 void Minions::draw(sf::RenderTarget& target,sf::RenderStates states) const
 {
+    Fish::draw(target,states);
     states.transform*=getTransform();
     target.draw(_body,states);
 }

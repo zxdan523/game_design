@@ -23,7 +23,7 @@ int main(int argc, char** argv)
   textures.addArea("Larry_fin_tiny_left",sf::IntRect(256,64,64,64));
   textures.addArea("Larry_fin_tiny_right",sf::IntRect(256,0,64,64));
   textures.addArea("Larry_tail",sf::IntRect(128,0,128,256));
-
+  textures.addArea("bubble",sf::IntRect(960,256,64,64));
 
   fish.setTexture(textures.get().texture);
   fish.setTextureAreas(textures.get().areas);

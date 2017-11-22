@@ -148,10 +148,11 @@ void Larry::updateShape()
 
 void Larry::update(float deltaTime)
 {
-    updateShape();
+    Fish::update(deltaTime); 
 }
 void Larry::draw(sf::RenderTarget& target,sf::RenderStates states) const
 {
+    Fish::draw(target,states); 
     states.transform*=getTransform();
     
     target.draw(_tail,states);
