@@ -24,7 +24,7 @@ int main(int argc, char** argv)
   textures.addArea("Eel_right_fin",sf::IntRect(576,320,64,64));
   textures.addArea("Eel_mouth",sf::IntRect(576,384,64,64));
   textures.addArea("Eel_tail",sf::IntRect(576,448,64,64));
-
+  textures.addArea("bubble",sf::IntRect(960,256,64,64));
 
   fish.setTexture(textures.get().texture);
   fish.setTextureAreas(textures.get().areas);
