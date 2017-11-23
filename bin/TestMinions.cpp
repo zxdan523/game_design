@@ -20,7 +20,7 @@ int main(int argc, char** argv)
   textures.addArea("Minions_shocked",sf::IntRect(768,0,256,256));
   textures.addArea("Minions_shot",sf::IntRect(0,256,256,256));
   textures.addArea("Minions_weak",sf::IntRect(256,256,256,256));
-
+  textures.addArea("bubble",sf::IntRect(960,256,64,64));
 
   fish.setTexture(textures.get().texture);
   fish.setTextureAreas(textures.get().areas);

@@ -72,6 +72,35 @@ void Fish::swimTo(const sf::Vector2f& dest)
             _knots[i].setRotation(angle(diff));
             _knots[i].setPosition(nextPos);
         }
+
+        if(randomInt(20)>19)
+        {
+            sf::Vector2f vel(randomFloat(1.0f,2.0f),0.0f);
+            if(diff.x>0) vel.x*=-1; 
+            _bubbles.push_back(Bubble(_knots[0].getPosition(),vel));
+            _bubbles[_bubbles.size()-1].setTexture(_texture);
+            _bubbles[_bubbles.size()-1].setTextureArea((*_textureAreas)["bubble"]);
+        }
     }
 }
 
+void Fish::update(float deltaTime)
+{
+    for(int i=0;i<_bubbles.size();i++)
+    {
+        _bubbles[i].update(deltaTime);
+        if(_bubbles[i].ended())
+        {
+            _bubbles.erase(_bubbles.begin()+i);
+        }
+    }
+    updateShape();
+}
+
+void Fish::draw(sf::RenderTarget& target,sf::RenderStates states) const
+{
+    for(int i=0;i<_bubbles.size();i++)
+    {
+        target.draw(_bubbles[i],states);
+    }
+}

@@ -93,4 +93,70 @@
 
 	</SwordFishAlgorithmList>
 
+	<!--Data to store
+
+	Minimum time
+	Delay time for minions (float)
+	Terrain tile map (vector int array, terrain)
+	Background music (file path)
+	Background picture (file path)
+	SwordFish (algorithm: delay, # swordfish, position of each, direction)
+	Shark List (type, origin)
+	# of minions
+	-->
+
+	<!-- <LevelList>
+		<Level>
+			<Name>1</Name>
+			<Swordfish>algorithm1</Swordfish>
+			<SharkList>
+				<Shark>
+					<Type>BigShark</Type>
+					<Origin>50,50</Origin>
+				</Shark>
+				<Shark>
+					<Type>SmallShark</Type>
+					<Origin>500,200</Origin>
+				</Shark>
+			</SharkList>
+			<DelayTime>5</DelayTime>
+			<BackgroundMusic>../data/music.mp3</BackgroundMusic>
+			<BackgroundPicture>../data/background.png</BackgroundPicture>			
+			<TileMap>
+				<grid>
+					0,1,0,0,0,0,0,0,0,0,
+					0,1,0,0,0,0,1,0,0,0,
+					0,1,0,0,1,1,1,0,0,0,
+					0,0,0,0,0,0,0,0,0,0,
+					0,0,0,0,0,0,9,1,1,1,
+					0,0,0,0,0,0,0,2,3,0,
+					0,0,0,0,0,0,0,0,0,0,
+					0,9,5,0,0,0,0,0,0,0,
+					0,4,3,0,0,0,0,0,0,0,
+					4,1,5,0,4,5,0,0,0,0,
+				</grid>
+				<texture>grass</texture>
+			</TileMap>
+		</Level>
+	</LevelList> -->
+
+	<!-- <SwordFishAlgorithmList>
+		<Algorithm>
+			<name>algorithm1</name>
+			<delay>3</delay>
+			<numFish>3</numFish>
+			<position>12,12</position>
+			<direction>45,600</direction>
+		</Algorithm>
+
+		<Algorithm>
+			<name>algorithm2</name>
+			<delay>3</delay>
+			<numFish>3</numFish>
+			<position>12,12</position>
+			<direction>45,600</direction>
+		</Algorithm>
+
+	</SwordFishAlgorithmList>
+ -->
 </root>

@@ -18,7 +18,7 @@ int main(int argc, char** argv)
 	XMLParser parser;
 
 	parser.loadXML("../data/xml/TestXML.xml");
-	parser.loadTexture(textures);
+	parser.loadTexture(textures,"fish");
 	
   // create main window
 	sf::RenderWindow App(sf::VideoMode(800,600,32), "XML Test",sf::Style::Titlebar|sf::Style::Close);
@@ -26,8 +26,8 @@ int main(int argc, char** argv)
 
 	texts.addFont("Roboto", "../data/Roboto-Regular.ttf");
 
-	fish.setTexture(textures.get().texture);
-	fish.setTextureAreas(textures.get().areas);
+	fish.setTexture(textures.get("fish").texture);
+	fish.setTextureAreas(textures.get("fish").areas);
 	
 	fish.init();
     
@@ -54,6 +54,7 @@ int main(int argc, char** argv)
 
 		sf::Vector2i mousePos=sf::Mouse::getPosition(App);
 		fish.swimTo(sf::Vector2f(mousePos.x,mousePos.y));
+		fish.update(0);
 
     // test font
 		sf::Text testText;

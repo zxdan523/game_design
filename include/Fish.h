@@ -6,6 +6,8 @@
 #include <memory>
 #include <string>
 #include "Knot.h"
+#include "Bubble.h"
+#include <vector>
 
 class Fish:public sf::Drawable,public sf::Transformable 
 {
@@ -28,7 +30,7 @@ class Fish:public sf::Drawable,public sf::Transformable
 
         void swimTo(const sf::Vector2f& dest);
 
-        virtual void update(float deltaTime)=0;
+        virtual void update(float deltaTime);
 
     protected:
         virtual void updateShape()=0;
@@ -37,7 +39,7 @@ class Fish:public sf::Drawable,public sf::Transformable
         std::shared_ptr<std::map<std::string,sf::IntRect>> _textureAreas;
         bool _hasTexture;
         float _headDist;
-    private:
-        virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const=0;
+        std::vector<Bubble> _bubbles;
+        virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const;
 };
 #endif
