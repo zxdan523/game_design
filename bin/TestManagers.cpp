@@ -84,6 +84,8 @@
       sf::Vector2i mousePos=sf::Mouse::getPosition(App);
       fish.swimTo(sf::Vector2f(mousePos.x,mousePos.y));
       testFish.swimTo(sf::Vector2f(mousePos.x,mousePos.y));
+      fish.update(0);
+      testFish.update(0);
 
       // test font
       sf::Text testText;

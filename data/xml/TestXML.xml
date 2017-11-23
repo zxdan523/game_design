@@ -27,6 +27,20 @@
 	<FontList>
 		<roboto>../data/Roboto-Regular.ttf</roboto>
 	</FontList>
+
+	<TileMap>
+		0,1,0,0,0,0,0,0,0,0,
+		0,1,0,0,0,0,1,0,0,0,
+		0,1,0,0,1,1,1,0,0,0,
+		0,0,0,0,0,0,0,0,0,0,
+		0,0,0,0,0,0,9,1,1,1,
+		0,0,0,0,0,0,0,2,3,0,
+		0,0,0,0,0,0,0,0,0,0,
+		0,9,5,0,0,0,0,0,0,0,
+		0,4,3,0,0,0,0,0,0,0,
+		4,1,5,0,4,5,0,0,0,0,
+	</TileMap>
+
 	<!--Data to store
 
 	Minimum time
@@ -39,7 +53,7 @@
 	# of minions
 	-->
 
-	<LevelList>
+	<!-- <LevelList>
 		<Level>
 			<Name>1</Name>
 			<Swordfish>algorithm1</Swordfish>
@@ -69,12 +83,12 @@
 					0,4,3,0,0,0,0,0,0,0,
 					4,1,5,0,4,5,0,0,0,0,
 				</grid>
-				<texture>grass<texture>
+				<texture>grass</texture>
 			</TileMap>
 		</Level>
-	</LevelList>
+	</LevelList> -->
 
-	<SwordFishAlgorithmList>
+	<!-- <SwordFishAlgorithmList>
 		<Algorithm>
 			<name>algorithm1</name>
 			<delay>3</delay>
@@ -92,5 +106,5 @@
 		</Algorithm>
 
 	</SwordFishAlgorithmList>
-
+ -->
 </root>
