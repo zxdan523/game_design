@@ -22,9 +22,9 @@ ui::Panel::Panel(Vector2f pos)
 
 }
 
-void ui::Panel::addButton(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
+void ui::Panel::addButton(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f buttonPos)
 {
-	ui::Button newButton(str, id, usColor, hovColor, selColor, txtColor, bFont, panelPosition - pos);
+	ui::Button newButton(str, id, usColor, hovColor, selColor, txtColor, bFont, buttonPos);
 	_btns.push_back(newButton);
 	buttonList[id] = newButton;
 }

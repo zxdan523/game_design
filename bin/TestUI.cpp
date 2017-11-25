@@ -8,7 +8,7 @@
 int main(int argc, char** argv)
 {
   // create main window
-  sf::RenderWindow App(sf::VideoMode(800,600,32), "Larry, Swim!",sf::Style::Titlebar|sf::Style::Close);
+  sf::RenderWindow App(sf::VideoMode(800,600,32), "FISHNAPPED",sf::Style::Titlebar|sf::Style::Close);
     
 	sf::Font buttonTextFont;
 	buttonTextFont.loadFromFile("Amender_Tu.ttf");
