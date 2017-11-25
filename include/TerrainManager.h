@@ -12,16 +12,12 @@ class TerrainManager : public sf::Drawable, public sf::Transformable
 {
 
 public:
-	void load(std::vector<std::vector<sf::Vector2f>>);
-
+	void load(std::vector<std::vector<sf::Vector2f>>, sf::Color color = sf::Color::White);
+	std::vector<std::vector<sf::Vector2f>> getTerrainHitbox();
 
 protected:
 	virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const;
-	std::vector<sf::ConvexShape> v;
-	sf::ConvexShape a;
-	//std::shared_ptr<std::list<sf::ConvexShape>> polygons;
-	std::shared_ptr<sf::Texture> texture;
-	std::shared_ptr<std::map<std::string,sf::IntRect>> textureAreas;
+	std::vector<sf::ConvexShape> shape_list;
 };
 
 

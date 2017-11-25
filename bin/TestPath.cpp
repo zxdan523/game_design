@@ -4,69 +4,64 @@
 #include "XMLParser.h"
 #include "Larry.h"
 #include "TextureManager.h"
-#include "TileMap.h"
 #include "TerrainManager.h"
-#include <iostream>
 #include "util.h"
 #include "math.h"
 
-
-
 std::vector<sf::Vector2f> expand_polygon(std::vector<sf::Vector2f> source_polygon, double expand_size)
-        {
-            double x_offset, y_offset;
-            double x_size, y_size;
-            double x_ratio, y_ratio;
- 
+{
+	double x_offset, y_offset;
+	double x_size, y_size;
+	double x_ratio, y_ratio;
 
-            x_offset = source_polygon[0].x;
-            y_offset = source_polygon[0].y;
-            x_size = source_polygon[0].x;
-            y_size = source_polygon[0].y;
+	x_offset = source_polygon[0].x;
+	y_offset = source_polygon[0].y;
+	x_size = source_polygon[0].x;
+	y_size = source_polygon[0].y;
 
-            for (int i = 1; i < source_polygon.size(); i++)
-            {
-                if ( source_polygon[i].x < x_offset )
-                    x_offset = source_polygon[i].x;
+	for (int i = 1; i < source_polygon.size(); i++)
+	{
+		if ( source_polygon[i].x < x_offset )
+			x_offset = source_polygon[i].x;
 
-                if (source_polygon[i].y < y_offset)
-                    y_offset = source_polygon[i].y;
+		if (source_polygon[i].y < y_offset)
+			y_offset = source_polygon[i].y;
 
-                if (source_polygon[i].x > x_size)
-                    x_size = source_polygon[i].x;
+		if (source_polygon[i].x > x_size)
+			x_size = source_polygon[i].x;
 
-                if (source_polygon[i].y > y_size)
-                    y_size = source_polygon[i].y;
-            }
+		if (source_polygon[i].y > y_size)
+			y_size = source_polygon[i].y;
+	}
 
-            std::vector<sf::Vector2f> output_polygon;
-            for (int i = 0; i < source_polygon.size(); i++)
-            {
+	std::vector<sf::Vector2f> output_polygon;
+	for (int i = 0; i < source_polygon.size(); i++)
+	{
 
-                output_polygon.push_back(sf::Vector2f(source_polygon[i].x - x_offset, source_polygon[i].y - y_offset));
-            }
+		output_polygon.push_back(sf::Vector2f(source_polygon[i].x - x_offset, source_polygon[i].y - y_offset));
+	}
 
-            x_size -= x_offset;
-            y_size -= y_offset;
+	x_size -= x_offset;
+	y_size -= y_offset;
 
-            x_ratio = (x_size + 2 * expand_size) / x_size;
-            y_ratio = (y_size + 2 * expand_size) / y_size;
+	x_ratio = (x_size + 2 * expand_size) / x_size;
+	y_ratio = (y_size + 2 * expand_size) / y_size;
 
-            for (int i = 0; i < output_polygon.size(); i++)
-            {
-                output_polygon[i].x = output_polygon[i].x * x_ratio * output_polygon[i].x / x_size;
-                output_polygon[i].y = output_polygon[i].y * y_ratio * output_polygon[i].y / y_size;
-            }
+	for (int i = 0; i < output_polygon.size(); i++)
+	{
+		output_polygon[i].x = output_polygon[i].x * x_ratio;
+		output_polygon[i].y = output_polygon[i].y * y_ratio;
+	}
 
-            for (int i = 0; i < output_polygon.size(); i++)
-            {
-                output_polygon[i].x = output_polygon[i].x + x_offset - expand_size;
-                output_polygon[i].y = output_polygon[i].y + y_offset - expand_size;
-            }
+	for (int i = 0; i < output_polygon.size(); i++)
+	{
+		output_polygon[i].x = output_polygon[i].x + x_offset - expand_size;
+		output_polygon[i].y = output_polygon[i].y + y_offset - expand_size;
+	}
 
-            return output_polygon;
-        }
-    
+	return output_polygon;
+}
+
 
 sf::Vector2f line_intersection(sf::Vector2f line1_start_point, sf::Vector2f line1_end_point, sf::Vector2f line2_start_point, sf::Vector2f line2_end_point)
 {
@@ -176,66 +171,31 @@ sf::Vector2f getPath(sf::Vector2f target_point, sf::Vector2f source_point, std::
 	output_point.x = target_point.x;
 	output_point.y = target_point.y;
 	source_distance = sqrt((source_point.x - target_point.x) * (source_point.x - target_point.x) + (source_point.y - target_point.y) * (source_point.y - target_point.y));
-	target_distance = source_distance;
+	target_distance = 2 * source_distance;
 
 	for (auto const& polygon : polygons)
 	{
 		rc = polygon_intersect_line(source_point, target_point, polygon);
 		if (rc == 1)
-		{
-			bool same_polygon = false;
-			vertex_index = 0;
-
+		{	
 			for (auto const& vertex : polygon)
 			{
-				if ((vertex.x == source_point.x) && (vertex.y == source_point.y))
-				{
-					same_polygon = true;
-					break;
+				for (auto const& polygon1 : polygons) {
+
+					rc = polygon_intersect_line(source_point, vertex, polygon1);
+					if(rc==1)
+						break;
+
 				}
-
-				vertex_index += 1;
-			}
-			if (same_polygon == true)
-			{
-				if (vertex_index == 0)
-					new_point = polygon[polygon.size() - 1];
-				else
-					new_point = polygon[vertex_index - 1];
-				current_distance = sqrt((new_point.x - target_point.x) * (new_point.x - target_point.x) + (new_point.y - target_point.y) * (new_point.y - target_point.y));
-				if (current_distance < target_distance)
+				if ( rc == 0 )
 				{
-					target_distance = current_distance;
-					output_point.x = new_point.x;
-					output_point.y = new_point.y;
-				}
-				if (vertex_index == polygon.size() - 1)
-					new_point = polygon[0];
-				else
-					new_point = polygon[vertex_index + 1];
-
-				current_distance = sqrt((new_point.x - target_point.x) * (new_point.x - target_point.x) + (new_point.y - target_point.y) * (new_point.y - target_point.y));
-
-				if (current_distance < target_distance)
-				{
-					target_distance = current_distance;
-					output_point.x = new_point.x;
-					output_point.y = new_point.y;
-				}
-
-				return output_point;
-			}
-
-			else
-			{
-				for (auto const& vertex : polygon)
-				{
-					current_distance = sqrt((source_point.x - vertex.x) * (source_point.x - vertex.x) + (source_point.y - vertex.y) * (source_point.y - vertex.y));
+					current_distance = sqrt((target_point.x - vertex.x) * (target_point.x - vertex.x) + (target_point.y - vertex.y) * (target_point.y - vertex.y));
+					current_distance += sqrt((source_point.x - vertex.x) * (source_point.x - vertex.x) + (source_point.y - vertex.y) * (source_point.y - vertex.y));
 					if (current_distance > 0)
 					{
-						if (current_distance < source_distance)
+						if (current_distance < target_distance)
 						{
-							source_distance = current_distance;
+							target_distance = current_distance;
 							output_point.x = vertex.x;
 							output_point.y = vertex.y;
 						}
@@ -251,45 +211,20 @@ sf::Vector2f getPath(sf::Vector2f target_point, sf::Vector2f source_point, std::
 
 int main(int argc, char** argv)
 {
-
-  // Resource Managers
+	// Resource Managers
 	TextureManager textures;
 	XMLParser parser;
 	TerrainManager terrain;
-	TerrainManager terrain2;
 
+	// Fish
 	sf::Vertex line[2];
-	std::vector<std::vector<sf::Vector2f>> test;
-	std::vector<std::vector<sf::Vector2f>> expand_test;
-	std::vector<sf::Vector2f> shape1;
-	shape1.push_back(sf::Vector2f(10,10));
-	shape1.push_back(sf::Vector2f(200,30));
-	shape1.push_back(sf::Vector2f(50,150));
-	test.push_back(shape1);
-	expand_test.push_back(expand_polygon(shape1,30));
-
-	std::vector<sf::Vector2f> shape2;
-	shape2.push_back(sf::Vector2f(500,600));
-	shape2.push_back(sf::Vector2f(400,300));
-	shape2.push_back(sf::Vector2f(600,400));
-	test.push_back(shape2);
-	expand_test.push_back(expand_polygon(shape2,30));
-	
-	std::vector<sf::Vector2f> shape3;
-	shape3.push_back(sf::Vector2f(700,60));
-	shape3.push_back(sf::Vector2f(770,60));
-	shape3.push_back(sf::Vector2f(850,100));
-	shape3.push_back(sf::Vector2f(650,100));
-	test.push_back(shape3);
-	expand_test.push_back(expand_polygon(shape3,30));
-	terrain.load(test);
-	terrain2.load(expand_test);
-
-  // create main window
-	sf::RenderWindow App(sf::VideoMode(1024,768,32), "Path - SFML",sf::Style::Titlebar|sf::Style::Close);
-	Minions minion(sf::Vector2f(800,400));
+	Minions minion(sf::Vector2f(700,200));
 	Larry larry;
 
+	// create main window
+	sf::RenderWindow App(sf::VideoMode(1024,768,32), "Path - SFML",sf::Style::Titlebar|sf::Style::Close);
+
+	// add textures
 	parser.loadXML("../data/xml/TestXML.xml");
 	parser.loadTexture(textures, "fish");
 
@@ -300,6 +235,32 @@ int main(int argc, char** argv)
 
 	minion.init();
 	larry.init();
+
+	// create terrain with verticies
+	std::vector<std::vector<sf::Vector2f>> test;
+	std::vector<std::vector<sf::Vector2f>> expand_test;
+	std::vector<sf::Vector2f> shape1;
+	shape1.push_back(sf::Vector2f(10,10));
+	shape1.push_back(sf::Vector2f(200,30));
+	shape1.push_back(sf::Vector2f(50,150));
+	test.push_back(shape1);
+	expand_test.push_back(expand_polygon(shape1,minion.getHeadDistance()));
+
+	std::vector<sf::Vector2f> shape2;
+	shape2.push_back(sf::Vector2f(500,600));
+	shape2.push_back(sf::Vector2f(400,300));
+	shape2.push_back(sf::Vector2f(600,400));
+	test.push_back(shape2);
+	expand_test.push_back(expand_polygon(shape2,minion.getHeadDistance()));
+	
+	std::vector<sf::Vector2f> shape3;
+	shape3.push_back(sf::Vector2f(700,60));
+	shape3.push_back(sf::Vector2f(770,60));
+	shape3.push_back(sf::Vector2f(850,100));
+	shape3.push_back(sf::Vector2f(650,100));
+	test.push_back(shape3);
+	expand_test.push_back(expand_polygon(shape3,minion.getHeadDistance()));
+	terrain.load(test);
 
     // start main loop
 	sf::Clock clock;
@@ -312,35 +273,23 @@ int main(int argc, char** argv)
 				case sf::Event::Closed:
 				App.close();
 				break;
-				case sf::Event::KeyPressed:
-				if(event.key.code==sf::Keyboard::A)
-					minion.recovered();
-				if(event.key.code==sf::Keyboard::S)
-					minion.shot();
-				if(event.key.code==sf::Keyboard::D)
-					minion.shocked();
-				if(event.key.code==sf::Keyboard::F)
-					minion.weaken();
-				break;
 				default:
 				break;
 			}
 		}
-    // clear screen and fill with blue
+    	// clear screen and fill with blue
 		App.clear(sf::Color::Blue);
 		
 		sf::Vector2i mousePos=sf::Mouse::getPosition(App);
-		
-		//show path to take between fish
-		line[0] = minion.getKnot(0).getPosition();
-		line[1] = getPath(minion.getKnot(0).getPosition(),larry.getKnot(0).getPosition(),expand_test);
-
-		minion.update(0);
 		larry.swimTo(sf::Vector2f(mousePos.x,mousePos.y));
 		larry.update(0);
-		App.draw(terrain);
-		App.draw(terrain2);
+		minion.update(0);
 
+		//show path to take between fish
+		line[0] = minion.getKnot(0).getPosition();
+		line[1] = getPath(larry.getKnot(0).getPosition(),minion.getKnot(0).getPosition(),expand_test);
+
+		App.draw(terrain);
 		App.draw(larry);
 		App.draw(minion);
 		App.draw(line, 2, sf::Lines);
