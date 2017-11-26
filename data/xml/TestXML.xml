@@ -102,21 +102,27 @@
 		</Level>
 	</LevelList>
 
-	<!-- <SwordFishAlgorithmList>
+	<SwordFishAlgorithmList>
 		<Algorithm>
-			<name>algorithm1</name>
-			<delay>3</delay>
-			<numFish>3</numFish>
+			<name>swordfish_attack1</name>
+			<delay>0</delay>
+			<numFish>1</numFish>
 			<position>12,12</position>
 			<direction>45,600</direction>
 		</Algorithm>
 		<Algorithm>
-			<name>algorithm2</name>
-			<delay>3</delay>
-			<numFish>3</numFish>
+			<name>swordfish_attack1</name>
+			<delay>1</delay>
+			<numFish>1</numFish>
 			<position>12,12</position>
 			<direction>45,600</direction>
 		</Algorithm>
+        <Algorithm>
+            <name>swordfish_attack3</name>
+            <delay>1</delay>
+            <numFish>1</numFish>
+            <position>12,12</position>
+            <direction>45,600</direction>
+        </Algorithm>
 	</SwordFishAlgorithmList>
- -->
 </root>
