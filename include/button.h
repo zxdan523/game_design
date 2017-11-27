@@ -32,7 +32,6 @@ namespace ui
 		bool mouseInButton(Event& e, RenderWindow& window);
 		void update(Event& e, RenderWindow& window);
 
-		void remove(std::string bID);
 		void setUnselectedColor(Color uColor);
 		void setHoverColor(Color hColor);
 		void setSelectedColor(Color sColor);
@@ -43,6 +42,7 @@ namespace ui
 		Color getTextColor();
 		RectangleShape getButtonShape();
 		Uint32 getButtonState();
+		std::string getButtonID();
 
 	private:
 		Uint32 buttonState;

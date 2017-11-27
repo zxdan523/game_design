@@ -117,12 +117,6 @@ void ui::Button::selected()
 	buttonText.setColor(getTextColor());
 }
 
-
-void ui::Button::remove(std::string bID)
-{
-
-}
-
 RectangleShape ui::Button::getButtonShape()
 {
 	return buttonShape;
@@ -131,6 +125,11 @@ RectangleShape ui::Button::getButtonShape()
 Uint32 ui::Button::getButtonState()
 {
 	return buttonState;
+}
+
+std::string ui::Button::getButtonID()
+{
+	return buttonID;
 }
 
 void ui::Button::draw(RenderTarget& target, RenderStates states) const
