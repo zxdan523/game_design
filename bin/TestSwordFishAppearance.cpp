@@ -56,6 +56,7 @@ int main(int argc, char** argv)
                             fish[i]->setTexture(textures.get().texture);
                             fish[i]->setTextureAreas(textures.get().areas);
                             fish[i]->init();
+                            
                         }
                     }
                     if (event.key.code == sf::Keyboard::S) {
@@ -76,6 +77,17 @@ int main(int argc, char** argv)
                             fish[i]->setTexture(textures.get().texture);
                             fish[i]->setTextureAreas(textures.get().areas);
                             fish[i]->init();
+                        }
+                    }
+                    if (event.key.code == sf::Keyboard::D) {
+                        for(int i=0;i<5;i++)
+                        {
+                            fish[i]=std::make_shared<Swordfish>(sf::Vector2f(i*200+1,767),sf::Vector2f(1.0f,-1.0f));
+                            fish[i]->setTexture(textures.get().texture);
+                            fish[i]->setTextureAreas(textures.get().areas);
+                            fish[i]->setPrepare(fish[i]->getPrepare()*i/5);
+                            fish[i]->init();
+                            
                         }
                     }
                 default:

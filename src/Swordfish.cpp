@@ -4,7 +4,7 @@
 #include "util.h"
 #include "Constants.h"
 
-const float Swordfish::PREPARE_TIME=3.0f;
+//const float Swordfish::PREPARE_TIME=3.0f;
 const float Swordfish::SHOOT_TIME=1.0f;
 const float Swordfish::SIZE=100.0f;
 const float Swordfish::SHOOT_SPEED=500.0f;
@@ -25,6 +25,7 @@ Swordfish::Swordfish(sf::Vector2f pos,sf::Vector2f dir)
   _attackLine.setFillColor(sf::Color(255,0,0,255));
   _attackLine.setOutlineThickness(0.0f);
   _timer=0.0f;
+    PREPARE_TIME=3.0f;
   _state=PREPARE;
   _speed=SHOOT_SPEED;
 }
@@ -50,6 +51,13 @@ sf::Vector2f Swordfish::getCenter() const
 float Swordfish::getAttackRadius() const
 {
     return SIZE;
+}
+
+void Swordfish::setPrepare(float time) {
+    PREPARE_TIME = time;
+}
+float Swordfish::getPrepare() {
+    return PREPARE_TIME;
 }
 void Swordfish::update(float deltaTime)
 {
@@ -101,3 +109,4 @@ void Swordfish::draw(sf::RenderTarget& target,sf::RenderStates states) const
     }
     target.draw(_body,states);
 }
+

@@ -21,6 +21,8 @@ public:
     virtual void updateShape() override;
     virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
     
+    void setPrepare(float time);
+    float getPrepare();
     sf::RectangleShape _body;
     sf::RectangleShape _attackLine;
     
@@ -29,6 +31,7 @@ public:
     sf::Vector2f _oriPos;
     sf::Vector2f _dir;
     float _speed;
-    static const float PREPARE_TIME,SHOOT_TIME,SIZE,SHOOT_SPEED;
+    static const float SHOOT_TIME,SIZE,SHOOT_SPEED;
+    float PREPARE_TIME;
 };
 #endif
