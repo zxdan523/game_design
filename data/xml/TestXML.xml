@@ -106,21 +106,28 @@
 		<Algorithm>
 			<name>swordfish_attack1</name>
 			<delay>0</delay>
-			<numFish>1</numFish>
+			<numFish>5</numFish>
 			<position>12,12</position>
 			<direction>45,600</direction>
 		</Algorithm>
 		<Algorithm>
 			<name>swordfish_attack1</name>
 			<delay>1</delay>
-			<numFish>1</numFish>
+			<numFish>5</numFish>
 			<position>12,12</position>
 			<direction>45,600</direction>
 		</Algorithm>
         <Algorithm>
             <name>swordfish_attack3</name>
             <delay>1</delay>
-            <numFish>1</numFish>
+            <numFish>5</numFish>
+            <position>12,12</position>
+            <direction>45,600</direction>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack4</name>
+            <delay>1</delay>
+            <numFish>5</numFish>
             <position>12,12</position>
             <direction>45,600</direction>
         </Algorithm>
