@@ -133,4 +133,44 @@
 		</Level>
 	</LevelList>
 
+<<<<<<< HEAD
+=======
+    <SwordFishAlgorithmList>
+        <Algorithm>
+            <name>swordfish_attack1</name>
+            <delay>0</delay>
+            <numFish>5</numFish>
+            <position>1,1,200,1,400,1,600,1,800,1</position>
+            <direction>1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,</direction>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack2</name>
+            <delay>0</delay>
+            <numFish>5</numFish>
+            <position>200,1,500,1,800,1,1,400,1,700</position>
+            <direction>1.0,1.0,0.5,1.0,-1.0,1.0,1.0,0.5,1.0,-0.25</direction>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack3</name>
+            <delay>1</delay>
+            <numFish>5</numFish>
+            <position>1,WINDOW_HEIGHT,200,WINDOW_HEIGHT,400,WINDOW_HEIGHT,600,WINDOW_HEIGHT,800,WINDOW_HEIGHT</position>
+            <direction>1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0,1.0,-1.0</direction>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack4</name>
+            <delay>1</delay>
+            <numFish>5</numFish>
+            <position>1,21,WINDOW_WIDTH-20,1,21,WINDOW_HEIGHT,WINDOW_WIDTH,WINDOW_HEIGHT-20,WINDOW_WIDTH/2,1</position>
+            <direction>1.0,1.0,-1.0,1.0,1.0,-1.0,-1.0,-1.0,0.0,1.0</direction>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack5</name>
+            <delay>1</delay>
+            <numFish>5</numFish>
+            <position>WINDOW_WIDTH/3,1,WINDOW_WIDTH*2/3,1,1,WINDOW_HEIGHT/4,1,WINDOW_HEIGHT*2/4,1,WINDOW_HEIGHT*3/4</position>
+            <direction>0.0,1.0,0.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0</direction>
+        </Algorithm>
+    </SwordFishAlgorithmList>
+>>>>>>> 4ed48e85eaaf3ac51ab20fd5ae5328d04bc5fc49
 </root>
