@@ -2,6 +2,7 @@
 #include <SFML/Audio.hpp>
 #include "Swordfish.h"
 #include "TextureManager.h"
+#include "XMLParser.h"
 #include <iostream>
 #include <vector>
 #include "Constants.h"
@@ -15,8 +16,9 @@ int main(int argc, char** argv)
     sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT,32), "Hello World - SFML",sf::Style::Titlebar|sf::Style::Close);
     
 
-    //XMLParser parser;
-    //parser.loadXML("../data/xml/TestXML.xml");
+    XMLParser parser;
+    parser.loadXML("../data/xml/TestXML.xml");
+    std::vector<int> swordfishPositions = parser.getSwordfishPositions();
     
     std::vector<std::shared_ptr<Swordfish>> fish(5);
     std::vector<sf::Vector2f> positions(5);
@@ -27,7 +29,6 @@ int main(int argc, char** argv)
     textures.addTexture("../data/fish.png");
     textures.addArea("Swordfish",sf::IntRect(512,512,512,256));
     textures.addArea("bubble",sf::IntRect(960,256,64,64));
-    \\\\
     
     for(int i=0;i<5;i++)
     {
