@@ -11,7 +11,7 @@ int main(int argc, char** argv)
   sf::RenderWindow App(sf::VideoMode(640,640,32), "Tile Map Test",sf::Style::Titlebar|sf::Style::Close);
 
    // define the level with an array of tile indices
-    /*std::vector<int> tiles =
+    std::vector<int> tiles =
     {
       0,1,0,0,0,0,0,0,0,0,
       0,1,0,0,0,0,1,0,0,0,
@@ -23,11 +23,11 @@ int main(int argc, char** argv)
       0,9,5,0,0,0,0,0,0,0,
       0,4,3,0,0,0,0,0,0,0,
       4,1,5,0,4,5,0,0,0,0,
-    };*/
+    };
 
   XMLParser parser;
   parser.loadXML("../data/xml/TestXML.xml");
-  std::vector<int> tiles = parser.getTileMap();
+  //std::vector<int> tiles = parser.getTileMap();
 
     // create the tilemap from the level definition
   TileMap map;

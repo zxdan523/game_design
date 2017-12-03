@@ -171,7 +171,7 @@ sf::Vector2f getPath(sf::Vector2f target_point, sf::Vector2f source_point, std::
 	output_point.x = target_point.x;
 	output_point.y = target_point.y;
 	source_distance = sqrt((source_point.x - target_point.x) * (source_point.x - target_point.x) + (source_point.y - target_point.y) * (source_point.y - target_point.y));
-	target_distance = 2 * source_distance;
+	target_distance = 2048;
 
 	for (auto const& polygon : polygons)
 	{
@@ -202,7 +202,6 @@ sf::Vector2f getPath(sf::Vector2f target_point, sf::Vector2f source_point, std::
 					}
 				}
 			}
-
 		}
 	}
 

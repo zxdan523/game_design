@@ -13,12 +13,14 @@
 class XMLParser
 {
     public:
-    	//XMLParser();
+        std::string loadTexture(TextureManager &textures, std::vector<std::string> items);
+        std::vector<std::string> getElementItems(tinyxml2::XMLElement * element);
+        tinyxml2::XMLElement * visitElement(std::vector<std::string> pathList);
     	void loadXML(const char*);
-		std::map<std::string,int> loadLevel(int levelName);
+		//std::map<std::string,int> loadLevel(int levelName);
     	void loadTexture(TextureManager&,std::string type="default");
-    	void loadFont();
-    	std::vector<int> getTileMap();
+    	//void loadFont();
+    	//std::vector<int> getTileMap();
 
     private:
     	tinyxml2::XMLDocument doc;

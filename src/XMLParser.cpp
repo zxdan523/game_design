@@ -5,9 +5,29 @@ void XMLParser::loadXML(const char* path) {
 	doc.LoadFile(path);
 }
 
-void XMLParser::loadFont() {
+std::vector<std::string> XMLParser::getElementItems(tinyxml2::XMLElement * element) {
+	
+	std::vector<std::string> items;
+
+	for(tinyxml2::XMLElement * item = element->FirstChildElement();
+		item!= NULL;item=item->NextSiblingElement()) {
+		items.push_back(item->GetText());
+	}
+
+	return items;
+}
+
+
+
+tinyxml2::XMLElement * XMLParser::visitElement(std::vector<std::string> pathList) {
+
+
 
 }
+
+
+//ignore, for reference -----------------------------------------------------------------------------------
+/*
 
 std::map<std::string,int> XMLParser::loadLevel(int levelName)
 {
@@ -45,7 +65,7 @@ std::vector<int> XMLParser::getTileMap() {
 
 	return v;
 }
-
+*/
 // adds texture info from the XML file to the texture manager 
 void XMLParser::loadTexture(TextureManager &textures, std::string name) {
 	// Find specific texture needed
