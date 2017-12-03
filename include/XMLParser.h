@@ -4,6 +4,7 @@
 //#include <SFML/Graphics.hpp>
 #include "tinyxml2.h"
 #include "TextureManager.h"
+#include "LevelInfo.h"
 #include <string>
 #include <map>
 #include <memory>
