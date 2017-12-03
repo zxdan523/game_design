@@ -5,6 +5,45 @@ void XMLParser::loadXML(const char* path) {
 	doc.LoadFile(path);
 }
 
+void XMLParser::loadLevel(LevelInfo& level, int level_num) {
+	tinyxml2::XMLNode * root = doc.FirstChild();
+	tinyxml2::XMLElement * level_list = root->FirstChildElement("LevelList");
+	tinyxml2::XMLElement * level_element = level_list->FirstChildElement();
+	
+	// find level in level list
+	while(level_element!=NULL && (level_element->FirstChildElement("LevelNumber")->GetText())!=(std::to_string(level_num))) {
+		level_element=level_element->NextSiblingElement();
+	}
+
+	// load level settings
+	level.setLevelNumber(std::stoi(level_element->FirstChildElement("LevelNumber")->GetText()));
+	level.setLevelLength(std::stoi(level_element->FirstChildElement("LevelLength")->GetText()));
+	level.setLevelLength(std::stoi(level_element->FirstChildElement("MinionsNumber")->GetText()));
+	level.setBackgroundImage(level_element->FirstChildElement("BackgroundMusic")->GetText());
+	level.setBackgroundMusic(level_element->FirstChildElement("BackgroundImage")->GetText());
+
+	// load terrain map
+	std::vector<std::vector<sf::Vector2f>> polygon_list;
+	for(tinyxml2::XMLElement * polygon = level_element->FirstChildElement("TerrainList")->FirstChildElement();
+		polygon!=NULL; polygon=polygon->NextSiblingElement()) {
+		std::vector<sf::Vector2f> polygon_entry;
+		for(tinyxml2::XMLElement * vertex = polygon->FirstChildElement();
+		vertex!= NULL;vertex=vertex->NextSiblingElement()) {
+			sf::Vector2f point;
+			std::string vertex_text = vertex->GetText();
+			point.x = std::stoi((vertex_text).substr(0, (vertex_text).find(",")));
+			point.y = std::stoi((vertex_text).substr((vertex_text).find(",")+1));
+			polygon_entry.push_back(point);
+	}
+	polygon_list.push_back(polygon_entry);
+		
+	}
+
+	level.setTerrain(polygon_list);
+
+}
+
+
 std::vector<std::string> XMLParser::getElementItems(tinyxml2::XMLElement * element) {
 	
 	std::vector<std::string> items;
@@ -12,40 +51,9 @@ std::vector<std::string> XMLParser::getElementItems(tinyxml2::XMLElement * eleme
 	for(tinyxml2::XMLElement * item = element->FirstChildElement();
 		item!= NULL;item=item->NextSiblingElement()) {
 		items.push_back(item->GetText());
-	}
-
-	return items;
 }
 
-
-
-tinyxml2::XMLElement * XMLParser::visitElement(std::vector<std::string> pathList) {
-
-
-
-}
-
-
-//ignore, for reference -----------------------------------------------------------------------------------
-/*
-
-std::map<std::string,int> XMLParser::loadLevel(int levelName)
-{
-	std::map<std::string,int> map;
-
-	// go to level list
-	tinyxml2::XMLNode * root = doc.FirstChild();
-	tinyxml2::XMLElement * levelList = root->FirstChildElement("LevelList");
-
-	// find specified level
-	tinyxml2::XMLElement * level = levelList->FirstChildElement();
-	while(level!=NULL && (std::stoi(level->FirstChildElement("name")->GetText()))!=(levelName)) {
-		level=level->NextSiblingElement();
-	}
-
-	tinyxml2::XMLElement * element = level->FirstChildElement("TileMap");
-
-
+return items;
 }
 
 std::vector<int> XMLParser::getTileMap() {
@@ -65,9 +73,9 @@ std::vector<int> XMLParser::getTileMap() {
 
 	return v;
 }
-*/
+
 // adds texture info from the XML file to the texture manager 
-void XMLParser::loadTexture(TextureManager &textures, std::string name) {
+void XMLParser::loadTexture(TextureManager &texture_manager, std::string name) {
 	// Find specific texture needed
 	tinyxml2::XMLNode * root = doc.FirstChild();
 	tinyxml2::XMLElement * textureList = root->FirstChildElement("TextureList");
@@ -79,7 +87,7 @@ void XMLParser::loadTexture(TextureManager &textures, std::string name) {
 
 	// sets location of texture
 	tinyxml2::XMLElement * location = texture->FirstChildElement("location");
-	textures.addTexture(location->GetText(),name);
+	texture_manager.addTexture(location->GetText(),name);
 
 	// iterate through areas listed and add to texture manager
 	for(tinyxml2::XMLElement * item = texture->FirstChildElement("Positions")->FirstChildElement();
@@ -96,6 +104,6 @@ void XMLParser::loadTexture(TextureManager &textures, std::string name) {
 		if(ss.peek()==',')
 			ss.ignore();
 	}
-	textures.addArea(areaName,sf::IntRect(v.at(0),v.at(1),v.at(2),v.at(3)),name);
+	texture_manager.addArea(areaName,sf::IntRect(v.at(0),v.at(1),v.at(2),v.at(3)),name);
 }
 }

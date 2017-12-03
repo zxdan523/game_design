@@ -1,6 +1,5 @@
 
 <root>
-
 	<TextureList>
 		<Texture>
 			<name>fish</name>
@@ -39,7 +38,6 @@
 	<FontList>
 		<roboto>../data/Roboto-Regular.ttf</roboto>
 	</FontList>
-
 	<TileMap>
 		1,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,
 		2,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
@@ -53,70 +51,86 @@
 		4,1,5,0,4,5,0,0,0,0,0,0,0,0,0,0,
 		2,1,3,0,1,1,0,0,0,0,0,1,1,0,0,0,
 		4,1,5,0,1,1,0,0,0,0,0,1,1,0,0,0,
-
 	</TileMap>
-
-	<!--Data to store
-	Minimum time
-	Delay time for minions (float)
-	Terrain tile map (vector int array, terrain)
-	Background music (file path)
-	Background picture (file path)
-	SwordFish (algorithm: delay, # swordfish, position of each, direction)
-	Shark List (type, origin)
-	# of minions
-	-->
-
-	 <LevelList>
+	<LevelList>
 		<Level>
-			<Name>1</Name>
-			<Swordfish>algorithm1</Swordfish>
-			<SharkList>
-				<Shark>
-					<Type>BigShark</Type>
-					<Origin>50,50</Origin>
-				</Shark>
-				<Shark>
-					<Type>SmallShark</Type>
-					<Origin>500,200</Origin>
-				</Shark>
-			</SharkList>
-			<DelayTime>5</DelayTime>
-			<BackgroundMusic>../data/music.mp3</BackgroundMusic>
-			<BackgroundPicture>../data/background.png</BackgroundPicture>			
-			<TileMap>
-				<grid>
-					0,1,0,0,0,0,0,0,0,0,
-					0,1,0,0,0,0,1,0,0,0,
-					0,1,0,0,1,1,1,0,0,0,
-					0,0,0,0,0,0,0,0,0,0,
-					0,0,0,0,0,0,9,1,1,1,
-					0,0,0,0,0,0,0,2,3,0,
-					0,0,0,0,0,0,0,0,0,0,
-					0,9,5,0,0,0,0,0,0,0,
-					0,4,3,0,0,0,0,0,0,0,
-					4,1,5,0,4,5,0,0,0,0,
-				</grid>
-				<texture>grass</texture>
-			</TileMap>
+			<LevelNumber>3</LevelNumber>
+			<LevelLength>120</LevelLength>
+			<MinionsNumber>4</MinionsNumber>
+			<TerrainList>
+				<Terrain>
+					<Vertex>0,0</Vertex>
+					<Vertex>0,180</Vertex>
+					<Vertex>110,128</Vertex>
+					<Vertex>230,0</Vertex>
+				</Terrain>
+				<Terrain>
+					<Vertex>0,768</Vertex>
+					<Vertex>0,680</Vertex>
+					<Vertex>180,615</Vertex>
+					<Vertex>326,768</Vertex>					
+				</Terrain>
+				<Terrain>
+					<Vertex>335,332</Vertex>
+					<Vertex>525,216</Vertex>
+					<Vertex>545,445</Vertex>
+				</Terrain>
+				<Terrain>
+					<Vertex>603,765</Vertex>
+					<Vertex>792,596</Vertex>
+					<Vertex>1024,585</Vertex>
+					<Vertex>1024,768</Vertex>
+				</Terrain>
+				<Terrain>
+					<Vertex>910,0</Vertex>
+					<Vertex>814,158</Vertex>
+					<Vertex>1024,110</Vertex>
+					<Vertex>1024,0</Vertex>
+				</Terrain>
+			</TerrainList>
+			<BackgroundImage>../data/level3background.png</BackgroundImage>
+			<BackgroundMusic>../data/level3music.mp3</BackgroundMusic>		
+		</Level>
+
+
+		<Level>
+			<LevelNumber>4</LevelNumber>
+			<LevelLength>200</LevelLength>
+			<MinionsNumber>4</MinionsNumber>
+			<TerrainList>
+				<Terrain>
+					<Vertex>0,0</Vertex>
+					<Vertex>0,180</Vertex>
+					<Vertex>110,128</Vertex>
+					<Vertex>230,0</Vertex>
+				</Terrain>
+				<Terrain>
+					<Vertex>0,768</Vertex>
+					<Vertex>0,680</Vertex>
+					<Vertex>180,615</Vertex>
+					<Vertex>326,768</Vertex>					
+				</Terrain>
+				<Terrain>
+					<Vertex>335,332</Vertex>
+					<Vertex>525,216</Vertex>
+					<Vertex>545,445</Vertex>
+				</Terrain>
+				<Terrain>
+					<Vertex>603,765</Vertex>
+					<Vertex>792,596</Vertex>
+					<Vertex>1024,585</Vertex>
+					<Vertex>1024,768</Vertex>
+				</Terrain>
+				<Terrain>
+					<Vertex>910,0</Vertex>
+					<Vertex>814,158</Vertex>
+					<Vertex>1024,110</Vertex>
+					<Vertex>1024,0</Vertex>
+				</Terrain>
+			</TerrainList>
+			<BackgroundImage>../data/level3background.png</BackgroundImage>
+			<BackgroundMusic>../data/level3music.mp3</BackgroundMusic>		
 		</Level>
 	</LevelList>
 
-	<!-- <SwordFishAlgorithmList>
-		<Algorithm>
-			<name>algorithm1</name>
-			<delay>3</delay>
-			<numFish>3</numFish>
-			<position>12,12</position>
-			<direction>45,600</direction>
-		</Algorithm>
-		<Algorithm>
-			<name>algorithm2</name>
-			<delay>3</delay>
-			<numFish>3</numFish>
-			<position>12,12</position>
-			<direction>45,600</direction>
-		</Algorithm>
-	</SwordFishAlgorithmList>
- -->
 </root>

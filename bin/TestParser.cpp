@@ -5,6 +5,7 @@
 #include "TextManager.h"
 #include "MusicManager.h"
 #include "XMLParser.h"
+#include "LevelInfo.h"
 #include "tinyxml2.h"
 #include <iostream>
 
@@ -16,9 +17,18 @@ int main(int argc, char** argv)
 	TextManager texts;
 	std::string a;
 	XMLParser parser;
+	LevelInfo level_three;
 
 	parser.loadXML("../data/xml/TestXML.xml");
 	parser.loadTexture(textures,"fish");
+	parser.loadLevel(level_three, 3);
+
+	std::cout<<level_three.getLevelNumber()<<std::endl;
+	std::cout<<level_three.getLevelLength()<<std::endl;
+	std::cout<<level_three.getMinionNumber()<<std::endl;
+	std::cout<<level_three.getBackgroundMusic()<<std::endl;
+	std::cout<<level_three.getBackgroundImage()<<std::endl;
+	std::cout<<level_three.getTerrain()[2][2].y<<std::endl;
 	
   // create main window
 	sf::RenderWindow App(sf::VideoMode(800,600,32), "XML Test",sf::Style::Titlebar|sf::Style::Close);
