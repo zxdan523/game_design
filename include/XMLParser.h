@@ -19,6 +19,7 @@ class XMLParser
     	void loadTexture(TextureManager&,std::string type="default");
     	void loadFont();
     	std::vector<int> getTileMap();
+        std::vector<int> getSwordfishPositions();
 
     private:
     	tinyxml2::XMLDocument doc;

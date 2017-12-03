@@ -46,6 +46,26 @@ std::vector<int> XMLParser::getTileMap() {
 	return v;
 }
 
+std::vector<int> XMLParser::getSwordfishPositions() {
+    tinyxml2::XMLNode * root = doc.FirstChild();
+    tinyxml2::XMLElement * swordfishAlgorithmList = root->FirstChildElement("SwordFishAlgorithmList");
+    tinyxml2::XMLElement * swordfishAlgorithm = swordfishAlgorithmList->FirstChildElement("Algorithm");
+    tinyxml2::XMLElement * swordfishPositions = swordfishAlgorithm->FirstChildElement("position");
+    std::string positions = swordfishPositions->GetText();
+    
+    std::stringstream ss(positions);
+    
+    int i;
+    std::vector<int> v;
+    while(ss>> i) {
+        v.push_back(i);
+        if(ss.peek()==',')
+            ss.ignore();
+    }
+    
+    return v;
+}
+
 // adds texture info from the XML file to the texture manager 
 void XMLParser::loadTexture(TextureManager &textures, std::string name) {
 	// Find specific texture needed

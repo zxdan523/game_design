@@ -27,7 +27,7 @@ int main(int argc, char** argv)
     textures.addTexture("../data/fish.png");
     textures.addArea("Swordfish",sf::IntRect(512,512,512,256));
     textures.addArea("bubble",sf::IntRect(960,256,64,64));
-    
+    \\\\
     
     for(int i=0;i<5;i++)
     {
