@@ -132,9 +132,6 @@
 			<BackgroundMusic>../data/level3music.mp3</BackgroundMusic>		
 		</Level>
 	</LevelList>
-
-<<<<<<< HEAD
-=======
     <SwordFishAlgorithmList>
         <Algorithm>
             <name>swordfish_attack1</name>
@@ -172,5 +169,4 @@
             <direction>0.0,1.0,0.0,1.0,1.0,0.0,1.0,0.0,1.0,0.0</direction>
         </Algorithm>
     </SwordFishAlgorithmList>
->>>>>>> 4ed48e85eaaf3ac51ab20fd5ae5328d04bc5fc49
 </root>

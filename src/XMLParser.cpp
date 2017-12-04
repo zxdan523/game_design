@@ -18,7 +18,7 @@ void XMLParser::loadLevel(LevelInfo& level, int level_num) {
 	// load level settings
 	level.setLevelNumber(std::stoi(level_element->FirstChildElement("LevelNumber")->GetText()));
 	level.setLevelLength(std::stoi(level_element->FirstChildElement("LevelLength")->GetText()));
-	level.setLevelLength(std::stoi(level_element->FirstChildElement("MinionsNumber")->GetText()));
+	level.setMinionNumber(std::stoi(level_element->FirstChildElement("MinionsNumber")->GetText()));
 	level.setBackgroundImage(level_element->FirstChildElement("BackgroundMusic")->GetText());
 	level.setBackgroundMusic(level_element->FirstChildElement("BackgroundImage")->GetText());
 
