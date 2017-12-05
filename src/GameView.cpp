@@ -80,6 +80,11 @@ void GameView::addBackgroundImage(sf::Texture* texture)
 {
     _bgImg.setTexture(texture);
 }
+
+void GameView::playBackgroundMusic(std::string name)
+{
+    _musicManager_ptr->playBackground(name);
+}
 void GameView::resetSwordfishPtr(const std::shared_ptr<std::vector<std::shared_ptr<Swordfish>>>& swordfish_ptr)
 {
     _swordfish_ptr=swordfish_ptr;

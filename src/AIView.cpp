@@ -122,9 +122,13 @@ void AIView::updateMinions(float deltaTime)
                 diff=(*_minions_ptr)[i]->getKnot(0).getPosition()-tool->getPosition();
                 if(mag(diff)<(*_minions_ptr)[i]->getKnot(0).getWidth()/2+tool->getSize().x/2)
                 {
-                    (*_minions_ptr)[i]->setAttackTarget(findNearestTarget((*_minions_ptr)[i]));
+                    //(*_minions_ptr)[i]->setAttackTarget(findNearestTarget((*_minions_ptr)[i]));
+                    (*_minions_ptr)[i]->attacked();
                 }
-                goToTarget((*_minions_ptr)[i],deltaTime);
+                if((*_minions_ptr)[i]->getState()==Minions::NORMAL||(*_minions_ptr)[i]->getState()==Minions::ATTACK)
+                {
+                    goToTarget((*_minions_ptr)[i],deltaTime);
+                }
             }
             break;
         case PowerUp::NONE:
@@ -219,7 +223,8 @@ void AIView::updateShark(const std::shared_ptr<Shark>& shark,float deltaTime)
                 diff=shark->getCenter()-tool->getPosition();
                 if(mag(diff)<shark->getRadius()/2+tool->getSize().x/2)
                 {
-                    shark->setTarget(findNearestTarget(shark));
+                    //shark->setTarget(findNearestTarget(shark));
+                    shark->attacked();
                 }
                 goToTarget(shark,deltaTime);
             }

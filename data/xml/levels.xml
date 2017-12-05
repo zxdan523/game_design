@@ -79,8 +79,8 @@
                     <Vertex>1024,768</Vertex>
                 </Terrain>
             </TerrainList>
-            <BackgroundImage>../data/level2background.png</BackgroundImage>
-            <BackgroundMusic>../data/level2music.mp3</BackgroundMusic>
+            <BackgroundImage>../data/level1background.png</BackgroundImage>
+            <BackgroundMusic>level1_background.wav</BackgroundMusic>
         </Level>
         <Level>
             <LevelNumber>2</LevelNumber>
@@ -97,7 +97,7 @@
                 </Terrain>
             </TerrainList>
             <BackgroundImage>../data/level2background.png</BackgroundImage>
-            <BackgroundMusic>../data/level2music.mp3</BackgroundMusic>
+            <BackgroundMusic>level2_background.wav</BackgroundMusic>
         </Level>
         <Level>
             <LevelNumber>3</LevelNumber>
@@ -135,7 +135,7 @@
                 </Terrain>
             </TerrainList>
             <BackgroundImage>../data/level3background.png</BackgroundImage>
-            <BackgroundMusic>../data/level3music.mp3</BackgroundMusic>      
+            <BackgroundMusic>level3_background.wav</BackgroundMusic>      
         </Level>
         <Level>
             <LevelNumber>4</LevelNumber>
@@ -177,7 +177,7 @@
                 </Terrain>
             </TerrainList>
             <BackgroundImage>../data/level4background.png</BackgroundImage>
-            <BackgroundMusic>../data/level4music.mp3</BackgroundMusic>      
+            <BackgroundMusic>level4_background.wav</BackgroundMusic>      
         </Level>
         <Level>
             <LevelNumber>5</LevelNumber>
@@ -234,7 +234,7 @@
                 </Terrain>
             </TerrainList>
             <BackgroundImage>../data/level5background.png</BackgroundImage>
-            <BackgroundMusic>../data/level5music.mp3</BackgroundMusic>      
+            <BackgroundMusic>level5_background.wav</BackgroundMusic>      
         </Level>
     </LevelList>
 

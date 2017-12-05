@@ -65,6 +65,8 @@ void GameLogic::levelStart()
     _eel->init();
     _powerup->init();
     _minions->clear();
+    eel_music=false;
+    dead_music=false;
     float interval=WINDOW_WIDTH*2.0f/MINIONS_NUM;
     for(size_t i=0;i<MINIONS_NUM/2;i++)
     {
@@ -93,8 +95,8 @@ void GameLogic::levelStart()
     _timer=0.0f;
     LevelInfo level=(*_levelInfo)[_currentLevel];
     //_levelTime=level.getLevelLength();
-    _levelTime=10;
-    //_gameView->playBackgroundMusic(level.getBackgroundMusic());
+    _levelTime=1;
+    _gameView->playBackgroundMusic(level.getBackgroundMusic());
     if(!_bgImg.loadFromFile(level.getBackgroundImage()))
     {
         std::cout<<"Cannot open file "<<level.getBackgroundImage()<<std::endl;
@@ -139,9 +141,14 @@ void GameLogic::levelStart()
     _stage=INTRO;
 }
 
+GameLogic::Stage GameLogic::getStage() const
+{
+    return _stage;
+}
 void GameLogic::run(float deltaTime)
 {
     if(_stage==WIN) return;
+    if(_stage==LOSE) return;
     if(!_sharkIn&&_stage!=INTRO)
     {
         _timer+=deltaTime;
@@ -172,14 +179,27 @@ void GameLogic::run(float deltaTime)
             break;
         case EEL_IN:
             updateEel(deltaTime);
+            if(_eel->getState()==Eel::RELEASE&&!eel_music)
+            {
+                eel_music=true;
+                _gameView->playMusic("eel_release.wav");
+            }
+            if(_eel->getState()==Eel::RELEASED&&eel_music)
+            {
+                eel_music=false;
+            }
             break;
         case WAIT_SWORDFISH:
             countSwordfish(deltaTime);
             break;
         case SWORDFISH_IN:
-            updateSwordfish(deltaTime);    
+            updateSwordfish(deltaTime);
             break;
         case WIN:
+            break;
+        case LOSE:
+            break;
+        case EXIT:
             break;
     }
     if(_stage==INTRO) return;
@@ -188,7 +208,22 @@ void GameLogic::run(float deltaTime)
     updateMinions(deltaTime);
     _powerup->update(deltaTime);
     _larry->update(deltaTime);
-    _powerup->grabToolBubble(_larry->getKnot(0).getPosition(),_larry->getHeadDistance());
+    if(_powerup->grabToolBubble(_larry->getKnot(0).getPosition(),_larry->getHeadDistance()))
+    {
+        _gameView->playMusic("power_up.wav");
+    }
+    if(_larry->isDead()&&!dead_music)
+    {
+        _stage=LOSE;
+        dead_music=true;
+        _gameView->playMusic("larry_dead.wav");
+        if(!_intro.loadFromFile("../data/lost.png"))
+        {
+            std::cout<<"Cannot open file "<<"../data/lost.png"<<std::endl;
+        }
+        _gameView->addBackgroundImage(&_intro);
+        _gameView->playIntro();
+    }
     if(_timer>_levelTime)
     {
         switch(_currentLevel)
@@ -196,6 +231,7 @@ void GameLogic::run(float deltaTime)
             case 0:
                 _currentLevel++;
                 levelStart();
+                _gameView->playMusic("level_complete.wav");
                 break;
             case 1:
                 _aiView->enableShark1();
@@ -240,6 +276,7 @@ void GameLogic::run(float deltaTime)
             _shark1->update(deltaTime);
             if(_shark1->getState()==Shark::DIE)
             {
+                _gameView->playMusic("level_complete.wav");
                 _sharkIn=false;
                 _currentLevel++;
                 levelStart();
@@ -249,6 +286,7 @@ void GameLogic::run(float deltaTime)
             _shark2->update(deltaTime);
             if(_shark2->getState()==Shark::DIE)
             {
+                _gameView->playMusic("level_complete.wav");
                 _sharkIn=false;
                 _currentLevel++;
                 levelStart();
@@ -259,6 +297,7 @@ void GameLogic::run(float deltaTime)
             _shark2->update(deltaTime);
             if(_shark2->getState()==Shark::DIE&&_shark1->getState()==Shark::DIE)
             {
+                _gameView->playMusic("pass_all.wav");
                 _sharkIn=false;
                 _currentLevel++;
                 levelStart();
@@ -303,10 +342,29 @@ void GameLogic::mouseMoved(float mouseX,float mouseY)
         Knot knot=(*_minions)[i]->getKnot(0);
         if(mag(knot.getPosition()-_larry->getKnot(0).getPosition())<knot.getWidth()/2&&(*_minions)[i]->getState()==Minions::WEAK)
         {
+            _gameView->playMusic("defeat_minion.wav");
             (*_minions)[i]->defeated();
         }
     }
     _aiView->clearDeadMinions();
+}
+
+void GameLogic::mousePressed(float mouseX,float mouseY)
+{
+    if(_stage==LOSE)
+    {
+        if(mouseY>558&&mouseY<649)
+        {
+            if(mouseX>152&&mouseX<394)
+            {
+                levelStart();
+            }
+            if(mouseX>614&&mouseX<856)
+            {
+                _stage=EXIT;
+            }
+        }
+    }
 }
 void GameLogic::countEel(float deltaTime)
 {
@@ -368,6 +426,16 @@ void GameLogic::updateSwordfish(float deltaTime)
     for(size_t i=0;i<(*_swordfish)[_swordfishId].size();i++)
     {
         (*_swordfish)[_swordfishId][i]->update(deltaTime);
+        if((*_swordfish)[_swordfishId][i]->getState()==Swordfish::SHOOT)
+        {
+            sf::Vector2f center=(*_swordfish)[_swordfishId][i]->getCenter();
+            float radius=(*_swordfish)[_swordfishId][i]->getAttackRadius();
+            sf::Vector2f pos=_larry->getKnot(0).getPosition();
+            if(mag(center-pos)<radius)
+            {
+                _larry->attacked();
+            }
+        }
         swd_end=swd_end&&((*_swordfish)[_swordfishId][i]->getState()==Swordfish::SHOOT_END);
     }
     if(swd_end)

@@ -7,7 +7,7 @@ const float PowerUpSystem::BAR_WIDTH=200.0f;
 const float PowerUpSystem::TOOL_SIZE=50.0f;
 const float PowerUpSystem::DURATION=5.0f;
 const float PowerUpSystem::OCTOPUS_AREA=200.0f;
-const float PowerUpSystem::TOOL_NUM=20.0f;
+const float PowerUpSystem::TOOL_NUM=10.0f;
 
 PowerUpSystem::PowerUpSystem()
 {
@@ -136,12 +136,14 @@ void PowerUpSystem::update(float deltaTime)
     }
 }
 
-void PowerUpSystem::grabToolBubble(const sf::Vector2f& center,float radius)
+bool PowerUpSystem::grabToolBubble(const sf::Vector2f& center,float radius)
 {
+    bool is_grab=false;
     for(int i=0;i<_powerUp.size();i++)
     {
         if(mag(_powerUp[i]->getPosition()-center)<_powerUp[i]->getSize()*0.5f+radius)
         {
+            is_grab=true;
             PowerUp::TYPE type=_powerUp[i]->getType();
             int value=0;
             switch(type)
@@ -176,6 +178,7 @@ void PowerUpSystem::grabToolBubble(const sf::Vector2f& center,float radius)
             _powerUp.erase(_powerUp.begin()+i);
         }
     }
+    return is_grab;
 }
 
 void PowerUpSystem::useTool(PowerUp::TYPE type,sf::Vector2f pos)

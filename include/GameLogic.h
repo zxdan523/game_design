@@ -10,7 +10,7 @@
 class GameLogic
 {
     public:
-        enum Stage{INTRO,PREPARE,WAIT_EEL,EEL_IN,WAIT_SWORDFISH,SWORDFISH_IN,WIN};
+        enum Stage{INTRO,PREPARE,WAIT_EEL,EEL_IN,WAIT_SWORDFISH,SWORDFISH_IN,WIN,LOSE,EXIT};
         GameLogic(const std::shared_ptr<Larry>& larry,
                   const std::shared_ptr<std::vector<std::shared_ptr<Minions>>>& minions,
                   const std::shared_ptr<std::vector<std::vector<std::shared_ptr<Swordfish>>>>& swordfish,
@@ -32,6 +32,9 @@ class GameLogic
 
         void keyPressed(int keyCode,float mouseX,float mouseY);
         void mouseMoved(float mouseX,float mouseY);
+        void mousePressed(float mouseX,float mouseY);
+
+        Stage getStage() const;
 
         void countEel(float deltaTime);
         void updateEel(float deltaTime);
@@ -64,5 +67,6 @@ class GameLogic
         int _swordfishId;
         bool _sharkIn;
         Stage _stage;
+        bool eel_music,dead_music;
 };
 #endif
