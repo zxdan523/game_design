@@ -5,176 +5,107 @@ CSCI 437
 @author Stephen Tung
 */
 #pragma once
-#include "Button.h"
+#include "button.h"
 #include <cstdlib>
 
 using namespace sf;
 
-ui::Button::Button()
+ui::Button::Button(const std::string& label, const Font& bFont, const Vector2f& size)
 {
-	buttonPosition = Vector2f(400.f, 300.f);
-	buttonState = ui::state::unselected;
-	font.loadFromFile("Amender_Tu.ttf");
+	_state = ui::state::unselected;
+	
+	_text.setString(label);
+	_text.setFont(bFont);
+	_text.setCharacterSize(size.y / 2.0f);
+	_text.setColor(TEXT_COLOR);
+	_text.setOrigin(float(_text.getGlobalBounds().width / 2), float(_text.getGlobalBounds().height / 2));
+	
+	Vector2f buttonSize = Vector2f(float(_text.getGlobalBounds().width) * 1.5f, float(_text.getGlobalBounds().height) * 1.5f);
+	_shape = RectangleShape(buttonSize);
+	_shape.setFillColor(UNSELECTED_COLOR);
+	_shape.setOrigin(_shape.getGlobalBounds().width / 2, _shape.getGlobalBounds().height / 2);
 
-	buttonText.setFont(font);
-	buttonText.setOrigin(float(buttonText.getGlobalBounds().width / 2), float(buttonText.getGlobalBounds().height / 2));
-	buttonText.setColor(textColor);
-
-	buttonSize = Vector2f(float(buttonText.getGlobalBounds().width) * 1.5f, float(buttonText.getGlobalBounds().height) * 1.5f);
-	buttonShape = RectangleShape(buttonSize);
-	buttonShape.setFillColor(unselectedColor);
-	buttonShape.setOrigin(buttonShape.getGlobalBounds().width / 2, buttonShape.getGlobalBounds().height / 2);
-	buttonShape.setPosition(buttonPosition);
-
-	Vector2f textPos = Vector2f(buttonShape.getPosition().x, buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 4);
-	buttonText.setPosition(textPos);
+	Vector2f textPos = Vector2f(_shape.getPosition().x, _shape.getPosition().y - _shape.getGlobalBounds().height / 4);
+	_text.setPosition(textPos);
 }
 
-ui::Button::Button(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos)
+ui::Button::Button(const Button& btn)
 {
-	buttonPosition = pos;
-	buttonState = ui::state::unselected;
-	buttonID = id;
-	font = bFont;
-	setUnselectedColor(usColor);
-	setHoverColor(hovColor);
-	setSelectedColor(selColor);
-	setTextColor(txtColor);
-
-	buttonText.setString(str);
-	buttonText.setFont(bFont);
-	buttonText.setOrigin(float(buttonText.getGlobalBounds().width / 2), float(buttonText.getGlobalBounds().height / 2));
-	buttonText.setColor(txtColor);
-
-	buttonSize = Vector2f(float(buttonText.getGlobalBounds().width) * 1.5f, float(buttonText.getGlobalBounds().height) * 1.5f);
-	buttonShape = RectangleShape(buttonSize);
-	buttonShape.setFillColor(usColor);
-	buttonShape.setOrigin(buttonShape.getGlobalBounds().width / 2, buttonShape.getGlobalBounds().height / 2);
-	buttonShape.setPosition(buttonPosition);
-
-	Vector2f textPos = Vector2f(buttonShape.getPosition().x, buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 4);
-	buttonText.setPosition(textPos);
+	_text = btn._text;
+	_shape = btn._shape;
 }
 
-void ui::Button::setUnselectedColor(Color uColor)
+ui::Button& ui::Button::operator=(const Button& btn)
 {
-	unselectedColor = uColor;
+	_text = btn._text;
+	_shape = btn._shape;
+	return *this;
 }
 
-Color ui::Button::getUnselectedColor()
+void ui::Button::setPosition(Vector2f pos)
 {
-	return unselectedColor;
-}
-
-void ui::Button::setHoverColor(Color hColor)
-{
-	hoverColor = hColor;
-}
-
-Color ui::Button::getHoverColor()
-{
-	return hoverColor;
-}
-
-void ui::Button::setSelectedColor(Color sColor)
-{
-	selectedColor = sColor;
-}
-
-Color ui::Button::getSelectedColor()
-{
-	return selectedColor;
-}
-
-void ui::Button::setTextColor(Color tColor)
-{
-	textColor = tColor;
-}
-
-Color ui::Button::getTextColor()
-{
-	return textColor;
+	_shape.setPosition(pos);
+	Vector2f textPos = Vector2f(_shape.getPosition().x, _shape.getPosition().y - _shape.getGlobalBounds().height / 4);
+	_text.setPosition(textPos);
 }
 
 void ui::Button::unselected()
 {
-	buttonState = ui::state::unselected;
-	buttonShape.setFillColor(getUnselectedColor());
-	buttonText.setColor(getTextColor());
+	_state = ui::state::unselected;
+	_shape.setFillColor(UNSELECTED_COLOR);
+	_text.setFillColor(TEXT_COLOR);
 }
 
 void ui::Button::hover()
 {
-	buttonState = ui::state::hover;
-	buttonShape.setFillColor(getHoverColor());
-	buttonText.setColor(getTextColor());
+	_state = ui::state::hover;
+	_shape.setFillColor(HOVER_COLOR);
+	_text.setFillColor(TEXT_COLOR);
 }
 
 void ui::Button::selected()
 {
-	buttonState = ui::state::selected;
-	buttonShape.setFillColor(getSelectedColor());
-	buttonText.setColor(getTextColor());
+	_state = ui::state::selected;
+	_shape.setFillColor(SELECTED_COLOR);
+	_text.setFillColor(TEXT_COLOR);
 }
 
-RectangleShape ui::Button::getButtonShape()
+bool ui::Button::mouseInButton(float mouseX, float mouseY)
 {
-	return buttonShape;
+	_mouseInButton = mouseX >= _shape.getPosition().x - _shape.getGlobalBounds().width / 2
+		&& mouseX <= _shape.getPosition().x + _shape.getGlobalBounds().width / 2
+		&& mouseY >= _shape.getPosition().y - _shape.getGlobalBounds().height / 2
+		&& mouseY <= _shape.getPosition().y + _shape.getGlobalBounds().height / 2;
+
+	return _mouseInButton;
 }
 
-Uint32 ui::Button::getButtonState()
+void ui::Button::update(float mouseX, float mouseY)
 {
-	return buttonState;
+	if (mouseInButton(mouseX, mouseY) == true)
+	{
+		hover();
+	}
+	else
+		unselected();
 }
 
-std::string ui::Button::getButtonID()
+std::string ui::Button::select(float mouseX, float mouseY)
 {
-	return buttonID;
+	if (mouseInButton(mouseX, mouseY) == true)
+	{
+		selected();
+		return _text.getString();
+	}
+	else
+	{
+		unselected();
+	}
+	return "None";
 }
 
 void ui::Button::draw(RenderTarget& target, RenderStates states) const
 {
-	target.draw(buttonShape, states);
-	target.draw(buttonText, states);
-}
-
-bool ui::Button::mouseInButton(Event& e, RenderWindow& window)
-{
-	Vector2i mousePosition = sf::Mouse::getPosition(window);
-
-	bool mouseInButton = mousePosition.x >= buttonShape.getPosition().x - buttonShape.getGlobalBounds().width / 2
-		&& mousePosition.x <= buttonShape.getPosition().x + buttonShape.getGlobalBounds().width / 2
-		&& mousePosition.y >= buttonShape.getPosition().y - buttonShape.getGlobalBounds().height / 2
-		&& mousePosition.y <= buttonShape.getPosition().y + buttonShape.getGlobalBounds().height / 2;
-
-	return mouseInButton;
-}
-
-void ui::Button::update(Event& e, RenderWindow& window)
-{
-	if (e.type == sf::Event::MouseButtonPressed)
-	{
-		if (mouseInButton(e, window) == true)
-		{
-			selected();
-		}
-	}
-	else if (e.type == Event::MouseButtonReleased)
-	{
-		if (mouseInButton(e, window) == true)
-		{
-			hover();
-		}
-		else
-			unselected();
-	}
-	else
-	{
-		if (mouseInButton(e, window) == true)
-		{
-			hover();
-		}
-		else
-			unselected();
-	}
+	target.draw(_shape, states);
+	target.draw(_text, states);
 }

@@ -5,79 +5,61 @@ CSCI 437
 @author Stephen Tung
 */
 #pragma once
-#include "Panel.h"
+#include "panel.h"
 #include <cstdlib>
 
 using namespace sf;
 
-ui::Panel::Panel()
+ui::Panel::Panel(const Vector2f& size, const std::string& title, const Font& pFont)
 {
-	panelPosition = sf::Vector2f(400.f, 300.f);
-	panelSize = sf::Vector2f(400.f, 400.f);
-	panelColor = Color(100, 100, 100, 180);
+  _font = pFont;
 
-	panelShape = RectangleShape(panelSize);
-	panelShape.setFillColor(panelColor);
-	panelShape.setOrigin(float(panelShape.getGlobalBounds().width / 2), float(panelShape.getGlobalBounds().height / 2));
-	panelShape.setPosition(panelPosition);
-}
-
-ui::Panel::Panel(Vector2f pos, Vector2f size, Color color)
-{
-  panelPosition = pos;
-  panelSize = size;
-  panelColor = color;
+  _title.setFont(_font);
+  _title.setCharacterSize(24);
+  _title.setFillColor(TEXT_COLOR);
+  _title.setString(title);
+  _title.setOrigin(_title.getGlobalBounds().width / 2, _title.getGlobalBounds().height / 2);
+  _title.setPosition(0.0f, size.y - (size.y * 1.4));
   
-  panelShape = RectangleShape(panelSize);
-  panelShape.setFillColor(panelColor);
-  panelShape.setOrigin(float(panelShape.getGlobalBounds().width / 2), float(panelShape.getGlobalBounds().height / 2));
-  panelShape.setPosition(panelPosition);
+  _shape = RectangleShape(size);
+  _shape.setFillColor(PANEL_COLOR);
+  _shape.setOrigin(_shape.getGlobalBounds().width / 2, _shape.getGlobalBounds().height / 2);
 }
 
-void ui::Panel::addButton(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f buttonPos)
+std::shared_ptr<ui::Button> ui::Panel::addButton(const Button& btn, const Vector2f& pos)
 {
-	relButtonPos = buttonPos;
-	ui::Button newButton(str, id, usColor, hovColor, selColor, txtColor, bFont, relButtonPos);
-	_btns.push_back(newButton);
-	//buttonList[id] = newButton;
+	std::shared_ptr<ui::Button> btn_ptr = std::make_shared<ui::Button>(btn);
+	btn_ptr->setPosition(pos);
+	_btns.push_back(btn_ptr);
+	_btns[0]->unselected();
+	return btn_ptr;
 }
 
-void ui::Panel::removeButton(std::string bID)
+void ui::Panel::update(float mouseX, float mouseY)
 {
-	//_btns.erase(std::remove(_btns.begin(), _btns.end(), bID), _btns.end());
-	//buttonList.erase(bID);
-}
-
-ui::Button ui::Panel::getButton(int index)
-{
-	std::vector<Button>::const_iterator it;
-	int i = 0;
-	for (it = _btns.begin(); it != _btns.end(); it++, i++)
+	for (int i = 0; i != _btns.size(); i++)
 	{
-		if (i == index)
-		{
-			return *it;
-		}
+		_btns[i]->update(mouseX, mouseY);
 	}
 }
 
-void ui::Panel::update(Event& e, RenderWindow& window)
+std::string ui::Panel::select(float mouseX, float mouseY)
 {
-	std::vector<Button>::const_iterator it;
-	Button button;
-	for (it = _btns.begin(); it != _btns.end(); it++)
+	for (int i = 0; i != _btns.size(); i++)
 	{
-		button = Button(*it);
-		button.update(e, window);
+		if (_btns[i]->select(mouseX, mouseY) != "None")
+			return _btns[i]->select(mouseX, mouseY);
 	}
+	return "None";
 }
 
 void ui::Panel::draw(RenderTarget& target, RenderStates states) const
 {
-	target.draw(panelShape, states);
-	std::vector<Button>::const_iterator it;
-	for (it = _btns.begin(); it != _btns.end(); it++)
+	states.transform*=getTransform();
+	target.draw(_shape, states);
+	target.draw(_title, states);
+	for (auto i = _btns.begin(); i != _btns.end(); i++)
 	{
-		target.draw(*it, states);
+		target.draw(*(*i), states);
 	}
 }

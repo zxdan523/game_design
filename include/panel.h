@@ -8,7 +8,8 @@ CSCI 437
 #define PANEL_H
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Button.h"
+#include "button.h"
+#include <memory>
 
 using namespace sf;
 
@@ -17,25 +18,25 @@ namespace ui
 	class Panel : public Drawable, public Transformable
 	{
 	public:
-		Panel();
-		Panel(Vector2f pos, Vector2f size, Color color);
-		void addButton(std::string str, std::string id, Color usColor, Color hovColor, Color selColor, Color txtColor, Font& bFont, Vector2f pos);
-		void removeButton(std::string bID);
-		Button getButton(int index);
+		Panel(const Vector2f& size, const std::string& title, const Font& pFont);
+		//Panel(const Panel&) = delete;
+		Panel& operator=(const Panel&) = delete;
 
-		void ui::Panel::update(Event& e, RenderWindow& window);
+		void update(float mouseX, float mouseY);
+		std::string select(float mouseX, float mouseY);
 
-		//static std::map<std::string, Button> buttonList;
-		std::vector<Button> _btns;
+		std::shared_ptr<Button> addButton(const Button& btn, const Vector2f& pos);
 
 	private:
-		RectangleShape panelShape;
-		Color panelColor;
-		Vector2f panelPosition;
-		Vector2f panelSize;
-		Vector2f relButtonPos;
+		RectangleShape _shape;
+		const Color PANEL_COLOR = Color(100, 100, 100, 180);
+		const Color TEXT_COLOR = Color::White;
+		Font _font;
+		Text _title;
 
-		void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+		std::vector<std::shared_ptr<Button>> _btns;
+
+		void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	};
 }
 #endif
