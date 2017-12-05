@@ -43,6 +43,28 @@ void XMLParser::loadLevel(LevelInfo& level, int level_num) {
 
 }
 
+void XMLParser::setSwordfishInfoList() {
+	tinyxml2::XMLNode * root = doc.FirstChild();
+
+	// load swordfish info
+	int pos_x, pos_y, delay;
+	float dir_x, dir_y;
+	for(tinyxml2::XMLElement * algorithm = root->FirstChildElement("SwordfishAlgorithmList")->FirstChildElement();
+		algorithm!=NULL; algorithm=algorithm->NextSiblingElement()) {
+		SwordfishInfo swordfish_info;
+		for(int i = 1;i<6;i++) {
+			pox_x = ;
+			swordfish_info.addSwordfish(2,1,1,1.0f,1.0f);
+			
+		}
+		swordfish_info_list.push_back(swordfish_info);
+}
+}
+
+std::vector<SwordfishInfo> XMLParser::getSwordfishInfoList() {
+	return swordfish_info_list;
+}
+
 
 std::vector<std::string> XMLParser::getElementItems(tinyxml2::XMLElement * element) {
 	
