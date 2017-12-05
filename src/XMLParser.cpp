@@ -1,5 +1,4 @@
 #include "XMLParser.h"
-#include <iostream>
 
 void XMLParser::loadXML(const char* path) {
 	doc.LoadFile(path);
@@ -69,19 +68,6 @@ void XMLParser::setSwordfishInfoList() {
 }
 }
 
-std::vector<int> XMLParser::getIntList(std::string list) {
-	int x;
-	std::vector<int> vector;
-	std::stringstream ss(list);
-
-	while(ss>> x) {
-			vector.push_back(x);
-			if(ss.peek()==',')
-				ss.ignore();
-		}
-		return vector;
-}
-
 std::vector<SwordfishInfo> XMLParser::getSwordfishInfoList() {
 	return swordfish_info_list;
 }
@@ -149,4 +135,17 @@ void XMLParser::loadTexture(TextureManager &texture_manager, std::string name) {
 	}
 	texture_manager.addArea(areaName,sf::IntRect(v.at(0),v.at(1),v.at(2),v.at(3)),name);
 }
+}
+
+std::vector<int> XMLParser::getIntList(std::string list) {
+	int x;
+	std::vector<int> vector;
+	std::stringstream ss(list);
+
+	while(ss>> x) {
+			vector.push_back(x);
+			if(ss.peek()==',')
+				ss.ignore();
+		}
+		return vector;
 }

@@ -1,7 +1,6 @@
 #ifndef XMLPARSER_H
 #define XMLPARSER_H
 
-//#include <SFML/Graphics.hpp>
 #include "tinyxml2.h"
 #include "TextureManager.h"
 #include "LevelInfo.h"
