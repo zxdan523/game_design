@@ -13,7 +13,9 @@
     TextureManager textures;
     TextureManager testTextures;
     MusicManager music;
-    music.add();
+      music.addMusic("canary.wav");
+      music.addMusic("orchestral.ogg");
+      music.addMusic("ding.flac");
     TextManager texts;
     bool isTest = false;
 
@@ -63,11 +65,11 @@
                   if (event.key.code == sf::Keyboard::Escape)
                       App.close();
                   else if (event.key.code == sf::Keyboard::Num1)
-                      music.play("canary");
+                      music.play("canary.wav");
                   else if (event.key.code == sf::Keyboard::Num2)
-                      music.play("orchestral");
+                      music.play("orchestral.ogg");
                   else if (event.key.code == sf::Keyboard::Num3)
-                      music.play("ding");
+                      music.play("ding.flac");
                   else if (event.key.code == sf::Keyboard::P)
                       music.stop();
                   else if(event.key.code == sf::Keyboard::Space)
