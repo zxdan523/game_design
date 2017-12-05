@@ -8,7 +8,7 @@ const float GameLogic::PREPARE_TIME=3;
 const float GameLogic::EEL_TIME=10;
 const float GameLogic::SWORDFISH_TIME=10;
 const float GameLogic::MINIONS_TIME=30;
-const float GameLogic::INTRO_TIME=10;
+const float GameLogic::INTRO_TIME=180;
 
 GameLogic::GameLogic(const std::shared_ptr<Larry>& larry,
                      const std::shared_ptr<std::vector<std::shared_ptr<Minions>>>& minions,
@@ -344,6 +344,23 @@ void GameLogic::mouseMoved(float mouseX,float mouseY)
         {
             _gameView->playMusic("defeat_minion.wav");
             (*_minions)[i]->defeated();
+        }
+    }
+    if(_sharkIn)
+    {
+        if(_currentLevel==1||_currentLevel==3||_currentLevel==4)
+        {
+            if(_shark1->getState()==Shark::WEAKEN&&mag(_shark1->getCenter()-_larry->getKnot(0).getPosition())<_shark1->getRadius())
+            {
+                _shark1->attacked();
+            }
+        }
+        if(_currentLevel==2||_currentLevel==4)
+        {
+            if(_shark2->getState()==Shark::WEAKEN&&mag(_shark2->getCenter()-_larry->getKnot(0).getPosition())<_shark2->getRadius())
+            {
+                _shark2->attacked();
+            }
         }
     }
     _aiView->clearDeadMinions();

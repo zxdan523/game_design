@@ -7,7 +7,7 @@ const float PowerUpSystem::BAR_WIDTH=200.0f;
 const float PowerUpSystem::TOOL_SIZE=50.0f;
 const float PowerUpSystem::DURATION=5.0f;
 const float PowerUpSystem::OCTOPUS_AREA=200.0f;
-const float PowerUpSystem::TOOL_NUM=10.0f;
+const float PowerUpSystem::TOOL_NUM=5.0f;
 
 PowerUpSystem::PowerUpSystem()
 {
