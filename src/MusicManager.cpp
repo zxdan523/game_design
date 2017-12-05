@@ -24,9 +24,9 @@ void MusicManager::add()
         return;
     musicList["ding"] = _globalBuffer;
     
-    if (!_backgroundBuffer.loadFromFile("../resources/background1.mp3"))
+    if (!_backgroundBuffer.loadFromFile("../resources/background1.wav"))
         return;
-    backgroundMusicList["background1"] = _globalBuffer;
+    backgroundMusicList["background1"] = _backgroundBuffer;
 }
 
 void MusicManager::stop()
