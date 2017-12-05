@@ -6,6 +6,7 @@
 #include "MusicManager.h"
 #include "XMLParser.h"
 #include "LevelInfo.h"
+#include "SwordfishInfo.h"
 #include <iostream>
 
 std::shared_ptr<std::vector<LevelInfo>> loadInLevelInfo()
@@ -31,7 +32,7 @@ int main(int argc, char** argv)
   XMLParser parser;
   parser.loadXML("../data/xml/levels.xml");
   parser.loadTexture(*textureManager);
-   
+  parser.setSwordfishInfoList();
   // create main window
   sf::RenderWindow App(sf::VideoMode(WINDOW_WIDTH,WINDOW_HEIGHT,32), "FISHNAPPED",sf::Style::Titlebar|sf::Style::Close);
 
@@ -72,14 +73,22 @@ int main(int argc, char** argv)
     
   std::shared_ptr<GameView> gameView=std::make_shared<GameView>(larry,minions,shark1,shark2,eel,nullptr,powerup,musicManager,textureManager);
   std::shared_ptr<AIView> aiView=std::make_shared<AIView>(larry,minions,shark1,shark2,eel,nullptr,powerup);
-  std::vector<std::shared_ptr<Swordfish>> swd_list;
   for(int i=0;i<5;i++)
   {
-      swd_list.push_back(std::make_shared<Swordfish>(sf::Vector2f(i*200,0),sf::Vector2f(1.0f,1.0f)));
-      swd_list[swd_list.size()-1]->setTexture(textureManager->get().texture);
-      swd_list[swd_list.size()-1]->setTextureAreas(textureManager->get().areas);
+      SwordfishInfo parms=parser.getSwordfishInfoList()[i];
+      swordfish->push_back(std::vector<std::shared_ptr<Swordfish>>());
+      for(int j=0;j<5;j++)
+      {
+          sf::Vector2f pos(parms.getSwordfishList()[j].pos_x,
+                           parms.getSwordfishList()[j].pos_y);
+          sf::Vector2f dir(parms.getSwordfishList()[j].dir_x,
+                           parms.getSwordfishList()[j].dir_y);
+          float delay=parms.getSwordfishList()[j].delay;
+          (*swordfish)[i].push_back(std::make_shared<Swordfish>(pos,dir,delay));
+          (*swordfish)[i][j]->setTexture(textureManager->get().texture);
+          (*swordfish)[i][j]->setTextureAreas(textureManager->get().areas);
+      }
   }
-  swordfish->push_back(swd_list);
   std::shared_ptr<GameLogic> gameLogic=std::make_shared<GameLogic>(larry,minions,swordfish,shark1,shark2,eel,powerup,gameView,aiView,textureManager,loadInLevelInfo());
   gameLogic->levelStart();
   // start main loop

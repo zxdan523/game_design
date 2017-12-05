@@ -261,7 +261,7 @@
         </Algorithm>
         <Algorithm>
             <name>swordfish_attack3</name>
-            <delay>3</delay>
+            <delay>1</delay>
             <position_x>1,200,400,600,800</position_x>
             <position_y>768,768,768,768,768</position_y>
             <direction_x>1,1,1,1,1</direction_x>
@@ -269,7 +269,7 @@
         </Algorithm>
         <Algorithm>
             <name>swordfish_attack4</name>
-            <delay>3</delay>
+            <delay>1</delay>
             <position_x>1,1004,21,1024,512</position_x>
             <position_y>21,1,768,748,1</position_y>
             <direction_x>1,-1,1,-1,0</direction_x>

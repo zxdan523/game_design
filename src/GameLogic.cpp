@@ -94,8 +94,7 @@ void GameLogic::levelStart()
     _minionsTimer=0.0f;
     _timer=0.0f;
     LevelInfo level=(*_levelInfo)[_currentLevel];
-    //_levelTime=level.getLevelLength();
-    _levelTime=1;
+    _levelTime=level.getLevelLength();
     _gameView->playBackgroundMusic(level.getBackgroundMusic());
     if(!_bgImg.loadFromFile(level.getBackgroundImage()))
     {
