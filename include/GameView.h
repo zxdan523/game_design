@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <string>
 #include "PowerUpSystem.h"
 #include "Larry.h"
 #include "Minions.h"
@@ -31,6 +32,10 @@ class GameView:public sf::Drawable
         void stopMusic() const;
 
         void resetSwordfishPtr(const std::shared_ptr<std::vector<std::shared_ptr<Swordfish>>>& swordfish_ptr);
+        void addBackgroundImage(sf::Texture* texture);
+
+        void playIntro();
+        void stopPlayIntro();
 
         void enableShark1();
         void disableShark1();
@@ -63,6 +68,7 @@ class GameView:public sf::Drawable
         std::shared_ptr<TextureManager> _textureManager_ptr;
         bool _showShark1,_showShark2,_showEel,_showSwordfish,_showEelBar,_showSwordfishBar;
         std::shared_ptr<ProgressBar> _eelBar,_swordfishBar,_sharkBar;
-        sf::RectangleShape _eelLogo,_swordfishLogo,_shark1Logo,_shark2Logo;
+        sf::RectangleShape _eelLogo,_swordfishLogo,_shark1Logo,_shark2Logo,_bgImg;
+        bool _playIntro;
 };
 #endif

@@ -47,10 +47,12 @@ GameView::GameView(const std::shared_ptr<Larry>& larry_ptr,
     _shark1Logo.setTexture(_textureManager_ptr->get().texture.get());
     _shark1Logo.setTextureRect((*_textureManager_ptr->get().areas)["Shark1"]);
 
-    _shark1Logo.setPosition(sf::Vector2f(WINDOW_WIDTH/3+WINDOW_WIDTH/6,50));
-    _shark2Logo.setPosition(sf::Vector2f(WINDOW_WIDTH/3+WINDOW_WIDTH/6,50));
+    _shark1Logo.setPosition(sf::Vector2f(WINDOW_WIDTH/3+WINDOW_WIDTH/6-20,20));
+    _shark2Logo.setPosition(sf::Vector2f(WINDOW_WIDTH/3+WINDOW_WIDTH/6+30,10));
     _shark2Logo.setTexture(_textureManager_ptr->get().texture.get());
     _shark2Logo.setTextureRect((*_textureManager_ptr->get().areas)["Shark2"]);
+
+    _bgImg=sf::RectangleShape(sf::Vector2f(WINDOW_WIDTH,WINDOW_HEIGHT));
 
 }
 
@@ -64,6 +66,20 @@ void GameView::stopMusic() const
     _musicManager_ptr->stop();
 }
 
+void GameView::playIntro() 
+{
+    _playIntro=true;
+}
+
+void GameView::stopPlayIntro()
+{
+    _playIntro=false;
+}
+
+void GameView::addBackgroundImage(sf::Texture* texture)
+{
+    _bgImg.setTexture(texture);
+}
 void GameView::resetSwordfishPtr(const std::shared_ptr<std::vector<std::shared_ptr<Swordfish>>>& swordfish_ptr)
 {
     _swordfish_ptr=swordfish_ptr;
@@ -146,7 +162,8 @@ void GameView::setSharkBar(float val)
 
 void GameView::draw(sf::RenderTarget& target,sf::RenderStates states) const
 {
-    
+    target.draw(_bgImg,states);
+    if(_playIntro) return;
     if(_minions_ptr!=nullptr)
     {
         for(size_t i=0;i!=_minions_ptr->size();i++)
@@ -192,14 +209,7 @@ void GameView::draw(sf::RenderTarget& target,sf::RenderStates states) const
         target.draw(_swordfishLogo,states);
     }
     target.draw(*_sharkBar,states);
-    if(_showShark1)
-    {
-        target.draw(_shark1Logo,states);
-    }
-    if(_showShark2)
-    {
-        target.draw(_shark2Logo,states);
-    }
-
+    target.draw(_shark1Logo,states);
+    target.draw(_shark2Logo,states);
 }
 

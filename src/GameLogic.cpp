@@ -2,12 +2,13 @@
 #include "GameLogic.h"
 #include "Constants.h"
 #include "util.h"
-
+#include <iostream>
 const int GameLogic::MINIONS_NUM=10;
 const float GameLogic::PREPARE_TIME=3;
 const float GameLogic::EEL_TIME=10;
 const float GameLogic::SWORDFISH_TIME=10;
 const float GameLogic::MINIONS_TIME=30;
+const float GameLogic::INTRO_TIME=10;
 
 GameLogic::GameLogic(const std::shared_ptr<Larry>& larry,
                      const std::shared_ptr<std::vector<std::shared_ptr<Minions>>>& minions,
@@ -18,7 +19,8 @@ GameLogic::GameLogic(const std::shared_ptr<Larry>& larry,
                      const std::shared_ptr<PowerUpSystem>& powerup,
                      const std::shared_ptr<GameView>& gameView,
                      const std::shared_ptr<AIView>& aiView,
-                     const std::shared_ptr<TextureManager>& textureManager)
+                     const std::shared_ptr<TextureManager>& textureManager,
+                     const std::shared_ptr<std::vector<LevelInfo>> levelInfo)
 {
     _larry=larry;
     _minions=minions;
@@ -30,10 +32,23 @@ GameLogic::GameLogic(const std::shared_ptr<Larry>& larry,
     _gameView=gameView;
     _aiView=aiView;
     _textureManager=textureManager;
+    _levelInfo=levelInfo;
+    _currentLevel=0;
 }
 
 void GameLogic::levelStart()
 {
+    if(_currentLevel==5)
+    {
+        if(!_intro.loadFromFile("../data/win.png"))
+        {
+            std::cout<<"Cannot open file "<<"../data/win.png"<<std::endl;
+        }
+        _gameView->addBackgroundImage(&_intro);
+        _gameView->playIntro();
+        _stage=WIN;
+        return;
+    }
     _gameView->disableEel();
     _gameView->disableShark1();
     _gameView->disableShark2();
@@ -45,6 +60,8 @@ void GameLogic::levelStart()
     _larry->init();
     _shark1->init();
     _shark2->init();
+    _shark1->setTarget(_larry);
+    _shark2->setTarget(_larry);
     _eel->init();
     _powerup->init();
     _minions->clear();
@@ -74,20 +91,74 @@ void GameLogic::levelStart()
     _swordfishTimer=0.0f;
     _minionsTimer=0.0f;
     _timer=0.0f;
-    _levelTime=120.0f;
+    LevelInfo level=(*_levelInfo)[_currentLevel];
+    //_levelTime=level.getLevelLength();
+    _levelTime=10;
+    //_gameView->playBackgroundMusic(level.getBackgroundMusic());
+    if(!_bgImg.loadFromFile(level.getBackgroundImage()))
+    {
+        std::cout<<"Cannot open file "<<level.getBackgroundImage()<<std::endl;
+    }
+    switch(_currentLevel)
+    {
+        case 0:
+            if(!_intro.loadFromFile("../data/level1intro.png"))
+            {
+                std::cout<<"Cannot open file "<<"../data/level1intro.png"<<std::endl;
+            }
+            break;
+        case 1:
+            if(!_intro.loadFromFile("../data/level2intro.png"))
+            {
+                std::cout<<"Cannot open file "<<"../data/level2intro.png"<<std::endl;
+            }
+            break;
+        case 2:
+            if(!_intro.loadFromFile("../data/level3intro.png"))
+            {
+                std::cout<<"Cannot open file "<<"../data/level3intro.png"<<std::endl;
+            }
+            break;
+        case 3:
+            if(!_intro.loadFromFile("../data/level4intro.png"))
+            {
+                std::cout<<"Cannot open file "<<"../data/level4intro.png"<<std::endl;
+            }
+            break;
+        case 4:
+            if(!_intro.loadFromFile("../data/level5intro.png"))
+            {
+                std::cout<<"Cannot open file "<<"../data/level5intro.png"<<std::endl;
+            }
+            break;
+            
+    }
+    _gameView->addBackgroundImage(&_intro);
+    _gameView->playIntro();
     _swordfishId=randomInt(_swordfish->size())%_swordfish->size();
-    _stage=PREPARE;
+    _stage=INTRO;
 }
 
 void GameLogic::run(float deltaTime)
 {
-    if(!_sharkIn)
+    if(_stage==WIN) return;
+    if(!_sharkIn&&_stage!=INTRO)
     {
         _timer+=deltaTime;
         _gameView->setSharkBar(_timer/_levelTime);
     }
     switch(_stage)
     {
+        case INTRO:
+            _timer+=deltaTime;
+            if(_timer>INTRO_TIME)
+            {
+                _timer=0;
+                _stage=PREPARE;
+                _gameView->addBackgroundImage(&_bgImg);
+                _gameView->stopPlayIntro();
+            }
+            break;
         case PREPARE:
             if(_timer>PREPARE)
             {
@@ -108,7 +179,10 @@ void GameLogic::run(float deltaTime)
         case SWORDFISH_IN:
             updateSwordfish(deltaTime);    
             break;
+        case WIN:
+            break;
     }
+    if(_stage==INTRO) return;
     _aiView->update(deltaTime);
     countMinions(deltaTime);
     updateMinions(deltaTime);
@@ -117,8 +191,80 @@ void GameLogic::run(float deltaTime)
     _powerup->grabToolBubble(_larry->getKnot(0).getPosition(),_larry->getHeadDistance());
     if(_timer>_levelTime)
     {
-        _sharkIn=true;
-        _timer=0.0f;
+        switch(_currentLevel)
+        {
+            case 0:
+                _currentLevel++;
+                levelStart();
+                break;
+            case 1:
+                _aiView->enableShark1();
+                _gameView->enableShark1();
+                _shark1->init();
+                _sharkIn=true;
+                break;
+            case 2:
+                _aiView->enableShark2();
+                _gameView->enableShark2();
+                _shark2->init();
+                _sharkIn=true;
+                break;
+            case 3:
+                _aiView->enableShark1();
+                _gameView->enableShark1();
+                _shark1->setType(Shark::SHARK_UP1);
+                _shark1->init();
+                _sharkIn=true;
+                break;
+            case 4:
+                _aiView->enableShark1();
+                _gameView->enableShark1();
+                _aiView->enableShark2();
+                _gameView->enableShark2();
+                _shark1->setType(Shark::SHARK_UP1);
+                _shark1->init();
+                _shark2->init();
+                _sharkIn=true;
+                break;
+        }
+        _timer=0;
+    }
+    if(_sharkIn)
+    {
+        switch(_currentLevel)
+        {
+            case 0:
+                break;
+            case 1:
+            case 3:
+            _shark1->update(deltaTime);
+            if(_shark1->getState()==Shark::DIE)
+            {
+                _sharkIn=false;
+                _currentLevel++;
+                levelStart();
+            }
+            break;
+            case 2:
+            _shark2->update(deltaTime);
+            if(_shark2->getState()==Shark::DIE)
+            {
+                _sharkIn=false;
+                _currentLevel++;
+                levelStart();
+            }
+            break;
+            case 4:
+            _shark1->update(deltaTime);
+            _shark2->update(deltaTime);
+            if(_shark2->getState()==Shark::DIE&&_shark1->getState()==Shark::DIE)
+            {
+                _sharkIn=false;
+                _currentLevel++;
+                levelStart();
+            }
+            break;
+        }
     }
         
 }
@@ -136,6 +282,15 @@ void GameLogic::keyPressed(int keyCode,float mouseX,float mouseY)
             break;
         case sf::Keyboard::D:
             _powerup->useTool(PowerUp::DECOY,mousePos);
+            break;
+        case sf::Keyboard::Return:
+            if(_stage==INTRO)
+            {
+                _gameView->stopPlayIntro();
+                _gameView->addBackgroundImage(&_bgImg);
+                _timer=0;
+                _stage=PREPARE;
+            }
             break;
     }
 }

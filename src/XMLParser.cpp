@@ -19,8 +19,8 @@ void XMLParser::loadLevel(LevelInfo& level, int level_num) {
 	level.setLevelNumber(std::stoi(level_element->FirstChildElement("LevelNumber")->GetText()));
 	level.setLevelLength(std::stoi(level_element->FirstChildElement("LevelLength")->GetText()));
 	level.setMinionNumber(std::stoi(level_element->FirstChildElement("MinionsNumber")->GetText()));
-	level.setBackgroundImage(level_element->FirstChildElement("BackgroundMusic")->GetText());
-	level.setBackgroundMusic(level_element->FirstChildElement("BackgroundImage")->GetText());
+	level.setBackgroundImage(level_element->FirstChildElement("BackgroundImage")->GetText());
+	level.setBackgroundMusic(level_element->FirstChildElement("BackgroundMusic")->GetText());
 
 	// load terrain map
 	std::vector<std::vector<sf::Vector2f>> polygon_list;

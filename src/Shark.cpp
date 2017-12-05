@@ -6,9 +6,9 @@
 const float Shark::HEAD_SIZE=150.0f;
 const float Shark::TAIL_SIZE=75.0f;
 const float Shark::KNOT_DIST=30.0f;
-const float Shark::NORMAL_SPEED=0.01f;
-const float Shark::CRAZY_SPEED=0.5f;
-const float Shark::ESCAPE_SPEED=0.8f;
+const float Shark::NORMAL_SPEED=100.0f;
+const float Shark::CRAZY_SPEED=200.0f;
+const float Shark::ESCAPE_SPEED=200.0f;
 const float Shark::NORMAL_SIZE=1.0f;
 const float Shark::CRAZY_SIZE=0.8f;
 const float Shark::WEAKEN_SIZE=0.5f;

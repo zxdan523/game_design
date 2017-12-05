@@ -26,7 +26,7 @@ void Minions::init()
     _attackRadius=ATTACK_RADIUS;
     _attackTarget=nullptr;
     _timer=0.0f;
-    _speed=NORMAL_SPEED;
+    _speed=randomFloat(NORMAL_SPEED,NORMAL_SPEED*1.5f);
     assert(_texture!=nullptr);
     assert(_textureAreas!=nullptr);
     _body.setTexture(_texture.get());
@@ -74,7 +74,7 @@ void Minions::attacked()
     {
         _state=ATTACKED;
         _timer=0.0f;
-        _speed=NORMAL_SPEED;
+        _speed=randomFloat(NORMAL_SPEED,NORMAL_SPEED*1.5f);
         _body.setFillColor(sf::Color(255,0,0));
     }
 }
@@ -88,7 +88,7 @@ void Minions::shot()
     {
         _state=SHOT;
         _timer=0.0f;
-        _speed=NORMAL_SPEED;
+        _speed=randomFloat(NORMAL_SPEED,NORMAL_SPEED*1.5f);
         assert(_textureAreas!=nullptr);
         _body.setTextureRect((*_textureAreas)["Minions_shot"]);
     }
@@ -123,7 +123,7 @@ void Minions::weaken()
 void Minions::recovered()
 {
     _state=NORMAL;
-    _speed=NORMAL_SPEED;
+    _speed=randomFloat(NORMAL_SPEED,NORMAL_SPEED*1.5f);
     _body.setScale(sf::Vector2f(1.0f,1.0f));
     _knots[0].setRect(NORMAL_SIZE,NORMAL_SIZE);
     assert(_textureAreas!=nullptr);

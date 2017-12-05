@@ -314,12 +314,6 @@ void AIView::goToTarget(const std::shared_ptr<Minions>& minions,float deltaTime)
         target->attacked();
         clearTarget(target);
     }
-    else if(mag_diff-mag_dist<touchDist)
-    {
-        minions->swimTo(knot.getPosition()+normalize(diff)*(mag_dist-touchDist));
-        target->attacked();
-        clearTarget(target);
-    }
     else
     {
         minions->swimTo(knot.getPosition()+dist);
@@ -370,12 +364,6 @@ void AIView::goToTarget(const std::shared_ptr<Shark>& shark,float deltaTime)
         target->attacked();
         clearTarget(target);
     }
-    else if(mag_diff-mag_dist<touchDist)
-    {
-        shark->swimTo(center+normalize(diff)*(mag_dist-touchDist));
-        target->attacked();
-        clearTarget(target);
-    }
     else
     {
         shark->swimTo(center+dist);
@@ -401,10 +389,6 @@ void AIView::escapeFromTarget(const std::shared_ptr<Minions>& minions,float delt
     Knot knot_minions=minions->getKnot(0);
     sf::Vector2f diff=knot_minions.getPosition()-knot_larry.getPosition();
     sf::Vector2f dist=knot_minions.getPosition()+(minions->getHeadDistance()+minions->getSpeed()*deltaTime)*normalize(diff);
-    if(dist.x<0) dist.x=0;
-    if(dist.x>WINDOW_WIDTH) dist.x=WINDOW_WIDTH;
-    if(dist.y<0) dist.y=0;
-    if(dist.y>WINDOW_HEIGHT) dist.y=WINDOW_HEIGHT;
 
     minions->swimTo(dist);
 }
@@ -414,7 +398,7 @@ void AIView::escapeFromTarget(const std::shared_ptr<Shark>& shark,float deltaTim
     Knot knot_larry=_larry_ptr->getKnot(0);
     Knot knot_shark=shark->getKnot(0);
     sf::Vector2f diff=knot_shark.getPosition()-knot_larry.getPosition();
-    sf::Vector2f dist=knot_shark.getPosition()+shark->getSpeed()*deltaTime*normalize(diff);
+    sf::Vector2f dist=knot_shark.getPosition()+(shark->getHeadDistance()+shark->getSpeed()*deltaTime)*normalize(diff);
     if(dist.x<0) dist.x=0;
     if(dist.x>WINDOW_WIDTH) dist.x=WINDOW_WIDTH;
     if(dist.y<0) dist.y=0;

@@ -5,11 +5,12 @@
 #include "GameView.h"
 #include "AIView.h"
 #include "TextureManager.h"
+#include "LevelInfo.h"
 
 class GameLogic
 {
     public:
-        enum Stage{PREPARE,WAIT_EEL,EEL_IN,WAIT_SWORDFISH,SWORDFISH_IN};
+        enum Stage{INTRO,PREPARE,WAIT_EEL,EEL_IN,WAIT_SWORDFISH,SWORDFISH_IN,WIN};
         GameLogic(const std::shared_ptr<Larry>& larry,
                   const std::shared_ptr<std::vector<std::shared_ptr<Minions>>>& minions,
                   const std::shared_ptr<std::vector<std::vector<std::shared_ptr<Swordfish>>>>& swordfish,
@@ -19,7 +20,8 @@ class GameLogic
                   const std::shared_ptr<PowerUpSystem>& powerup,
                   const std::shared_ptr<GameView>& gameView,
                   const std::shared_ptr<AIView>& aiView,
-                  const std::shared_ptr<TextureManager>& textureManager);
+                  const std::shared_ptr<TextureManager>& textureManager,
+                  const std::shared_ptr<std::vector<LevelInfo>> levelInfo);
         GameLogic(const GameLogic&)=delete;
 
         GameLogic& operator=(const GameLogic&)=delete;
@@ -40,7 +42,7 @@ class GameLogic
 
     private:
         static const int MINIONS_NUM;
-        static const float PREPARE_TIME,EEL_TIME,SWORDFISH_TIME,MINIONS_TIME;
+        static const float PREPARE_TIME,EEL_TIME,SWORDFISH_TIME,MINIONS_TIME,INTRO_TIME;
         std::shared_ptr<Larry> _larry;
         std::shared_ptr<std::vector<std::shared_ptr<Minions>>> _minions;
         std::shared_ptr<std::vector<std::vector<std::shared_ptr<Swordfish>>>> _swordfish;
@@ -51,6 +53,9 @@ class GameLogic
         std::shared_ptr<GameView> _gameView;
         std::shared_ptr<AIView> _aiView;
         std::shared_ptr<TextureManager> _textureManager;
+        std::shared_ptr<std::vector<LevelInfo>> _levelInfo;
+        sf::Texture _bgImg,_intro;
+        int _currentLevel;
         float _timer;
         float _eelTimer;
         float _swordfishTimer;
