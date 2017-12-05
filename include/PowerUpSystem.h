@@ -19,7 +19,7 @@ class PowerUpSystem:public sf::Drawable
 
         void update(float deltaTime);
 
-        void grabToolBubble(const sf::Vector2f& center,float radius);
+        bool grabToolBubble(const sf::Vector2f& center,float radius);
         void useTool(PowerUp::TYPE type,sf::Vector2f pos);
         std::shared_ptr<sf::RectangleShape> getToolInUse() const;
         PowerUp::TYPE getTypeInUse() const;

@@ -92,10 +92,16 @@ int main(int argc, char** argv)
      while (App.pollEvent(event)) {
         switch (event.type) {
             case sf::Event::Closed:
+                gameView->stopMusic();
                 App.close();
                 break;
             case sf::Event::KeyPressed:
                 gameLogic->keyPressed(event.key.code,mousePos.x,mousePos.y);
+            case sf::Event::MouseButtonPressed:
+                if(event.mouseButton.button==sf::Mouse::Left)
+                {
+                    gameLogic->mousePressed(mousePos.x,mousePos.y);
+                }
             default:
                 break;
         }
@@ -107,6 +113,11 @@ int main(int argc, char** argv)
     gameLogic->run(clock.restart().asSeconds());
     App.draw(*gameView);
     App.display();
+    if(gameLogic->getStage()==GameLogic::EXIT)
+    {
+        gameView->stopMusic();
+        App.close();
+    }
   }
 
   // Done.

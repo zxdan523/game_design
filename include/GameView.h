@@ -33,6 +33,7 @@ class GameView:public sf::Drawable
 
         void resetSwordfishPtr(const std::shared_ptr<std::vector<std::shared_ptr<Swordfish>>>& swordfish_ptr);
         void addBackgroundImage(sf::Texture* texture);
+        void playBackgroundMusic(std::string name);
 
         void playIntro();
         void stopPlayIntro();
