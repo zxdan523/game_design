@@ -60,10 +60,14 @@ int main(int argc, char** argv)
 
   std::shared_ptr<MusicManager> musicManager=std::make_shared<MusicManager>();
     
-  musicManager->addMusic("orchestral.ogg");
-  musicManager->addMusic("canary.wav");
-  musicManager->addMusic("ding.flac");
-
+  musicManager->addMusic("eel_release.wav");
+  musicManager->addMusic("swordfish_shoot.wav");
+  musicManager->addMusic("power_up.wav");
+  musicManager->addMusic("larry_dead.wav");
+  musicManager->addMusic("level_complete.wav");
+  musicManager->addMusic("defeat_minion.wav");
+  musicManager->addMusic("pass_all.wav");
+    
   std::shared_ptr<GameView> gameView=std::make_shared<GameView>(larry,minions,shark1,shark2,eel,nullptr,powerup,musicManager,textureManager);
   std::shared_ptr<AIView> aiView=std::make_shared<AIView>(larry,minions,shark1,shark2,eel,nullptr,powerup);
   std::vector<std::shared_ptr<Swordfish>> swd_list;

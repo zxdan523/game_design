@@ -6,6 +6,7 @@
 
 std::map<std::string, sf::SoundBuffer> MusicManager::musicList = std::map<std::string, sf::SoundBuffer>();
 std::vector<sf::Sound> MusicManager::playingSounds = std::vector<sf::Sound>();
+sf::Music music;
 
 MusicManager::MusicManager()
 {
@@ -64,9 +65,8 @@ void MusicManager::stop()
 
 void MusicManager::playBackground(std::string sound)
 {
-    if (!_globalBuffer.loadFromFile("../resources/" + sound))
+    if (!music.openFromFile("../resources/" + sound))
         return;
-    _globalSound.setBuffer(_globalBuffer);
-    _globalSound.play();
+    music.play();
 }
 
