@@ -5,33 +5,68 @@
 #include "MusicManager.h"
 
 std::map<std::string, sf::SoundBuffer> MusicManager::musicList = std::map<std::string, sf::SoundBuffer>();
+std::vector<sf::Sound> MusicManager::playingSounds = std::vector<sf::Sound>();
 
 MusicManager::MusicManager()
 {
     
 }
 
-void MusicManager::add()
+void MusicManager::addMusic(std::string sound)
 {
-    if (!_globalBuffer.loadFromFile("../resources/canary.wav"))
+    if (!_globalBuffer.loadFromFile("../resources/" + sound))
         return;
-    musicList["canary"] = _globalBuffer;
-    if (!_globalBuffer.loadFromFile("../resources/orchestral.ogg"))
-        return;
-    musicList["orchestral"] = _globalBuffer;
-    if (!_globalBuffer.loadFromFile("../resources/ding.flac"))
-        return;
-    musicList["ding"] = _globalBuffer;
-}
-
-void MusicManager::stop()
-{
-    _globalSound.pause();
+    musicList[sound] = _globalBuffer;
 }
 
 void MusicManager::play(std::string sound)
 {
-    _globalBuffer = musicList[sound];
+    if (playingSounds.size() == 0)
+    {
+        playingSounds.push_back(sf::Sound());
+        playingSounds.at(0).setBuffer(musicList[sound]);
+        playingSounds.at(0).play();
+    }
+    else
+    {
+        int location = -1;
+        for (int i = 0; i < playingSounds.size(); i++)
+        {
+            if (playingSounds.at(i).getStatus() != sf::Sound::Playing && location == -1)
+            {
+                location = i;
+            }
+        }
+        if (location != -1)
+        {
+            playingSounds.at(location).setBuffer(musicList[sound]);
+            playingSounds.at(location).play();
+        }
+        else
+        {
+            playingSounds.push_back(sf::Sound());
+            playingSounds.at(playingSounds.size()-1).setBuffer(musicList[sound]);
+            playingSounds.at(playingSounds.size() - 1).play();
+        }
+    }
+}
+
+void MusicManager::stop()
+{
+    for (int i = 0; i < playingSounds.size(); i++)
+    {
+        if (playingSounds.at(i).getStatus() == sf::Sound::Playing)
+        {
+            playingSounds.at(i).pause();
+        }
+    }
+}
+
+void MusicManager::playBackground(std::string sound)
+{
+    if (!_globalBuffer.loadFromFile("../resources/" + sound))
+        return;
     _globalSound.setBuffer(_globalBuffer);
     _globalSound.play();
 }
+

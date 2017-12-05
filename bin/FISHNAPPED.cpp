@@ -59,6 +59,10 @@ int main(int argc, char** argv)
   powerup->setTextureAreas(textureManager->get().areas);
 
   std::shared_ptr<MusicManager> musicManager=std::make_shared<MusicManager>();
+    
+  musicManager->addMusic("orchestral.ogg");
+  musicManager->addMusic("canary.wav");
+  musicManager->addMusic("ding.flac");
 
   std::shared_ptr<GameView> gameView=std::make_shared<GameView>(larry,minions,shark1,shark2,eel,nullptr,powerup,musicManager,textureManager);
   std::shared_ptr<AIView> aiView=std::make_shared<AIView>(larry,minions,shark1,shark2,eel,nullptr,powerup);
