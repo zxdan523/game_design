@@ -49,6 +49,8 @@ int main(int argc, char** argv)
                     music.play("orchestral");
                 else if (event.key.code == Keyboard::Num3)
                     music.play("ding");
+                else if (event.key.code == Keyboard::Num4)
+                    music.playBackground("background1");
                 else if (event.key.code == Keyboard::P)
                     music.stop();
             default:
