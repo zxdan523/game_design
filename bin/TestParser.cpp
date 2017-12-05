@@ -2,6 +2,7 @@
 #include <SFML/Audio.hpp>
 #include "Larry.h"
 #include "TextureManager.h"
+#include "TerrainManager.h"
 #include "TextManager.h"
 #include "MusicManager.h"
 #include "XMLParser.h"
@@ -18,9 +19,11 @@ int main(int argc, char** argv)
 	std::string a;
 	XMLParser parser;
 	LevelInfo level;
+	TerrainManager terrain;
 
 	parser.loadXML("../data/xml/levels.xml");
-	parser.loadTexture(textures,"fish");
+	parser.loadTexture(textures);
+	parser.setSwordfishInfoList();
 	
 	parser.loadLevel(level, 1);
 	std::cout<<"level: "<<level.getLevelNumber()<<std::endl;
@@ -29,6 +32,7 @@ int main(int argc, char** argv)
 	std::cout<<"bg music: "<<level.getBackgroundMusic()<<std::endl;
 	std::cout<<"bg image: "<<level.getBackgroundImage()<<std::endl;
 	std::cout<<"terrain 1st point: "<<level.getTerrain()[0][0].y<<std::endl;
+	std::cout<<"swordfish "<<parser.getSwordfishInfoList()[4].getSwordfishList()[0].delay<<parser.getSwordfishInfoList()[4].getSwordfishList()[0].pos_y<<std::endl;	
 
 	parser.loadLevel(level, 2);
 	std::cout<<"level: "<<level.getLevelNumber()<<std::endl;
@@ -62,14 +66,16 @@ int main(int argc, char** argv)
 	std::cout<<"bg image: "<<level.getBackgroundImage()<<std::endl;
 	std::cout<<"terrain 1st point: "<<level.getTerrain()[0][0].y<<std::endl;
 
+	terrain.load(level.getTerrain(), sf::Color::Green);
+
   // create main window
-	sf::RenderWindow App(sf::VideoMode(800,600,32), "XML Test",sf::Style::Titlebar|sf::Style::Close);
+	sf::RenderWindow App(sf::VideoMode(1024,768,32), "XML Test",sf::Style::Titlebar|sf::Style::Close);
 	Larry fish;
 
 	//texts.addFont("Roboto", "../data/Roboto-Regular.ttf");
 
-	fish.setTexture(textures.get("fish").texture);
-	fish.setTextureAreas(textures.get("fish").areas);
+	fish.setTexture(textures.get().texture);
+	fish.setTextureAreas(textures.get().areas);
 	
 	fish.init();
     
@@ -106,6 +112,7 @@ int main(int argc, char** argv)
 		testText.setPosition(50,50);
 		testText.setCharacterSize(40);*/
 		
+		App.draw(terrain);
 		App.draw(fish);
 		//App.draw(testText);
     // display

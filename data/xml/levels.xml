@@ -135,6 +135,9 @@
                 </Terrain>
             </TerrainList>
             <BackgroundImage>../data/level3background.png</BackgroundImage>
+
+            <BackgroundMusic>level2_background.wav</BackgroundMusic>      
+
             <BackgroundMusic>level3_background.wav</BackgroundMusic>      
         </Level>
         <Level>
@@ -238,4 +241,47 @@
         </Level>
     </LevelList>
 
+     <SwordfishAlgorithmList>
+        <Algorithm>
+            <name>swordfish_attack1</name>
+            <delay>0</delay>
+            <position_x>1,200,400,600,800</position_x>
+            <position_y>1,1,1,1,1</position_y>
+            <direction_x>1,1,1,1,1</direction_x>
+            <direction_y>1,1,1,1,1</direction_y>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack2</name>
+            <delay>0</delay>
+            <position_x>200,500,800,1,1</position_x>
+            <position_y>1,1,1,400,700</position_y>
+            <direction_x>1,1,-1,2,4</direction_x>
+            <direction_y>1,2,1,1,-1</direction_y>
+            <direction>1.0,1.0,0.5,1.0,-1.0,1.0,1.0,0.5,1.0,-0.25</direction>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack3</name>
+            <delay>3</delay>
+            <position_x>1,200,400,600,800</position_x>
+            <position_y>768,768,768,768,768</position_y>
+            <direction_x>1,1,1,1,1</direction_x>
+            <direction_y>-1,-1,-1,-1,-1</direction_y>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack4</name>
+            <delay>3</delay>
+            <position_x>1,1004,21,1024,512</position_x>
+            <position_y>21,1,768,748,1</position_y>
+            <direction_x>1,-1,1,-1,0</direction_x>
+            <direction_y>1,1,-1,-1,1</direction_y>
+        </Algorithm>
+        <Algorithm>
+            <name>swordfish_attack5</name>
+            <delay>2</delay>
+            <position_x>341,683,1,1,1</position_x>
+            <position_y>1,1,1,192,576</position_y>
+            <direction_x>0,0,1,1,1</direction_x>
+            <direction_y>1,1,0,0,0</direction_y>
+        </Algorithm>
+    </SwordfishAlgorithmList>
 </root>

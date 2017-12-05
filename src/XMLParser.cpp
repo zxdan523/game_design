@@ -43,6 +43,49 @@ void XMLParser::loadLevel(LevelInfo& level, int level_num) {
 
 }
 
+void XMLParser::setSwordfishInfoList() {
+	tinyxml2::XMLNode * root = doc.FirstChild();
+
+	// load swordfish info
+	int pos_x, pos_y, delay;
+	float dir_x, dir_y;
+	for(tinyxml2::XMLElement * algorithm = root->FirstChildElement("SwordfishAlgorithmList")->FirstChildElement();
+		algorithm!=NULL; algorithm=algorithm->NextSiblingElement()) {
+		SwordfishInfo swordfish_info;
+
+		std::vector<int> pos_x_vector = getIntList(algorithm->FirstChildElement("position_x")->GetText());
+		std::vector<int> pos_y_vector = getIntList(algorithm->FirstChildElement("position_y")->GetText());
+		std::vector<int> dir_x_vector = getIntList(algorithm->FirstChildElement("direction_x")->GetText());;
+		std::vector<int> dir_y_vector = getIntList(algorithm->FirstChildElement("direction_y")->GetText());;
+		
+		int delay = std::stoi(algorithm->FirstChildElement("delay")->GetText());
+
+		for(int i = 0;i<5;i++) {
+
+			swordfish_info.addSwordfish(pos_x_vector[i],pos_y_vector[i],delay * (i + 1),dir_x_vector[i],dir_y_vector[i]);
+			
+		}
+		swordfish_info_list.push_back(swordfish_info);
+}
+}
+
+std::vector<int> XMLParser::getIntList(std::string list) {
+	int x;
+	std::vector<int> vector;
+	std::stringstream ss(list);
+
+	while(ss>> x) {
+			vector.push_back(x);
+			if(ss.peek()==',')
+				ss.ignore();
+		}
+		return vector;
+}
+
+std::vector<SwordfishInfo> XMLParser::getSwordfishInfoList() {
+	return swordfish_info_list;
+}
+
 
 std::vector<std::string> XMLParser::getElementItems(tinyxml2::XMLElement * element) {
 	

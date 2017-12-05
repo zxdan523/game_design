@@ -5,6 +5,7 @@
 #include "tinyxml2.h"
 #include "TextureManager.h"
 #include "LevelInfo.h"
+#include "SwordfishInfo.h"
 #include <string>
 #include <map>
 #include <memory>
@@ -20,9 +21,13 @@ class XMLParser
     	void loadTexture(TextureManager& texture_manager,std::string type="default");
     	std::vector<int> getTileMap();
         void loadLevel(LevelInfo& level, int level_num);
+        void setSwordfishInfoList();
+        std::vector<SwordfishInfo> getSwordfishInfoList();
+        std::vector<int> getIntList(std::string list);
 
     private:
     	tinyxml2::XMLDocument doc;
+        std::vector<SwordfishInfo> swordfish_info_list;
     	
 };
 
