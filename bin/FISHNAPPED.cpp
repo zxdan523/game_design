@@ -68,6 +68,8 @@ int main(int argc, char** argv)
   musicManager->addMusic("defeat_minion.wav");
   musicManager->addMusic("pass_all.wav");
     
+  //musicManager->playBackground("level1_background.wav");
+    
   std::shared_ptr<GameView> gameView=std::make_shared<GameView>(larry,minions,shark1,shark2,eel,nullptr,powerup,musicManager,textureManager);
   std::shared_ptr<AIView> aiView=std::make_shared<AIView>(larry,minions,shark1,shark2,eel,nullptr,powerup);
   std::vector<std::shared_ptr<Swordfish>> swd_list;

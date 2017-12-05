@@ -61,12 +61,14 @@ void MusicManager::stop()
             playingSounds.at(i).pause();
         }
     }
+    music.stop();
 }
 
 void MusicManager::playBackground(std::string sound)
 {
     if (!music.openFromFile("../resources/" + sound))
         return;
+    music.setLoop(true);
     music.play();
 }
 
