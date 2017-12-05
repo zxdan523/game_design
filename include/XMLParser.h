@@ -23,6 +23,7 @@ class XMLParser
         void loadLevel(LevelInfo& level, int level_num);
         void setSwordfishInfoList();
         std::vector<SwordfishInfo> getSwordfishInfoList();
+        std::vector<int> getIntList(std::string list);
 
     private:
     	tinyxml2::XMLDocument doc;

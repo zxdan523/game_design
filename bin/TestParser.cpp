@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 	std::cout<<"bg music: "<<level.getBackgroundMusic()<<std::endl;
 	std::cout<<"bg image: "<<level.getBackgroundImage()<<std::endl;
 	std::cout<<"terrain 1st point: "<<level.getTerrain()[0][0].y<<std::endl;
-	std::cout<<"swordfish "<<parser.getSwordfishInfoList()[0].getSwordfishList()[0].pos_x<<std::endl;	
+	std::cout<<"swordfish "<<parser.getSwordfishInfoList()[4].getSwordfishList()[0].delay<<parser.getSwordfishInfoList()[4].getSwordfishList()[0].pos_y<<std::endl;	
 
 	parser.loadLevel(level, 2);
 	std::cout<<"level: "<<level.getLevelNumber()<<std::endl;
