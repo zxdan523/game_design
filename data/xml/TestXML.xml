@@ -12,7 +12,40 @@
 				<item>Larry_fin_tiny_left|256,64,64,64</item>
 				<item>Larry_fin_tiny_right|256,0,64,64</item>
 				<item>Larry_tail|128,0,128,256</item>
+				<item>bubble|960,256,64,64</item>
+				<item>Minions_normal|512,0,256,256</item>
+				<item>Minions_shocked|768,0,256,256</item>
+				<item>Minions_shot|0,256,256,256</item>
+				<item>Minions_weak|256,256,256,256</item>
 				<item>Eel_left_eye|512,256,64,64</item>
+   				<item>Eel_right_eye|512,320,64,64</item>
+   				<item>Eel_attack_left_eye|512,384,64,64</item>
+   				<item>Eel_attack_right_eye|512,448,64,64</item>
+  				<item>Eel_left_fin|576,256,64,64</item>
+   				<item>Eel_right_fin|576,320,64,64</item>
+   				<item>Eel_mouth|580,384,60,64</item>
+   				<item>Eel_tail|576,448,64,64</item>
+   				<item>Swordfish|512,512,512,256</item>
+   				<item>Swordfish|512,512,512,256</item>
+   				<item>Shark_normal_head|0,512,256,256</item>
+   				<item>Shark_weak_head|256,512,256,256</item>
+   				<item>Shark_crazy_head|633,256,256,256</item>
+   				<item>Shark_fins|886,256,64,128</item>
+   				<item>Shark_tail|886,384,64,128</item>
+   				<item>Shark_normal_head2|0,1024,256,256</item>
+   				<item>Shark_weak_head2|512,1024,256,256</item>
+   				<item>Shark_crazy_head2|256,1024,256,256</item>
+   				<item>Shark_fins2|768,1024,64,128</item>
+   				<item>Shark_tail2|769,1152,63,128</item>
+   				<item>TimeMachine|896,768,128,128</item>
+   				<item>TimeMachineBubble|512,896,128,128</item>
+   				<item>TimeMachineLogo|640,896,128,128</item>
+   				<item>Octopus|256,768,256,256</item>
+   				<item>OctopusBubble|512,768,128,128</item>
+   				<item>OctopusLogo|768,768,128,128</item>
+   				<item>Decoy|896,896,128,128</item>
+   				<item>DecoyBubble|640,768,128,128</item>
+   				<item>DecoyLogo|768,896,128,128</item>
 			</Positions>
 		</Texture>
 		<Texture>

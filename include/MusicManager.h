@@ -1,3 +1,5 @@
+#ifndef MUSIC_MANAGER
+#define MUSIC_MANAGER
 #include <SFML/Audio.hpp>
 #include <map>
 
@@ -15,3 +17,5 @@ class MusicManager
         sf::Sound _globalSound;
     
 };
+
+#endif

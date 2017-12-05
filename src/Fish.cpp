@@ -62,7 +62,10 @@ void Fish::swimTo(const sf::Vector2f& dest)
     if(_knots.size()>0)
     {
         sf::Vector2f diff=dest-_knots[0].getPosition();
-        _knots[0].setRotation(angle(diff));
+        if(mag(diff)>EPSILON)
+        {
+            _knots[0].setRotation(angle(diff));
+        }
         _knots[0].setPosition(_knots[0].getPosition()+(mag(diff)-_headDist)*normalize(diff));
         
         for(size_t i=1;i<_knots.size();i++)

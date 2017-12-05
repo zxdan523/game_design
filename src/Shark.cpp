@@ -1,5 +1,6 @@
 #include "Shark.h"
 #include "util.h"
+#include "Constants.h"
 #include <cassert>
 
 const float Shark::HEAD_SIZE=150.0f;
@@ -11,9 +12,11 @@ const float Shark::ESCAPE_SPEED=0.8f;
 const float Shark::NORMAL_SIZE=1.0f;
 const float Shark::CRAZY_SIZE=0.8f;
 const float Shark::WEAKEN_SIZE=0.5f;
+const float Shark::ATTACKED_TIME=0.3f;
+const float Shark::SHOT_TIME=1.0f;
 const int Shark::HP=100;
 
-Shark::Shark()
+Shark::Shark(Shark::Type type)
 {
     addKnot(Knot(KNOT_DIST,TAIL_SIZE));
     addKnot(Knot(KNOT_DIST,TAIL_SIZE*4.0f/5.0f));
@@ -29,25 +32,57 @@ Shark::Shark()
     _numPartition=10;
     _body=sf::VertexArray(sf::Quads,4*(_numPartition-1));
     _bodyShadow=sf::VertexArray(sf::Quads,4*(_numPartition-1));
-    _speed=NORMAL_SPEED;
-    _state=NORMAL;
-    _size=1.0f;
-    _current_HP=HP;
-    setHeadDistance(HEAD_SIZE);
+    _type=type;
 }
 
 void Shark::init()
 {
+    setSize(NORMAL_SIZE);
+    for(int i=0;i<_knots.size();i++)
+    {
+        if(_type==SHARK1||_type==SHARK_UP1)
+        {
+            _knots[i].setPosition(WINDOW_WIDTH+_headDist+i*KNOT_DIST,WINDOW_HEIGHT/3);
+        }
+        else
+        {
+            _knots[i].setPosition(WINDOW_WIDTH+_headDist+i*KNOT_DIST,2*WINDOW_HEIGHT/3);
+        }
+        _knots[i].setRotation(180.0f);
+    }
+    _speed=NORMAL_SPEED;
+    _state=NORMAL;
+    _size=NORMAL_SIZE;
+    _current_HP=HP;
+    _timer=0.0f;
     assert(_texture!=nullptr);
     assert(_textureAreas!=nullptr);
-    _head.setTexture(_texture.get());
-    _head.setTextureRect((*_textureAreas)["Shark_normal_head"]);
-    _fins.setTexture(_texture.get());
-    _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
-    _tail.setTexture(_texture.get());
-    _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
+    switch(_type)
+    {
+    case SHARK1:
+    case SHARK_UP1:
+        _head.setTexture(_texture.get());
+        _head.setTextureRect((*_textureAreas)["Shark_normal_head"]);
+        _fins.setTexture(_texture.get());
+        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+        _tail.setTexture(_texture.get());
+        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
+        break;
+    case SHARK2:
+    case SHARK_UP2:
+        _head.setTexture(_texture.get());
+        _head.setTextureRect((*_textureAreas)["Shark_normal_head2"]);
+        _fins.setTexture(_texture.get());
+        _fins.setTextureRect((*_textureAreas)["Shark_fins2"]);
+        _tail.setTexture(_texture.get());
+        _tail.setTextureRect((*_textureAreas)["Shark_tail2"]);
+        break;
+    }
 }
-
+void Shark::setType(Shark::Type type)
+{
+    _type=type;
+}
 void Shark::setSize(float size)
 {
     setHeadDistance(HEAD_SIZE*size);
@@ -63,8 +98,19 @@ void Shark::setSize(float size)
     _tail=sf::RectangleShape(sf::Vector2f(TAIL_SIZE*size,TAIL_SIZE*size*2.0f));
     _tail.setOrigin(sf::Vector2f(TAIL_SIZE*size,TAIL_SIZE*size));
 }
-
-void Shark::shocked()
+float Shark::getRadius() const
+{
+    return _head.getSize().x/2;
+}
+sf::Vector2f Shark::getCenter() const
+{
+    return _head.getPosition();
+}
+sf::Vector2f Shark::getHeadPosition() const
+{
+    return _head.getPosition()+_head.getTransform()*sf::Vector2f(_headDist,0.0f);
+}
+void Shark::hurt()
 {
     _current_HP-=10;
     if(_current_HP==HP/2)
@@ -75,12 +121,27 @@ void Shark::shocked()
         _speed=CRAZY_SPEED;
         assert(_texture!=nullptr);
         assert(_textureAreas!=nullptr);
-        _head.setTexture(_texture.get());
-        _head.setTextureRect((*_textureAreas)["Shark_crazy_head"]);
-        _fins.setTexture(_texture.get());
-        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
-        _tail.setTexture(_texture.get());
-        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
+        switch(_type)
+        {
+            case SHARK1:
+            case SHARK_UP1:
+                _head.setTexture(_texture.get());
+                _head.setTextureRect((*_textureAreas)["Shark_crazy_head"]);
+                _fins.setTexture(_texture.get());
+                _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+                _tail.setTexture(_texture.get());
+                _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
+                break;
+            case SHARK2:
+            case SHARK_UP2:
+                _head.setTexture(_texture.get());
+                _head.setTextureRect((*_textureAreas)["Shark_crazy_head2"]);
+                _fins.setTexture(_texture.get());
+                _fins.setTextureRect((*_textureAreas)["Shark_fins2"]);
+                _tail.setTexture(_texture.get());
+                _tail.setTextureRect((*_textureAreas)["Shark_tail2"]);
+            break;
+        }
     }
     if(_current_HP==HP/10)
     {
@@ -90,12 +151,27 @@ void Shark::shocked()
         _size=WEAKEN_SIZE;
         assert(_texture!=nullptr);
         assert(_textureAreas!=nullptr);
-        _head.setTexture(_texture.get());
-        _head.setTextureRect((*_textureAreas)["Shark_weak_head"]);
-        _fins.setTexture(_texture.get());
-        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
-        _tail.setTexture(_texture.get());
-        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
+        switch(_type)
+        {
+            case SHARK1:
+            case SHARK_UP1:
+                _head.setTexture(_texture.get());
+                _head.setTextureRect((*_textureAreas)["Shark_weak_head"]);
+                _fins.setTexture(_texture.get());
+                _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
+                _tail.setTexture(_texture.get());
+                _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
+                break;
+            case SHARK2:
+            case SHARK_UP2:
+                _head.setTexture(_texture.get());
+                _head.setTextureRect((*_textureAreas)["Shark_weak_head2"]);
+                _fins.setTexture(_texture.get());
+                _fins.setTextureRect((*_textureAreas)["Shark_fins2"]);
+                _tail.setTexture(_texture.get());
+                _tail.setTextureRect((*_textureAreas)["Shark_tail2"]);
+            break;
+        }
     }
     if(_current_HP==0)
     {
@@ -103,45 +179,21 @@ void Shark::shocked()
         _state=DIE;
     }
 }
+void Shark::shocked()
+{
+   _state=SHOCKED;
+}
 
 void Shark::shot()
 {
-    _current_HP-=10;
-    if(_current_HP==HP/2)
-    {
-        _state=CRAZY;
-        setSize(CRAZY_SIZE);
-        _size=CRAZY_SIZE;
-        _speed=CRAZY_SPEED;
-        assert(_texture!=nullptr);
-        assert(_textureAreas!=nullptr);
-        _head.setTexture(_texture.get());
-        _head.setTextureRect((*_textureAreas)["Shark_crazy_head"]);
-        _fins.setTexture(_texture.get());
-        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
-        _tail.setTexture(_texture.get());
-        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
-    }
-    if(_current_HP==HP/10)
-    {
-        _state=WEAKEN;
-        _speed=ESCAPE_SPEED;
-        setSize(WEAKEN_SIZE);
-        _size=WEAKEN_SIZE;
-        assert(_texture!=nullptr);
-        assert(_textureAreas!=nullptr);
-        _head.setTexture(_texture.get());
-        _head.setTextureRect((*_textureAreas)["Shark_weak_head"]);
-        _fins.setTexture(_texture.get());
-        _fins.setTextureRect((*_textureAreas)["Shark_fins"]);
-        _tail.setTexture(_texture.get());
-        _tail.setTextureRect((*_textureAreas)["Shark_tail"]);
-    }
-    if(_current_HP==0)
-    {
-        _current_HP=0;
-        _state=DIE;
-    }
+    _state=SHOT;
+    _timer=0;
+}
+
+void Shark::attacked()
+{
+    _state=ATTACKED;
+    _timer=0;
 }
 
 void Shark::setNumPartition(int numPartition)
@@ -174,7 +226,10 @@ float Shark::getSpeed() const
 {
     return _speed;
 }
-
+Shark::Type Shark::getType() const
+{
+    return _type;
+}
 void Shark::update(float deltaTime)
 {
     switch(_state)
@@ -187,10 +242,25 @@ void Shark::update(float deltaTime)
             break;
         case DIE:
             break;
+        case SHOCKED:
+            break;
+        case SHOT:
+            _timer+=deltaTime;
+            if(_timer>SHOT_TIME)
+            {
+                _timer=0;
+                hurt();
+            }
+        case ATTACKED:
+            _timer+=deltaTime;
+            if(_timer>ATTACKED_TIME)
+            {
+                _timer=0;
+                hurt();
+            }
         default:
             break;
     }
-
     updateShape();
 }
 
@@ -222,10 +292,29 @@ void Shark::updateShape()
         _body[4*i+3].position=vertices[2*(i+1)]+dir*2.5f*_size;
         _bodyShadow[4*i+2].position=vertices[2*(i+1)+1]+dir*2.5f*_size;
         _bodyShadow[4*i+3].position=vertices[2*(i+1)]-dir*2.5f*_size;
-        _body[4*i].color=sf::Color(72,72,72);
-        _body[4*i+1].color=sf::Color(72,72,72);
-        _body[4*i+2].color=sf::Color(72,72,72);
-        _body[4*i+3].color=sf::Color(72,72,72);
+        sf::Color bodyColor=sf::Color(72,72,72);
+        if(_type==SHARK2||_type==SHARK_UP2)
+        {
+            bodyColor=sf::Color(129,76,0);
+        }
+        if(_state==SHOT||_state==SHOCKED||_state==ATTACKED)
+        {
+
+            bodyColor=sf::Color(bodyColor.r,0,0);
+            _head.setFillColor(sf::Color(255,0,0));
+            _fins.setFillColor(sf::Color(255,0,0));
+            _tail.setFillColor(sf::Color(255,0,0));
+        }
+        else
+        {
+            _head.setFillColor(sf::Color(255,255,255));
+            _fins.setFillColor(sf::Color(255,255,255));
+            _tail.setFillColor(sf::Color(255,255,255));
+        }
+        _body[4*i].color=bodyColor;
+        _body[4*i+1].color=bodyColor;
+        _body[4*i+2].color=bodyColor;
+        _body[4*i+3].color=bodyColor;
         _bodyShadow[4*i].color=sf::Color::Black;
         _bodyShadow[4*i+1].color=sf::Color::Black;
         _bodyShadow[4*i+2].color=sf::Color::Black;

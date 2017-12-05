@@ -7,7 +7,6 @@
 #include <string>
 #include "Knot.h"
 #include "Bubble.h"
-#include <vector>
 
 class Fish:public sf::Drawable,public sf::Transformable 
 {
@@ -31,6 +30,7 @@ class Fish:public sf::Drawable,public sf::Transformable
         void swimTo(const sf::Vector2f& dest);
 
         virtual void update(float deltaTime);
+        virtual void attacked()=0;
 
     protected:
         virtual void updateShape()=0;

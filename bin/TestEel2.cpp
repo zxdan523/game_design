@@ -87,8 +87,8 @@ int main(int argc, char** argv)
         if(minions[i]->getState()==Minions::NORMAL)
         {
             sf::Vector2f dist=normalize(diff)*50.0f*deltaTime;
-            if(mag(dist)>minions[i]->getHeadDistance())
-            minions[i]->swimTo(minions[i]->getKnot(0).getPosition()+dist);
+            if(mag(diff)>mag(dist))
+                minions[i]->swimTo(minions[i]->getKnot(0).getPosition()+dist);
             minions[i]->update(0);
         }
         App.draw(*(minions[i]));

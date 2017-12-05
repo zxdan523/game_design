@@ -53,13 +53,25 @@ Eel::Eel()
     _attackArea=sf::CircleShape(ATTACK_RADIUS);
     _attackArea.setOrigin(ATTACK_RADIUS,ATTACK_RADIUS);
     _attackArea.setFillColor(sf::Color(255,255,0,128));
-    _timer=0.0f;
-    _state=NORMAL;
-    _moveAngle=0.0f;
 }
 
 void Eel::init()
 {
+    for(int i=0;i<PARTITION;i++)
+    {
+        _knots[i].setPosition(sf::Vector2f(WINDOW_WIDTH+i*LENGTH,WINDOW_HEIGHT*(1.0f-0.618f)));
+        _knots[i].setRotation(180.0f);
+        if(i<PARTITION-1)
+        {
+            _body[4*i].color=BODY_COLOR;
+            _body[4*i+1].color=BODY_COLOR;
+            _body[4*i+2].color=BODY_COLOR;
+            _body[4*i+3].color=BODY_COLOR;
+        }
+    }
+    _timer=0.0f;
+    _state=NORMAL;
+    _moveAngle=0.0f;
     assert(_texture!=nullptr);
     assert(_textureAreas!=nullptr);
     _mouth.setTexture(_texture.get());
@@ -114,7 +126,9 @@ void Eel::triggered()
     _back_right_fin.setFillColor(sf::Color(255,0,0));
     _tail.setFillColor(sf::Color(255,0,0));
 }
-
+void Eel::attacked()
+{
+}
 void Eel::update(float deltaTime)
 {
     assert(_knots.size()>=1);
@@ -135,7 +149,7 @@ void Eel::update(float deltaTime)
                 _moveAngle-=2*M_PI;
             }
             swimTo(_knots[0].getPosition()+(_headDist+dist)*sf::Vector2f(-1.0f*fabs(cos(_moveAngle)),1.0f*sin(_moveAngle)));
-            if(_knots[0].getPosition().x<-PARTITION*LENGTH&&_state==RELEASED)
+            if(_knots[0].getPosition().x<-PARTITION*LENGTH)
             {
                 _state=DISAPEAR;
             }
@@ -224,7 +238,7 @@ void Eel::draw(sf::RenderTarget& target,sf::RenderStates states) const
     }
     if(_state==NORMAL)
     {
-        //target.draw(_triggerArea,states);
+        target.draw(_triggerArea,states);
     }
     states.transform*=getTransform();
     target.draw(_body,states);

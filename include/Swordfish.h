@@ -5,9 +5,9 @@
 class Swordfish:public Fish
 {
 public:
-    enum State {PREPARE,SHOOT,SHOOT_END};
+    enum State {DELAY,PREPARE,SHOOT,SHOOT_END};
     
-    Swordfish(sf::Vector2f pos=sf::Vector2f(),sf::Vector2f dir=sf::Vector2f(1.0f,0.0f));
+    Swordfish(const sf::Vector2f& pos=sf::Vector2f(),const sf::Vector2f& dir=sf::Vector2f(1.0f,0.0f),float delay=0);
     Swordfish(const Swordfish&)=delete;
     
     Swordfish& operator=(const Swordfish&)=delete;
@@ -17,6 +17,7 @@ public:
     sf::Vector2f getCenter() const;
     float getAttackRadius() const;
     
+    virtual void attacked() override;
     virtual void update(float deltaTime) override;
     virtual void updateShape() override;
     virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
@@ -25,6 +26,7 @@ public:
     sf::RectangleShape _attackLine;
     
     float _timer;
+    float _delay;
     State _state;
     sf::Vector2f _oriPos;
     sf::Vector2f _dir;

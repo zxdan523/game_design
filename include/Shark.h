@@ -6,8 +6,9 @@
 class Shark:public Fish
 {
     public:
-        enum State {NORMAL,CRAZY,WEAKEN,DIE}; 
-        Shark();
+        enum State {NORMAL,CRAZY,WEAKEN,ATTACKED,SHOT,SHOCKED,DIE};
+        enum Type {SHARK1,SHARK2,SHARK_UP1,SHARK_UP2};
+        Shark(Type type=SHARK1);
         Shark(const Shark&)=delete;
 
         Shark& operator=(const Shark&)=delete;
@@ -21,15 +22,22 @@ class Shark:public Fish
         std::shared_ptr<Fish> getTarget() const;
         float getSpeed() const;
         void setSize(float size);
+        sf::Vector2f getCenter() const;
+        float getRadius() const;
+        sf::Vector2f getHeadPosition() const;
+        void setType(Type type);
+        Type getType() const;
 
         void shocked();
         void shot();
+        void hurt();
+        virtual void attacked() override;
 
         virtual void update(float deltaTime) override;
     private:
         virtual void updateShape() override;
         virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
-        static const float HEAD_SIZE,TAIL_SIZE,KNOT_DIST,NORMAL_SPEED,CRAZY_SPEED,ESCAPE_SPEED,NORMAL_SIZE,CRAZY_SIZE,ESCAPE_SIZE,WEAKEN_SIZE;
+        static const float HEAD_SIZE,TAIL_SIZE,KNOT_DIST,NORMAL_SPEED,CRAZY_SPEED,ESCAPE_SPEED,NORMAL_SIZE,CRAZY_SIZE,ESCAPE_SIZE,WEAKEN_SIZE,ATTACKED_TIME,SHOT_TIME;
         static const int HP;
         int _numPartition;
         sf::VertexArray _body;
@@ -38,7 +46,9 @@ class Shark:public Fish
         State _state;
         float _size;
         float _speed;
+        float _timer;
         int _current_HP;
         std::shared_ptr<Fish> _target;
+        Type _type;
 };
 #endif

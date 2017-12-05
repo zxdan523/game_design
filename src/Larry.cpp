@@ -1,5 +1,6 @@
 #include "Larry.h"
 #include "util.h"
+#include "Constants.h"
 #include <algorithm>
 #include <cassert>
 const float Larry::KNOT_DIST=20;
@@ -8,10 +9,6 @@ Larry::Larry()
     _numPartition=20;
     _body=sf::VertexArray(sf::Quads,4*(_numPartition-1));
     _back_fin=sf::VertexArray(sf::Quads,2*(_numPartition-1));
-}
-
-void Larry::init()
-{
     Fish::addKnot(Knot(KNOT_DIST,KNOT_DIST));
     Fish::addKnot(Knot(KNOT_DIST,KNOT_DIST*3.0f/2.0f));
     Fish::addKnot(Knot(KNOT_DIST,KNOT_DIST*5.0f/2.0f));
@@ -19,7 +16,16 @@ void Larry::init()
     Fish::addKnot(Knot(KNOT_DIST,KNOT_DIST*1.0f/2.0f));
     Fish::addKnot(Knot(KNOT_DIST,KNOT_DIST*1.0f/2.0f));
     Fish::addKnot(Knot(KNOT_DIST,KNOT_DIST*1.0f/2.0f));
+}
 
+void Larry::init()
+{
+    _dead=false;
+    for(int i=0;i<_knots.size();i++)
+    {
+        _knots[i].setPosition(WINDOW_WIDTH/2-i*KNOT_DIST,WINDOW_HEIGHT/2);
+        _knots[i].setRotation(0.0f);
+    }
     assert(_texture!=nullptr);
     assert(_textureAreas!=nullptr);
     assert(_knots.size()>=3);
@@ -60,9 +66,17 @@ void Larry::init()
     _tail.setOrigin(sf::Vector2f(tail_size/2.0f,tail_size/2.0f));
     _tail.setTexture(_texture.get());
     _tail.setTextureRect((*_textureAreas)["Larry_tail"]);
-    updateShape();
 }
 
+void Larry::attacked()
+{
+    _dead=true;
+}
+
+bool Larry::isDead() const
+{
+    return _dead;
+}
 void Larry::setNumPartition(int numPartition)
 {
     _numPartition=numPartition;

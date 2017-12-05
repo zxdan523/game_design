@@ -20,6 +20,7 @@ class Eel:public Fish
         
         void triggered();
 
+        virtual void attacked() override;
         virtual void update(float deltaTime) override;
         virtual void updateShape() override;
         virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;

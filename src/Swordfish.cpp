@@ -9,34 +9,38 @@ const float Swordfish::SHOOT_TIME=1.0f;
 const float Swordfish::SIZE=100.0f;
 const float Swordfish::SHOOT_SPEED=500.0f;
 
-Swordfish::Swordfish(sf::Vector2f pos,sf::Vector2f dir)
+Swordfish::Swordfish(const sf::Vector2f& pos,const sf::Vector2f& dir,float delay)
 {
   _body=sf::RectangleShape(sf::Vector2f(2*SIZE,SIZE));
   _body.setOrigin(1.0f*SIZE,0.5f*SIZE);
-  _body.setPosition(pos);
-  _body.setRotation(angle(dir));
   _oriPos=pos;
   _dir=normalize(dir);
-    
+  
   _attackLine.setSize(sf::Vector2f(10000, 5));
   _attackLine.setOrigin(0,2.5f);
   _attackLine.setPosition(pos);
   _attackLine.setRotation(angle(dir));
-  _attackLine.setFillColor(sf::Color(255,0,0,255));
   _attackLine.setOutlineThickness(0.0f);
   _timer=0.0f;
-  _state=PREPARE;
   _speed=SHOOT_SPEED;
+  _delay=delay;
 }
 
 void Swordfish::init()
 {
+    _body.setPosition(_oriPos);
+    _body.setRotation(angle(_dir));
+    _attackLine.setFillColor(sf::Color(255,0,0,255));
+    _state=DELAY;
     assert(_texture!=nullptr);
     assert(_textureAreas!=nullptr);
     _body.setTexture(_texture.get());
     _body.setTextureRect((*_textureAreas)["Swordfish"]);
 }
 
+void Swordfish::attacked()
+{
+}
 Swordfish::State Swordfish::getState() const
 {
     return _state;
@@ -49,13 +53,21 @@ sf::Vector2f Swordfish::getCenter() const
 
 float Swordfish::getAttackRadius() const
 {
-    return SIZE;
+    return SIZE/2.0f;
 }
 void Swordfish::update(float deltaTime)
 {
     sf::Vector2f pos=_body.getPosition();
     switch(_state)
     {
+        case DELAY:
+            _timer+=deltaTime;
+            if(_timer>_delay)
+            {
+                _timer=0;
+                _state=PREPARE;
+            }
+            break;
         case PREPARE:
             _timer+=deltaTime;
             _attackLine.setFillColor(sf::Color(255,0,0,255*(1.0f-_timer/PREPARE_TIME)));

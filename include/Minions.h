@@ -2,10 +2,12 @@
 #define MINIONS_H
 
 #include "Fish.h"
+#include "ProgressBar.h"
+#include <memory>
 class Minions:public Fish
 {
     public:
-        enum State {NORMAL,WEAK,DIE,SHOCKED,SHOT,ATTACK,ATTACK_END};
+        enum State {NORMAL,WEAK,DIE,SHOCKED,SHOT,ATTACK,ATTACKED,ATTACK_END};
         
         Minions(sf::Vector2f pos=sf::Vector2f());
         Minions(const Minions&)=delete;
@@ -20,6 +22,7 @@ class Minions:public Fish
         float getSpeed() const;
 
         void attacking();
+        virtual void attacked() override;
         void shot();
         void shocked();
         void weaken();
@@ -32,11 +35,12 @@ class Minions:public Fish
         virtual void draw(sf::RenderTarget& target,sf::RenderStates states) const override;
 
         std::shared_ptr<Fish> _attackTarget;
+        std::shared_ptr<ProgressBar> _recoverBar;
         sf::RectangleShape _body;
         float _attackRadius;
         float _timer;
         float _speed;
         State _state;
-        static const float NORMAL_SIZE,WEAK_SIZE,WEAK_TIME,SHOT_TIME, NORMAL_SPEED, ATTACK_SPEED,ATTACK_RADIUS, ESCAPE_SPEED;
+        static const float NORMAL_SIZE,WEAK_SIZE,WEAK_TIME,SHOT_TIME, NORMAL_SPEED, ATTACK_SPEED,ATTACK_RADIUS, ESCAPE_SPEED,ATTACKED_TIME;
 };
 #endif

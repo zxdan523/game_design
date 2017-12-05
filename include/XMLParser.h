@@ -4,6 +4,7 @@
 //#include <SFML/Graphics.hpp>
 #include "tinyxml2.h"
 #include "TextureManager.h"
+#include "LevelInfo.h"
 #include <string>
 #include <map>
 #include <memory>
@@ -13,11 +14,12 @@
 class XMLParser
 {
     public:
-    	//XMLParser();
+        std::vector<std::string> getElementItems(tinyxml2::XMLElement * element);
+        tinyxml2::XMLElement * visitElement(std::vector<std::string> pathList);
     	void loadXML(const char*);
-    	void loadTexture(TextureManager&,std::string type="default");
-    	void loadFont();
+    	void loadTexture(TextureManager& texture_manager,std::string type="default");
     	std::vector<int> getTileMap();
+        void loadLevel(LevelInfo& level, int level_num);
 
     private:
     	tinyxml2::XMLDocument doc;
