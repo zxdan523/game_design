@@ -224,13 +224,13 @@ int main(int argc, char** argv)
 	sf::RenderWindow App(sf::VideoMode(1024,768,32), "Path - SFML",sf::Style::Titlebar|sf::Style::Close);
 
 	// add textures
-	parser.loadXML("../data/xml/TestXML.xml");
-	parser.loadTexture(textures, "fish");
+	parser.loadXML("../data/xml/levels.xml");
+	parser.loadTexture(textures);
 
-	minion.setTexture(textures.get("fish").texture);
-	minion.setTextureAreas(textures.get("fish").areas);
-	larry.setTexture(textures.get("fish").texture);
-	larry.setTextureAreas(textures.get("fish").areas);
+	minion.setTexture(textures.get().texture);
+	minion.setTextureAreas(textures.get().areas);
+	larry.setTexture(textures.get().texture);
+	larry.setTextureAreas(textures.get().areas);
 
 	minion.init();
 	larry.init();
@@ -243,14 +243,14 @@ int main(int argc, char** argv)
 	shape1.push_back(sf::Vector2f(200,30));
 	shape1.push_back(sf::Vector2f(50,150));
 	test.push_back(shape1);
-	expand_test.push_back(expand_polygon(shape1,minion.getHeadDistance()));
+	expand_test.push_back(expand_polygon(shape1,minion.getHeadDistance()+40));
 
 	std::vector<sf::Vector2f> shape2;
 	shape2.push_back(sf::Vector2f(500,600));
 	shape2.push_back(sf::Vector2f(400,300));
 	shape2.push_back(sf::Vector2f(600,400));
 	test.push_back(shape2);
-	expand_test.push_back(expand_polygon(shape2,minion.getHeadDistance()));
+	expand_test.push_back(expand_polygon(shape2,minion.getHeadDistance()+40));
 	
 	std::vector<sf::Vector2f> shape3;
 	shape3.push_back(sf::Vector2f(700,60));
@@ -258,7 +258,7 @@ int main(int argc, char** argv)
 	shape3.push_back(sf::Vector2f(850,100));
 	shape3.push_back(sf::Vector2f(650,100));
 	test.push_back(shape3);
-	expand_test.push_back(expand_polygon(shape3,minion.getHeadDistance()));
+	expand_test.push_back(expand_polygon(shape3,minion.getHeadDistance()+40));
 	terrain.load(test);
 
     // start main loop
