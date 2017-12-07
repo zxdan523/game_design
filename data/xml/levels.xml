@@ -135,9 +135,6 @@
                 </Terrain>
             </TerrainList>
             <BackgroundImage>../data/level3background.png</BackgroundImage>
-
-            <BackgroundMusic>level2_background.wav</BackgroundMusic>      
-
             <BackgroundMusic>level3_background.wav</BackgroundMusic>      
         </Level>
         <Level>
