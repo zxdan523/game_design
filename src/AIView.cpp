@@ -96,6 +96,10 @@ void AIView::updateMinions(float deltaTime)
         case PowerUp::DECOY:
             for(size_t i=0;i<_minions_ptr->size();i++)
             {
+                if((*_minions_ptr)[i]->getState()==Minions::WEAK)
+                {
+                    escapeFromTarget((*_minions_ptr)[i],deltaTime);
+                }
                 if((*_minions_ptr)[i]->getState()!=Minions::NORMAL&&
                    (*_minions_ptr)[i]->getState()!=Minions::ATTACK)
                 {
@@ -114,6 +118,10 @@ void AIView::updateMinions(float deltaTime)
         case PowerUp::OCTOPUS:
             for(size_t i=0;i<_minions_ptr->size();i++)
             {
+                if((*_minions_ptr)[i]->getState()==Minions::WEAK)
+                {
+                    escapeFromTarget((*_minions_ptr)[i],deltaTime);
+                }
                 if((*_minions_ptr)[i]->getState()!=Minions::NORMAL&&
                    (*_minions_ptr)[i]->getState()!=Minions::ATTACK)
                 {
@@ -216,6 +224,10 @@ void AIView::updateShark(const std::shared_ptr<Shark>& shark,float deltaTime)
             {
                 goToTarget(shark,deltaTime);
             }
+            else if(shark->getState()==Shark::WEAKEN)
+            {
+                escapeFromTarget(shark,deltaTime);
+            }
             break;
         case PowerUp::OCTOPUS:
             if(shark->getState()==Shark::NORMAL)
@@ -231,6 +243,10 @@ void AIView::updateShark(const std::shared_ptr<Shark>& shark,float deltaTime)
             else if(shark->getState()==Shark::CRAZY)
             {
                 goToTarget(shark,deltaTime);
+            }
+            else if(shark->getState()==Shark::WEAKEN)
+            {
+                escapeFromTarget(shark,deltaTime);
             }
             break;
         case PowerUp::NONE:
