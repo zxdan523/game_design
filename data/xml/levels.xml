@@ -62,7 +62,7 @@
     <LevelList>
         <Level>
             <LevelNumber>1</LevelNumber>
-            <LevelLength>120</LevelLength>
+            <LevelLength>60</LevelLength>
             <MinionsNumber>3</MinionsNumber>
             <TerrainList>
                 <Terrain>
@@ -84,7 +84,7 @@
         </Level>
         <Level>
             <LevelNumber>2</LevelNumber>
-            <LevelLength>120</LevelLength>
+            <LevelLength>60</LevelLength>
             <MinionsNumber>3</MinionsNumber>
             <TerrainList>
                 <Terrain>
@@ -101,7 +101,7 @@
         </Level>
         <Level>
             <LevelNumber>3</LevelNumber>
-            <LevelLength>120</LevelLength>
+            <LevelLength>90</LevelLength>
             <MinionsNumber>4</MinionsNumber>
             <TerrainList>
                 <Terrain>
@@ -142,7 +142,7 @@
         </Level>
         <Level>
             <LevelNumber>4</LevelNumber>
-            <LevelLength>180</LevelLength>
+            <LevelLength>120</LevelLength>
             <MinionsNumber>4</MinionsNumber>
             <TerrainList>
                 <Terrain>
@@ -184,7 +184,7 @@
         </Level>
         <Level>
             <LevelNumber>5</LevelNumber>
-            <LevelLength>180</LevelLength>
+            <LevelLength>150</LevelLength>
             <MinionsNumber>5</MinionsNumber>
             <TerrainList>
                 <Terrain>
