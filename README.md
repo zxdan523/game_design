@@ -25,6 +25,15 @@ Compile the program.
 ```
 make
 ```
+
+Run the game
+
+```
+./FISHNAPPED
+```
+
+Follow the instructions and enjoy!
+
 Our classes inherit UML graph.
 
 ![](doc/class-diagram.png)
