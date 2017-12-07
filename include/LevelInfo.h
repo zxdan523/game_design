@@ -20,13 +20,11 @@ public:
 	void setBackgroundImage(std::string bg_img_name);
 	std::string getBackgroundMusic();
 	void setBackgroundMusic(std::string bg_music_name);
-	SwordfishInfo getSwordfishInfo();
-	void setSwordfishInfo(SwordfishInfo swordfish_info);
+
 private:
 	int level_number, level_length, minion_num;
 	std::vector<std::vector<sf::Vector2f>> terrain;
 	std::string bg_img_name, bg_music_name;
-	SwordfishInfo swordfish_info; 	
 
 };
 
