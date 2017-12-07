@@ -13,10 +13,9 @@ class MusicManager
         void playBackground(std::string sound);
     
         static std::map<std::string, sf::SoundBuffer> musicList;
-        static std::vector<sf::Sound> playingSounds;
+        static std::vector<sf::Sound> musicPlaying;
     private:
         sf::SoundBuffer _globalBuffer;
-        sf::Sound _globalSound;
     
 };
 

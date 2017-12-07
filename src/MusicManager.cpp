@@ -5,7 +5,7 @@
 #include "MusicManager.h"
 
 std::map<std::string, sf::SoundBuffer> MusicManager::musicList = std::map<std::string, sf::SoundBuffer>();
-std::vector<sf::Sound> MusicManager::playingSounds = std::vector<sf::Sound>();
+std::vector<sf::Sound> MusicManager::musicPlaying = std::vector<sf::Sound>();
 sf::Music music;
 
 MusicManager::MusicManager()
@@ -13,6 +13,7 @@ MusicManager::MusicManager()
     
 }
 
+// Add music to musicList map from resources folder
 void MusicManager::addMusic(std::string sound)
 {
     if (!_globalBuffer.loadFromFile("../resources/" + sound))
@@ -20,50 +21,53 @@ void MusicManager::addMusic(std::string sound)
     musicList[sound] = _globalBuffer;
 }
 
+// Plays Sound from the vector and adds new Sounds if needed
 void MusicManager::play(std::string sound)
 {
-    if (playingSounds.size() == 0)
+    if (musicPlaying.size() == 0)
     {
-        playingSounds.push_back(sf::Sound());
-        playingSounds.at(0).setBuffer(musicList[sound]);
-        playingSounds.at(0).play();
+        musicPlaying.push_back(sf::Sound());
+        musicPlaying.at(0).setBuffer(musicList[sound]);
+        musicPlaying.at(0).play();
     }
     else
     {
-        int location = -1;
-        for (int i = 0; i < playingSounds.size(); i++)
+        int pointer = -1;
+        for (int i = 0; i < musicPlaying.size(); i++)
         {
-            if (playingSounds.at(i).getStatus() != sf::Sound::Playing && location == -1)
+            if (musicPlaying.at(i).getStatus() != sf::Sound::Playing && pointer == -1)
             {
-                location = i;
+                pointer = i;
             }
         }
-        if (location != -1)
+        if (pointer != -1)
         {
-            playingSounds.at(location).setBuffer(musicList[sound]);
-            playingSounds.at(location).play();
+            musicPlaying.at(pointer).setBuffer(musicList[sound]);
+            musicPlaying.at(pointer).play();
         }
         else
         {
-            playingSounds.push_back(sf::Sound());
-            playingSounds.at(playingSounds.size()-1).setBuffer(musicList[sound]);
-            playingSounds.at(playingSounds.size() - 1).play();
+            musicPlaying.push_back(sf::Sound());
+            musicPlaying.at(musicPlaying.size() - 1).setBuffer(musicList[sound]);
+            musicPlaying.at(musicPlaying.size() - 1).play();
         }
     }
 }
 
+// Stops all sounds and music playing in the application
 void MusicManager::stop()
 {
-    for (int i = 0; i < playingSounds.size(); i++)
+    for (int i = 0; i < musicPlaying.size(); i++)
     {
-        if (playingSounds.at(i).getStatus() == sf::Sound::Playing)
+        if (musicPlaying.at(i).getStatus() == sf::Sound::Playing)
         {
-            playingSounds.at(i).pause();
+            musicPlaying.at(i).pause();
         }
     }
     music.stop();
 }
 
+//Plays and loops background Music from the resources folder
 void MusicManager::playBackground(std::string sound)
 {
     if (!music.openFromFile("../resources/" + sound))
