@@ -204,11 +204,11 @@ void AIView::updateShark(const std::shared_ptr<Shark>& shark,float deltaTime)
         case PowerUp::DECOY:
             if(shark->getState()==Shark::NORMAL)
             {
-                diff=tool->getPosition()-shark->getHeadPosition();
+                diff=tool->getPosition()-shark->getCenter();
                 dist=(shark->getHeadDistance()+shark->getSpeed()*deltaTime)*normalize(diff);
                 if(mag(diff)>mag(dist))
                 {
-                    pos=shark->getHeadPosition()+dist;
+                    pos=shark->getCenter()+dist;
                     goToPosition(shark,pos);
                 }
             }
