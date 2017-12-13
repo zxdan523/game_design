@@ -25,6 +25,37 @@ Compile the program.
 ```
 make
 ```
+
+Run the game
+
+```
+./FISHNAPPED
+```
+
+Follow the instructions and enjoy!
+
 Our classes inherit UML graph.
 
-![](doc/class-diagram.png)
+![](doc/class-diagram_final.png)
+
+There are five levels.
+
+Level 1:
+
+![](doc/1.png)
+
+Level 2:
+
+![](doc/2.png)
+
+Level 3:
+
+![](doc/3.png)
+
+Level 4:
+
+![](doc/4.png)
+
+Level 5:
+
+![](doc/5.png)
