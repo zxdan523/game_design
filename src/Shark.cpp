@@ -331,6 +331,7 @@ void Shark::updateShape()
 
 void Shark::draw(sf::RenderTarget& target,sf::RenderStates states) const
 {
+    if(_state==DIE) return;
     states.transform*=getTransform();
     target.draw(_head,states);
     target.draw(_fins,states);
